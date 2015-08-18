@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] FW: Compiling with bjam
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20FW%3A%20Compiling%20with%20bjam&In-Reply-To=%3C201107151719.55146.ujoimro%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000031.html">
+   <LINK REL="Next"  HREF="000033.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] FW: Compiling with bjam</H1>
+    <B>Laszlo Marak</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20FW%3A%20Compiling%20with%20bjam&In-Reply-To=%3C201107151719.55146.ujoimro%40gmail.com%3E"
+       TITLE="[Pink-image-devel] FW: Compiling with bjam">ujoimro at gmail.com
+       </A><BR>
+    <I>Fri Jul 15 17:19:54 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000031.html">[Pink-image-devel] Numpy to pink and back
+</A></li>
+        <LI>Next message: <A HREF="000033.html">[Pink-image-devel] Compilation problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#32">[ date ]</a>
+              <a href="thread.html#32">[ thread ]</a>
+              <a href="subject.html#32">[ subject ]</a>
+              <a href="author.html#32">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Otto,
+
+So the error comes from a minor error in the Jamroot file. I have made a 
+detailed howto, You can find it at
+
+<A HREF="http://openfacts2.berlios.de/wikien/index.php/BerliosProject:Pink_Image_Processing_Library/Compiling_Pink_on_Windows">http://openfacts2.berlios.de/wikien/index.php/BerliosProject:Pink_Image_Processing_Library/Compiling_Pink_on_Windows</A>
+
+also the Jamroot file in the current compressed package is buggy, so please 
+use the attached Jamroot file instead (note that You still have to adjust it 
+according to the howto). 
+
+If You want to update or improve the howto, just create a berlios account, and 
+I'll give You the right to edit the wiki. 
+
+Good Luck,
+Laszlo
+
+On 2011-07-13 Wednesday 08:54:31 you wrote:
+&gt;<i> Hi Laszlo,
+</I>&gt;<i> 
+</I>&gt;<i> Many thanks for the answer!. So I have to use bjam ... I already tried
+</I>&gt;<i> with bjam and failed. I sent you a couple of emails referred to that. I
+</I>&gt;<i> send you here the summary of the information again, in case you have not
+</I>&gt;<i> received those. In case you received them, this is the summary, so can
+</I>&gt;<i> delete those.
+</I>&gt;<i> 
+</I>&gt;<i> Basically:
+</I>&gt;<i> * I installed boost and bjam (tried with versions 1.46.1 which has a
+</I>&gt;<i> windows installer, and also compiled manually the version 1.45.0), msvc
+</I>&gt;<i> 10. First
+</I>&gt;<i>   I compiled the example in the boost webpage (hello world), and it
+</I>&gt;<i> worked ok.
+</I>&gt;<i> 
+</I>&gt;<i> * Next, as you wrote in the pink webpage, I configured the jamroot,
+</I>&gt;<i> boost-build.jam and user-config.jam in the pink source. I attach these
+</I>&gt;<i> files here.
+</I>&gt;<i> 
+</I>&gt;<i> * Finally, I evoked bjam and got a strange error message, which I paste
+</I>&gt;<i> below. I also tried with python 2.7 and got exactly the same error
+</I>&gt;<i> message.
+</I>&gt;<i> 
+</I>&gt;<i> What should I do?
+</I>&gt;<i> 
+</I>&gt;<i> * Another thing: you mention that the documentation is not avaiable for
+</I>&gt;<i> windows and one should get it from a compiled version of pink in linux.
+</I>&gt;<i> Could you please provide such file?
+</I>&gt;<i> 
+</I>&gt;<i> Thanks! =)
+</I>&gt;<i> 
+</I>&gt;<i> Otto
+</I>&gt;<i> 
+</I>&gt;<i> Error message:
+</I>&gt;<i> 
+</I>&gt;<i> C:/Program
+</I>&gt;<i> Files/boost/boost_1_46_1/tools/build/v2/build\project.jam:670: in obj
+</I>&gt;<i> ect(project-attributes)@59.set from module object(project-attributes)@59
+</I>&gt;<i> error: Invalid project attribute '&lt;link&gt;static' specified for project at
+</I>&gt;<i> '.'
+</I>&gt;<i> C:/Program
+</I>&gt;<i> Files/boost/boost_1_46_1/tools/build/v2/build\project.jam:929: in pro
+</I>&gt;<i> ject from module Jamfile&lt;/C:/pink&gt;
+</I>&gt;<i> Jamroot:22: in modules.load from module Jamfile&lt;/C:/pink&gt; C:/Program
+</I>&gt;<i> Files/boost/boost_1_46_1/tools/build/v2/build\project.jam:314: in loa
+</I>&gt;<i> d-jamfile from module project C:/Program
+</I>&gt;<i> Files/boost/boost_1_46_1/tools/build/v2/build\project.jam:62: in load
+</I>&gt;<i> from module project C:/Program
+</I>&gt;<i> Files/boost/boost_1_46_1/tools/build/v2/build\project.jam:168: in pro
+</I>&gt;<i> ject.find from module project C:/Program
+</I>&gt;<i> Files/boost/boost_1_46_1/tools/build/v2\build-system.jam:569: in load
+</I>&gt;<i> from module build-system C:\Program
+</I>&gt;<i> Files\boost\boost_1_46_1\tools\build\v2/kernel\modules.jam:283: in im
+</I>&gt;<i> port from module modules C:\Program
+</I>&gt;<i> Files\boost\boost_1_46_1\tools\build\v2\kernel\bootstrap.jam:142: in
+</I>&gt;<i> boost-build from module
+</I>&gt;<i> C:\pink\boost-build.jam:4: in module scope from module
+</I>-------------- next part --------------
+# -*- sh -*-
+# UjoImro, 2011
+
+project
+  : requirements &lt;variant&gt;release &lt;link&gt;shared ;
+
+
+using msvc ;
+using python : 2.7 : C:\\Python27 ;
+
+import python ;
+
+if ! [ python.configured ]
+{
+    ECHO &quot;notice: no Python configured in user-config.jam&quot; ;
+    ECHO &quot;notice: will use default configuration&quot; ;
+    using python ;
+}
+
+# Specify the path to the Boost project.  If you move this project,
+# adjust this path to refer to the Boost root directory.
+use-project boost
+  : &quot;C:/boost_1_45_0&quot; ;
+
+### ***********************************************************************************************
+### ***********************************************************************************************
+### ***********************************************************************************************
+###                    YOU SHOULDN'T NEED TO CHANGE ANYTHING BELOW THIS POINT
+### ***********************************************************************************************
+### ***********************************************************************************************
+### ***********************************************************************************************
+
+#project
+#  : requirements &lt;variant&gt;release &lt;link&gt;static ;
+
+project
+  : requirements &lt;variant&gt;debug &lt;link&gt;static ;
+
+# Set up the project-wide requirements that everything uses the
+# boost_python library from the project whose global ID is
+# /boost/python.
+project
+  : requirements &lt;library&gt;/boost/python//boost_python 
+                 &lt;include&gt;include 
+		 &lt;include&gt;src/liar
+                 &lt;library&gt;/boost/thread//boost_thread
+		 &lt;library&gt;/boost//date_time 
+		 &lt;define&gt;WIN32 ;
+
+# Declare the three extension modules.  You can specify multiple
+# source files after the colon separated by spaces.
+python-extension libcpp_pink : 
+                               [ glob src/bdd/*.c ]
+                               [ glob src/lib/*.c ]
+			       [ glob src/python/*.c ]
+			       [ glob src/liar/*.c : excluded_files src/liar/imclient.c src/liar/startim.c src/liar/democlient.c ]
+                               [ glob src/bdd/*.cpp ]
+                               [ glob src/lib/*.cpp ]
+			       [ glob src/python/*.cpp : excluded_files src/python/pymview.cpp ]
+			       [ glob src/liar/*.cpp ]
+                               [ glob src/bdd/*.cxx ]
+                               [ glob src/lib/*.cxx ]
+			       [ glob src/python/*.cxx ]
+			       [ glob src/liar/*.cxx ]
+			       ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+# LuM end of file
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000031.html">[Pink-image-devel] Numpy to pink and back
+</A></li>
+	<LI>Next message: <A HREF="000033.html">[Pink-image-devel] Compilation problems
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#32">[ date ]</a>
+              <a href="thread.html#32">[ thread ]</a>
+              <a href="subject.html#32">[ subject ]</a>
+              <a href="author.html#32">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

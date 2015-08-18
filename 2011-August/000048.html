@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Memory not being free()
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-August/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Memory%20not%20being%20free%28%29&In-Reply-To=%3C201108061336.22784.ujoimro%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000047.html">
+   <LINK REL="Next"  HREF="000049.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Memory not being free()</H1>
+    <B>Laszlo Marak</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Memory%20not%20being%20free%28%29&In-Reply-To=%3C201108061336.22784.ujoimro%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Memory not being free()">ujoimro at gmail.com
+       </A><BR>
+    <I>Sat Aug  6 13:36:20 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000047.html">[Pink-image-devel] Memory not being free()
+</A></li>
+        <LI>Next message: <A HREF="000049.html">[Pink-image-devel] Memory not being free()
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#48">[ date ]</a>
+              <a href="thread.html#48">[ thread ]</a>
+              <a href="subject.html#48">[ subject ]</a>
+              <a href="author.html#48">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello, 
+I have corrected distc, but I could not reproduce the leaking. I could not 
+test watershedmeyer, that's why I did not upload the new commit yet.
+
+----- &lt;begin original message&gt; -----
+Date: 2011-08-05T04:02:49Z
+From: Michael Cheng &lt;Michael Cheng &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">michael.cheng at emphron.com</A>&gt;&gt;
+To: Hugues <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Talbotpink-image-devel at lists.berlios.de</A>, Hugues Talbot 
+&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">pink-image-devel at lists.berlios.de</A>, Hugues Talbotpink-image-
+<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">devel at lists.berlios.de</A>, Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+Subject: Re: [Pink-image-devel] Memory not being free()
+
+&gt;<i> On Thu, Aug 4, 2011 at 5:28 PM, Hugues Talbot 
+</I>&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">hugues.talbot at gmail.com</A>&gt;wrote:
+&gt;<i> &gt; I'd like to know: you do recompile Pink from source, right ?
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Yes. On OSX with Python+etc from macports.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; When running in scripts (rather than in ipython), these functions seem to
+</I>&gt;<i> &gt; leak much more slowly - except for distc which still leaks pretty bad.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I think it may only be distc that is having issues. I tested those
+</I>&gt;<i> 
+</I>&gt;<i> functions in isolation in a long-running script and the removal of distc
+</I>&gt;<i> seemed to fix that particular instance of leaking.
+</I>&gt;<i> 
+</I>&gt;<i> It's really hard to figure out memory issues with Python because I just
+</I>&gt;<i> assume the garbage collector does everything.
+</I>&gt;<i> 
+</I>&gt;<i> Mike.
+</I>Laszlo MARAK
+Phd. student of ESIEE
+email: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>
+
+It may be that your whole purpose in life is simply to serve as a warning to 
+others.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000047.html">[Pink-image-devel] Memory not being free()
+</A></li>
+	<LI>Next message: <A HREF="000049.html">[Pink-image-devel] Memory not being free()
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#48">[ date ]</a>
+              <a href="thread.html#48">[ thread ]</a>
+              <a href="subject.html#48">[ subject ]</a>
+              <a href="author.html#48">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

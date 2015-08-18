@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Problems with lattrib.c
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Problems%20with%20lattrib.c&In-Reply-To=%3C8DBAF83A-3370-46FE-A634-2E824180BA99%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000218.html">
+   <LINK REL="Next"  HREF="000217.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Problems with lattrib.c</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Problems%20with%20lattrib.c&In-Reply-To=%3C8DBAF83A-3370-46FE-A634-2E824180BA99%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Problems with lattrib.c">hugues.talbot at esiee.fr
+       </A><BR>
+    <I>Tue Jul  9 15:09:04 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000218.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+        <LI>Next message: <A HREF="000217.html">[Pink-image-devel] Problems with lattrib.c
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#211">[ date ]</a>
+              <a href="thread.html#211">[ thread ]</a>
+              <a href="subject.html#211">[ subject ]</a>
+              <a href="author.html#211">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+the file 'lattrib.c' in src/lib has some strange features:
+
+1- it compiles but does not link in Debug mode (??)
+2- it calls exit() all the time.
+
+Both are linked. For instance, on line 1246, we have the following code.
+
+  while (!FahVideNiveau(FAH, h))               /* first step : propagation */
+  {                                            /* ======================== */
+      p = FahPopNiveau(FAH, h);
+
+...
+
+
+However, FahPopNiveau() is never defined in pink.
+
+FahVideNiveau() is defined in mcfah.c thusly:
+
+/* ==================================== */
+int32_t FahVideNiveau(
+  Fah * L,
+  int32_t niv)
+/* ==================================== */
+{
+  printf(&quot;FahVideNiveau: pas de sens avec la version impure de mcfah\n&quot;);
+  exit(0);
+} /* FahVideNiveau() */
+
+Any call to this function will result in the python interpreter quitting, which is less than desirable.
+
+Somehow, in Release mode, the optimizer gets read of this call and the code compiles and links.
+
+In debug mode, however, pink cannot be loaded beause FahVideNiveau does not exist.
+
+QUESTIONS:
+==========
+
+- Is lattrib.c used anywhere ? Can we get rid of it ?
+
+- If not, what does FahPopNiveau() do ? Can we fix this ?
+
+Thanks in advance.
+
+
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+Experience is not what happens to a man; it is what a man does with what happens to him. -Aldous Huxley, novelist (1894-1963) 
+
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000218.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+	<LI>Next message: <A HREF="000217.html">[Pink-image-devel] Problems with lattrib.c
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#211">[ date ]</a>
+              <a href="thread.html#211">[ thread ]</a>
+              <a href="subject.html#211">[ subject ]</a>
+              <a href="author.html#211">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

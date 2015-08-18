@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Tutoriels pour Pink
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-April/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Tutoriels%20pour%20Pink&In-Reply-To=%3C20120402224823.76290c4c%40idefix%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000130.html">
+   <LINK REL="Next"  HREF="000132.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Tutoriels pour Pink</H1>
+    <B>Edward Ando'</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Tutoriels%20pour%20Pink&In-Reply-To=%3C20120402224823.76290c4c%40idefix%3E"
+       TITLE="[Pink-image-devel] Tutoriels pour Pink">edward.ando at 3sr-grenoble.fr
+       </A><BR>
+    <I>Mon Apr  2 22:48:23 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000130.html">[Pink-image-devel] Tutoriels pour Pink
+</A></li>
+        <LI>Next message: <A HREF="000132.html">[Pink-image-devel] Tutoriels pour Pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#131">[ date ]</a>
+              <a href="thread.html#131">[ thread ]</a>
+              <a href="subject.html#131">[ subject ]</a>
+              <a href="author.html#131">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks for your example. Here is a nice 200x200x200 example data file
+encoded in 16-bit unsigned BigEndian integers (sand grains as usual):
+
+<A HREF="http://geo.hmg.inpg.fr/~ando/COEA01-01-0200x0200x0200-16b.tif">http://geo.hmg.inpg.fr/~ando/COEA01-01-0200x0200x0200-16b.tif</A> 
+
+I'll test out the watersheds with the higher memory machine.
+
+I don't think I've understood fully not sure what kind of watersheds
+are, and what the differences are between them. I have been using just
+the simple &quot;pink.cpp.watershed&quot; which works nicely, then there are a
+lot of C file talking about Meyer watersheds (2, 2lab, 3, 4D).
+
+I cannot however see any sign of powerwatershed anywhere... and I have
+checked that I have the latest debian build! I hope we can find a sec
+to talk on Thursday, look forward to seeing you!
+
+Eddy
+
+
+On Mon, 2 Apr 2012 18:22:10 +0200 Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+wrote:
+
+&gt;<i> Hello Edward,
+</I>&gt;<i> 
+</I>&gt;<i> Ok, thanks. We shall meet on Thursday I think.
+</I>&gt;<i> 
+</I>&gt;<i> 1- Can you please post one of your fiji image somewhere ? It is
+</I>&gt;<i> likely that we can extend the TIFF reader to support their format, if
+</I>&gt;<i> they do it by TIFF tags like they are supposed to...
+</I>&gt;<i> 
+</I>&gt;<i> 2- I stand corrected, PGM export is not working for 3D images. 
+</I>&gt;<i> 
+</I>&gt;<i> 3- OK good. 16-bit format should definitely work, as it is standard.
+</I>&gt;<i> The last argument in the PGM header should be the max value in the
+</I>&gt;<i> image. If you specify 65535 this should result in a 16-bit unsigned
+</I>&gt;<i> image.
+</I>&gt;<i> 
+</I>&gt;<i> As for watershed, the more interesting watershed function should be
+</I>&gt;<i> the powerwatershed one (pink.cpp.powerwatershedBW). However the
+</I>&gt;<i> current version is relatively slow and inefficient for multi-label
+</I>&gt;<i> segmentation, but we have an ongoing relationship with Saint-Gobain
+</I>&gt;<i> to improve it in the next few months. The Meyer version are mostly
+</I>&gt;<i> for tutorials, however they should definitely work.
+</I>&gt;<i> 
+</I>&gt;<i> Memory usage:
+</I>&gt;<i> 
+</I>&gt;<i> On 16-bit data,  950x950x1600 requires 2.7GB of RAM, or about 6GB
+</I>&gt;<i> with less-than-efficient 32-bit data. Together with the control image
+</I>&gt;<i> and the queue structure, the total amount should be in the order of
+</I>&gt;<i> 12GB. However the pink.watershed functions uses an underlying graph
+</I>&gt;<i> structure that triples the amount of memory in 3D (because there 3
+</I>&gt;<i> connecting edge on average for each voxel), so I'm not surprised this
+</I>&gt;<i> overloads your machine. This is one of the reasons the orientations
+</I>&gt;<i> are better with this function, and cannot be helped much. However,
+</I>&gt;<i> explicitly using 16-bit data would help a lot, if you do not have too
+</I>&gt;<i> many particles. We would be obviously limited to 65000 objects or
+</I>&gt;<i> labels. Would that be sufficient ?
+</I>&gt;<i> 
+</I>&gt;<i> Cheers.
+</I>&gt;<i> 
+</I>&gt;<i> On 2 Apr 2012, at 2 Apr, 17:19, Edward Ando' wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Thanks for your answer - just to update you on progress:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 1. 3D Images generated by Fiji did not seem to work
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 2. Couldn't export to PGM on Debian Squeeze?
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 3. This works fine by creating the header by itself as text and
+</I>&gt;<i> &gt; adding raw data tot he end of it. 16-bit unsigned ints are hoever
+</I>&gt;<i> &gt; unsupported for some reason. This is the best solution for me... I
+</I>&gt;<i> &gt; then strip the headers off the files coming out and I am fine.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 4. Didn't get this far...
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 2 more things:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 1: the orientation of the watershed lines coming from:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; pink.watershed(image, pink.segmentheight(image, 6, height, 0), 6)
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Are slightly better than our current software, and we we're
+</I>&gt;<i> &gt; thinking of including this on a paper we have coming our very soon
+</I>&gt;<i> &gt; - just a few questions... I see there is also a watershedMeyer2 and
+</I>&gt;<i> &gt; watershedMeyer2NM, which do not work out of the box for me - is it
+</I>&gt;<i> &gt; worth investigating these further? Are they likely to improve the
+</I>&gt;<i> &gt; quality of the segmentation?
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 2: use on large images: I would like to run these on volumes of size
+</I>&gt;<i> &gt; 950x950x1600, for example, and even a 950x950x200 rapidly occupies
+</I>&gt;<i> &gt; all the 24GB of memory I have available. We are soon to receive a
+</I>&gt;<i> &gt; 64GB machine, but in the meanwhile, are the other watershed methods
+</I>&gt;<i> &gt; less demanding of memory?
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Thanks,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Edward
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; On Fri, 16 Mar 2012 16:53:25 +0100
+</I>&gt;<i> &gt; Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt; wrote:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;&gt; Salut Edward,
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; In general please try to send email to the developers' list so that
+</I>&gt;<i> &gt;&gt; several people can see it.
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; There are several solutions
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 1- in fact Pink can read TIFF images.
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; import pink
+</I>&gt;<i> &gt;&gt; a = pink.cpp.readimage('toto.tif') 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; should work fine. Since TIFF is not really specified for 3D, I'm
+</I>&gt;<i> &gt;&gt; notsure what will happen.... 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 2- You can read many formats with imview: 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; <A HREF="http://hugues.zahlt.info/Imview.html">http://hugues.zahlt.info/Imview.html</A>
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; Under Ubuntu and other Debian-related distributions, imview can be
+</I>&gt;<i> &gt;&gt; installed by apt-get , synaptic, etc.
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; Then imview can export in PGM format.
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 3- the extended PGM images consiste of a very simple header
+</I>&gt;<i> &gt;&gt; followed by the data. The documentation of the format in the
+</I>&gt;<i> &gt;&gt; source of pink is under
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; doc/format.txt
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; It may be a little cryptic to read...
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; So writing a header by hand before the data is doable.
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 4- you can use the function 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; pink.cpp.read_raw_image()
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; This should be the simplest option, but I don't know how to use it.
+</I>&gt;<i> &gt;&gt; The help string is not as helpful as it could be:
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; In [3]: help(pink.cpp.read_raw_image)
+</I>&gt;<i> &gt;&gt;&gt; Help on built-in function read_raw_image:
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; read_raw_image(...)
+</I>&gt;<i> &gt;&gt;&gt;    read_raw_image( (str)filename, (list)dimensions of the image [,
+</I>&gt;<i> &gt;&gt;&gt; (int)image mode=1]) -&gt; object : this function reads a raw image
+</I>&gt;<i> &gt;&gt;&gt; from a file the image type is specified by the suffix and the size
+</I>&gt;<i> &gt;&gt;&gt; is given in the 'dim' argument 
+</I>&gt;<i> &gt;&gt;&gt;        C++ signature :
+</I>&gt;<i> &gt;&gt;&gt;            boost::python::api::object
+</I>&gt;<i> &gt;&gt;&gt; read_raw_image(std::string,boost::python::list [,int=1])
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; Let us know how you go !
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; On 16 Mar 2012, at 16 Mar, 15:43, Edward Ando' wrote:
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; Bonjour Hugues,
+</I>&gt;<i> &gt;&gt;&gt; Je m'y suis mis un peu sur le Pink image library, et je suis
+</I>&gt;<i> &gt;&gt;&gt; impression&#233; par ce que je voies.
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; Je ne connais pas du tout, par contre, comment marchent les images
+</I>&gt;<i> &gt;&gt;&gt; PGM que vous utilisez... Je voies qu'elles commencent par &quot;P7&quot; ce
+</I>&gt;<i> &gt;&gt;&gt; qui veux dire qu'elle sont des PAM &quot;arbitraires&quot;.
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; J'ai mes images dans les formats RAW (3D) ou &#224; la limite des Tiff
+</I>&gt;<i> &gt;&gt;&gt; 3D... Je voies qu'il y a:
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; <A HREF="http://www.esiee.fr/~coupriem/Pink/doc/html/raw2pgm_8c.html">http://www.esiee.fr/~coupriem/Pink/doc/html/raw2pgm_8c.html</A>
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; Dans le source code, mais je ne voies pas comment l'utiliser
+</I>&gt;<i> &gt;&gt;&gt; depuis le pink en python...
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; Peux-tu m'expliquer comment convertir mes image en PGM, ou
+</I>&gt;<i> &gt;&gt;&gt; importer directement du raw?
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; Sinon tu pr&#233;f&#232;res que j'&#233;crives au mailing list?
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; Merci,
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; Eddy
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; P.S. Pour t'inscrire au Club3D, qui est h&#233;berg&#233; chez nous, c'est
+</I>&gt;<i> &gt;&gt;&gt; ici: <A HREF="http://www.noesis.fr/forum/viewtopic.php?t=2406">http://www.noesis.fr/forum/viewtopic.php?t=2406</A>
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt; On Thu, 12 Jan 2012 19:40:21 +0100
+</I>&gt;<i> &gt;&gt;&gt; Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt; wrote:
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt;&gt; Bonjour Edward,
+</I>&gt;<i> &gt;&gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt;&gt; Voici les tutoriels pour Pink.
+</I>&gt;<i> &gt;&gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt;&gt; <A HREF="http://www.esiee.fr/~talboth/logiciel/tutorial_pink_20120112.tbz">http://www.esiee.fr/~talboth/logiciel/tutorial_pink_20120112.tbz</A> 
+</I>&gt;<i> &gt;&gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt;&gt; Merci de me ternir au courant s'il y a des soucis.
+</I>&gt;<i> &gt;&gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt;&gt; Hugues Talbot, Professeur associ&#233;
+</I>&gt;<i> &gt;&gt;&gt;&gt; Universit&#233; Paris-Est,
+</I>&gt;<i> &gt;&gt;&gt;&gt; Laboratoire d'informatique Gaspard-Monge
+</I>&gt;<i> &gt;&gt;&gt;&gt; Equipe A3SI 
+</I>&gt;<i> &gt;&gt;&gt;&gt; ESIEE - BP 99 
+</I>&gt;<i> &gt;&gt;&gt;&gt; 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;<i> &gt;&gt;&gt;&gt; (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;<i> &gt;&gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt;&gt;&gt; There are two popes per square kilometer in Vatican.
+</I>&gt;<i> &gt;&gt;&gt; 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; ===
+</I>&gt;<i> &gt;&gt; Hugues Talbot, Professeur associ&#233;
+</I>&gt;<i> &gt;&gt; Universit&#233; Paris-Est,
+</I>&gt;<i> &gt;&gt; Laboratoire d'informatique Gaspard-Monge
+</I>&gt;<i> &gt;&gt; Equipe A3SI 
+</I>&gt;<i> &gt;&gt; ESIEE - BP 99 
+</I>&gt;<i> &gt;&gt; 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;<i> &gt;&gt; (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; The plural of anecdote is not data
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> 
+</I>&gt;<i> ===
+</I>&gt;<i> 
+</I>&gt;<i> &quot;Anything that is in the world when you're born is normal and
+</I>&gt;<i> ordinary and is just a natural part of the way the world works.
+</I>&gt;<i> Anything that's invented between when you're fifteen and thirty-five
+</I>&gt;<i> is new and exciting and revolutionary and you can probably get a
+</I>&gt;<i> career in it. Anything invented after you're thirty-five is against
+</I>&gt;<i> the natural order of things.&quot;
+</I>&gt;<i> 
+</I>&gt;<i> -- Douglas Adams
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000130.html">[Pink-image-devel] Tutoriels pour Pink
+</A></li>
+	<LI>Next message: <A HREF="000132.html">[Pink-image-devel] Tutoriels pour Pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#131">[ date ]</a>
+              <a href="thread.html#131">[ thread ]</a>
+              <a href="subject.html#131">[ subject ]</a>
+              <a href="author.html#131">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

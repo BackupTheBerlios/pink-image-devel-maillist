@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Pink from Python
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20from%20Python&In-Reply-To=%3C1654980.tOntIk5EXG%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000199.html">
+   <LINK REL="Next"  HREF="000201.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Pink from Python</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20from%20Python&In-Reply-To=%3C1654980.tOntIk5EXG%40anyu%3E"
+       TITLE="[Pink-image-devel] Pink from Python">ujoimro at gmail.com
+       </A><BR>
+    <I>Wed Jun 12 11:42:40 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000199.html">[Pink-image-devel] Pink from Python
+</A></li>
+        <LI>Next message: <A HREF="000201.html">[Pink-image-devel] Failed to build pink on ubuntu 13.04: a boost	issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#200">[ date ]</a>
+              <a href="thread.html#200">[ thread ]</a>
+              <a href="subject.html#200">[ subject ]</a>
+              <a href="author.html#200">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear S&#233;bastien, 
+
+we have choosen Python as a front-end of pink, because it is easy to program 
+and it is interfaced with many libraries (numpy, tk, itk, etc.) which can be 
+useful to solve image processing problems. If You are unfamiliar with 
+programming I would definitely suggest to use the Python tools. 
+
+The libraries which could extend pink well depend on Your particular problem. 
+If You just want to start image processing, the tutorials would suite You 
+well.
+
+Cordially, 
+
+Laszlo
+
+
+On 2013-06-11 17:29:03 S&#233;bastien Tosi wrote:
+&gt;<i> Hi Lazlo,
+</I>&gt;<i> 
+</I>&gt;<i> Thanks for the tips, I did not notice there were example scripts, that's
+</I>&gt;<i> great! I have to say I was wondering if it was worth using the library from
+</I>&gt;<i> Python (which I am not familiar at all with) or if I should directly write
+</I>&gt;<i> some applications in C. Is there a logic behind which functions have been
+</I>&gt;<i> selected for the Python front-end, will they be all included in the long
+</I>&gt;<i> run?
+</I>&gt;<i> 
+</I>&gt;<i> Best,
+</I>&gt;<i> S.
+</I>&gt;<i> 
+</I>&gt;<i> On 11 June 2013 14:15, ujoimro &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Dear S&#233;bastien,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; On 2013-06-10 20:11:00 S&#233;bastien Tosi wrote:
+</I>&gt;<i> &gt; &gt; Hi Lazlo,
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; I installed Pink under Windows and I am able to call some of its
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; functions
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; from Python thanks to your wrappers. I am unfortunately having
+</I>&gt;<i> &gt; &gt; trouble
+</I>&gt;<i> &gt; &gt; visualizing the images (either slice by slice or as a 3D rendering):
+</I>&gt;<i> &gt; &gt; I
+</I>&gt;<i> &gt; &gt; could not get the function pink.cpp.Pimview to work: do I need to
+</I>&gt;<i> &gt; &gt; install some other Python modules (you used iPython in your
+</I>&gt;<i> &gt; &gt; example, is it&gt; 
+</I>&gt;<i> &gt; required
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; for some of the functions?)
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Imview is not supported on Windows(tm), at least I have never seen
+</I>&gt;<i> &gt; Imview
+</I>&gt;<i> &gt; working.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; Another question is whether all the functions from the original Pink
+</I>&gt;<i> &gt; &gt; library are exposed to Python or not? For instance I could not find
+</I>&gt;<i> &gt; &gt; any
+</I>&gt;<i> &gt; &gt; function to save an image to file...
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Not all the functions are supported, but saving images is definitely
+</I>&gt;<i> &gt; supported. There is a method called &quot;writeimage&quot; attached to every image
+</I>&gt;<i> &gt; object like:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; import pink
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I=pink.cpp.readimage(&quot;filename.pgm&quot;)
+</I>&gt;<i> &gt; I.writeimage(&quot;new_filename.pgm&quot;)
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; There are also functions to convert pink objects from and to numpy,
+</I>&gt;<i> &gt; which
+</I>&gt;<i> &gt; can
+</I>&gt;<i> &gt; also be saved form Python.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; More generally which other Python exposed library do you recommend
+</I>&gt;<i> &gt; &gt; me to install to complement Pink (for instance but not only for
+</I>&gt;<i> &gt; &gt; image visualization)? This library should ideally be able to handle
+</I>&gt;<i> &gt; &gt; Pink image format to get a better inter-operability (is this image
+</I>&gt;<i> &gt; &gt; format&gt; 
+</I>&gt;<i> &gt; originating
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; from Boost library?). I  was thinking about Boost, Vigra and
+</I>&gt;<i> &gt; &gt; SimpleITK
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; for
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; instance...
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; The visualization of the images is a complex question and I cannot give
+</I>&gt;<i> &gt; a
+</I>&gt;<i> &gt; single answer. Imview is a very useful visualizer and it does support
+</I>&gt;<i> &gt; pink's
+</I>&gt;<i> &gt; images. Even if it's not connected with pink.python, You can save the
+</I>&gt;<i> &gt; image and open them from Imview.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; Is there a tutorial or document demonstrating this sort of
+</I>&gt;<i> &gt; &gt; interaction? I found a pdf document from Michel Couprie where
+</I>&gt;<i> &gt; &gt; VTK-Python and Python-TK were suggested but there is no script
+</I>&gt;<i> &gt; &gt; example, could you help me out?&gt; 
+</I>&gt;<i> &gt; Try pink.manipulate from the examples, it is a good example for
+</I>&gt;<i> &gt; Python.Tk
+</I>&gt;<i> &gt; interaction.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; Best,
+</I>&gt;<i> &gt; &gt; S&#233;bastien
+</I></PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000199.html">[Pink-image-devel] Pink from Python
+</A></li>
+	<LI>Next message: <A HREF="000201.html">[Pink-image-devel] Failed to build pink on ubuntu 13.04: a boost	issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#200">[ date ]</a>
+              <a href="thread.html#200">[ thread ]</a>
+              <a href="subject.html#200">[ subject ]</a>
+              <a href="author.html#200">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

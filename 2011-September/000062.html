@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] compilation issue for 0.9.r617
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20compilation%20issue%20for%200.9.r617&In-Reply-To=%3CCANYiBk3GQwZMKE4N_Q0Z%3DeM3KZ76d9Smjb%2BUeshFhWCe5bdDFA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000058.html">
+   <LINK REL="Next"  HREF="000063.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] compilation issue for 0.9.r617</H1>
+    <B>Jerome Ferrari</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20compilation%20issue%20for%200.9.r617&In-Reply-To=%3CCANYiBk3GQwZMKE4N_Q0Z%3DeM3KZ76d9Smjb%2BUeshFhWCe5bdDFA%40mail.gmail.com%3E"
+       TITLE="[Pink-image-devel] compilation issue for 0.9.r617">zonderrr at gmail.com
+       </A><BR>
+    <I>Tue Sep 13 13:54:21 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000058.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+        <LI>Next message: <A HREF="000063.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#62">[ date ]</a>
+              <a href="thread.html#62">[ thread ]</a>
+              <a href="subject.html#62">[ subject ]</a>
+              <a href="author.html#62">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>thank you,
+
+I managed to compile 0.9.r632.
+
+If I switch on the OPENCL and NUMA flag, I should get a faster Pink at the
+end, right?
+
+2011/9/12 Laszlo Marak &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>&gt;
+
+&gt;<i> This bug has been fixed and is present in package r632
+</I>&gt;<i>
+</I>&gt;<i> On 2011-09-07 Wednesday 09:00:54 Jerome Ferrari wrote:
+</I>&gt;<i> &gt; Hello,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I managed to get installed libnuma-dev, libnuma-dbg and libnuma1and it
+</I>&gt;<i> &gt; wokrs, I managed to get to the end of the compilation (version 0.9.r622),
+</I>&gt;<i> &gt; but I can't import pink properly under python:
+</I>&gt;<i> &gt; *
+</I>&gt;<i> &gt; In [1]: import pink
+</I>&gt;<i> &gt;
+</I>&gt;<i> ---------------------------------------------------------------------------
+</I>&gt;<i> &gt; ImportError                               Traceback (most recent call
+</I>&gt;<i> last)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; /local00/home/F36852/opt/&lt;ipython console&gt; in &lt;module&gt;()
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; /home/F36852/opt/pink/python/pink/__init__.py in &lt;module&gt;()
+</I>&gt;<i> &gt;      15 from exceptions import python_component_missing
+</I>&gt;<i> &gt;      16 from isize import iSize
+</I>&gt;<i> &gt; ---&gt; 17 import cpp # the functions imported directly from c/c++
+</I>&gt;<i> &gt;      18
+</I>&gt;<i> &gt;      19 from windowing import windowing
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; /home/F36852/opt/pink/python/pink/cpp/__init__.py in &lt;module&gt;()
+</I>&gt;<i> &gt;      10 # Universit&#233; Paris-Est, Laboratoire d'Informatique Gaspard-Monge,
+</I>&gt;<i> &gt; Equipe A3SI, ESIEE Paris, 93162, Noisy le Grand CEDEX
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      11 # <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      12 #
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;      13
+</I>&gt;<i> &gt; ---&gt; 14 from libcpp_pink import *
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ImportError: /home/F36852/opt/pink/python/libcpp_pink.so: undefined
+</I>&gt;<i> symbol:
+</I>&gt;<i> &gt; numa_bind*
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I asked for the installation of the numactl package. We will see, but if
+</I>&gt;<i> &gt; you have another proposal...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Sincerely,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Jerome
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; 2011/8/30 Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; we will fix the problem ASAP at our end.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; On 30 Aug 2011, at 30 Aug, 9:10, Jerome Ferrari wrote:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Thank you for your answer,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I'll try that. Unfortunately, I don't have root access to my machine,
+</I>&gt;<i> it
+</I>&gt;<i> &gt; &gt; will take some time to have it ...
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; 2011/8/29 Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;&gt; Hello,
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; This is a mistake at our end, of course we should test for the
+</I>&gt;<i> presence
+</I>&gt;<i> &gt; &gt;&gt; of the NUMA headers.
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; In the meantime, to fix it, try installing the NUMA development kit.
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; I'm not sure how it is called under Debian, but try installing a
+</I>&gt;<i> package
+</I>&gt;<i> &gt; &gt;&gt; called &quot;libnuma-dev&quot; or something similar.
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110913/52c1b2b1/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110913/52c1b2b1/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000058.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+	<LI>Next message: <A HREF="000063.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#62">[ date ]</a>
+              <a href="thread.html#62">[ thread ]</a>
+              <a href="subject.html#62">[ subject ]</a>
+              <a href="author.html#62">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

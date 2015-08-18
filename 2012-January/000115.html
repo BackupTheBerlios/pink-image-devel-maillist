@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] build error on macports 2.0.3
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-January/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20build%20error%20on%20macports%202.0.3&In-Reply-To=%3C201201122230.42625.ujoimro%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000114.html">
+   <LINK REL="Next"  HREF="000116.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] build error on macports 2.0.3</H1>
+    <B>Laszlo Marak</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20build%20error%20on%20macports%202.0.3&In-Reply-To=%3C201201122230.42625.ujoimro%40gmail.com%3E"
+       TITLE="[Pink-image-devel] build error on macports 2.0.3">ujoimro at gmail.com
+       </A><BR>
+    <I>Thu Jan 12 22:30:39 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000114.html">[Pink-image-devel] build error on macports 2.0.3
+</A></li>
+        <LI>Next message: <A HREF="000116.html">[Pink-image-devel] build error on macports 2.0.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#115">[ date ]</a>
+              <a href="thread.html#115">[ thread ]</a>
+              <a href="subject.html#115">[ subject ]</a>
+              <a href="author.html#115">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello, 
+
+in Boost 1.48 they have changed the nomenclature of the template classes. They 
+call them RT0, RT1, ... However RT1 was a constant in the fft function. I have 
+changed the constant name to PINK_RT1. Now Pink should compile with both the 
+older and newer boosts. The update should be available from r693 which should 
+be uploaded by the time You wake up.
+
+cheers, 
+
+Laszlo
+
+On 2012-01-10 Tuesday 23:20:29 Michael Cheng wrote:
+&gt;<i> On Tue, Jan 10, 2012 at 9:48 AM, Michael Cheng 
+</I>&lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">michael.cheng at emphron.com</A>&gt;wrote:
+&gt;<i> &gt; Pink fails to compile with its usual lack of clarity.  Anyone got any
+</I>&gt;<i> &gt; ideas?
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I've sort of figured it out...
+</I>&gt;<i> 
+</I>&gt;<i> * It only occurs in boost1.48 (whether installed via macports or compiled
+</I>&gt;<i> from source)
+</I>&gt;<i> * I compiled boost1.47 from tarball and it all works fine now.
+</I>&gt;<i> 
+</I>&gt;<i> This may be a boost error, or it may be an error in how pink/python are
+</I>&gt;<i> calling boost.  Hard to say...
+</I>&gt;<i> 
+</I>&gt;<i> mike
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000114.html">[Pink-image-devel] build error on macports 2.0.3
+</A></li>
+	<LI>Next message: <A HREF="000116.html">[Pink-image-devel] build error on macports 2.0.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#115">[ date ]</a>
+              <a href="thread.html#115">[ thread ]</a>
+              <a href="subject.html#115">[ subject ]</a>
+              <a href="author.html#115">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

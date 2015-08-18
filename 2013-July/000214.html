@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] linking libpink.dylib
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20linking%20libpink.dylib&In-Reply-To=%3C157347B3-1365-4A88-9845-B41076570CD1%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000215.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] linking libpink.dylib</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20linking%20libpink.dylib&In-Reply-To=%3C157347B3-1365-4A88-9845-B41076570CD1%40gmail.com%3E"
+       TITLE="[Pink-image-devel] linking libpink.dylib">hugues.talbot at gmail.com
+       </A><BR>
+    <I>Wed Jul 10 11:19:23 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000215.html">[Pink-image-devel] Completely lost
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#214">[ date ]</a>
+              <a href="thread.html#214">[ thread ]</a>
+              <a href="subject.html#214">[ subject ]</a>
+              <a href="author.html#214">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Laszlo,
+
+The linking stage works on Linux, and when linking libpink.so. the boost libraries there are not required:
+
+cat lib/CMakeFiles/pink.dir/link.txt
+
+/home/talboth/bin/c++  -fPIC -g   -shared -Wl,-soname,libpink.so -o libpink.so CMakeFiles/pink.dir/l2dcollapse.c.o CMakeFiles/pink.dir/lsegmentlignes.c.o CMakeFiles/pink.dir/mccbt.c.o CMakeFiles/pink.dir/mcchrono.c.o CMakeFiles/pink.dir/lbarycentre.c.o CMakeFiles/pink.dir/lmaxdiameter.c.o CMakeFiles/pink.dir/lnbvois.c.o CMakeFiles/pink.dir/lhierarchie.c.o CMakeFiles/pink.dir/lgettree.c.o CMakeFiles/pink.dir/lgeo.c.o CMakeFiles/pink.dir/lerosbin3d.c.o CMakeFiles/pink.dir/ljones.c.o CMakeFiles/pink.dir/lcrop.c.o CMakeFiles/pink.dir/lregul.c.o CMakeFiles/pink.dir/leros.c.o CMakeFiles/pink.dir/lskelpar.c.o  [&#8230;.]
+CMakeFiles/pink.dir/linux/lclick.c.o CMakeFiles/pink.dir/linux/mcxbib.c.o -lm -lSM -lICE -lX11 -lXext -lpthread -lrt -ltiff /usr/local/lib64/libgsl.so /usr/local/lib64/libgslcblas.so -llapack -Wl,-rpath,/usr/local/lib64:
+
+No boost library, yet there are no error messages. Yet presumably this shared library would require the same symbols as under OSX.
+
+So it seems that under OSX by default all symbols must be defined at the linking stage. Perhaps there is an option to work around this problem.
+
+I'll investigate some more.
+
+
+Cheers.
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000215.html">[Pink-image-devel] Completely lost
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#214">[ date ]</a>
+              <a href="thread.html#214">[ thread ]</a>
+              <a href="subject.html#214">[ subject ]</a>
+              <a href="author.html#214">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

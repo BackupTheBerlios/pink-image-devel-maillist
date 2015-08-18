@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Missing &quot;long2short&quot; and &quot;short2long&quot; from	pink
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Missing%20%22long2short%22%20and%20%22short2long%22%20from%0A%09pink&In-Reply-To=%3CBANLkTimnfnjPsrzaoOXtUkrNhLKastOiAg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000006.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Missing &quot;long2short&quot; and &quot;short2long&quot; from	pink</H1>
+    <B>Jerome Ferrari</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Missing%20%22long2short%22%20and%20%22short2long%22%20from%0A%09pink&In-Reply-To=%3CBANLkTimnfnjPsrzaoOXtUkrNhLKastOiAg%40mail.gmail.com%3E"
+       TITLE="[Pink-image-devel] Missing &quot;long2short&quot; and &quot;short2long&quot; from	pink">zonderrr at gmail.com
+       </A><BR>
+    <I>Mon Jun  6 17:25:09 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000006.html">[Pink-image-devel] Missing &quot;long2short&quot; and &quot;short2long&quot; from	pink
+</A></li>
+        <LI>Next message: <A HREF="000007.html">[Pink-image-devel] compilation time
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>We must have long2short(short2long(image)) == image
+
+after, the way values above 255 are managed feels arbitrary to me. The best
+might be the simplest to code.
+
+2011/6/2 Laszlo Marak &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>&gt;
+
+&gt;<i> We wrote something, but it's not finished, so I did not include it.
+</I>&gt;<i>
+</I>&gt;<i> short2long is obvious,
+</I>&gt;<i>
+</I>&gt;<i> but long2short? What do you think, the conversion modes should be?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 2011-06-02 Thursday 15:19:19 Hugues Talbot wrote:
+</I>&gt;<i> &gt; Hello Laszlo,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Something you may have done with ... has not been comitted:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Do you know about this ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Linking CXX shared library libcpp_pink.dylib
+</I>&gt;<i> &gt; Undefined symbols for architecture x86_64:
+</I>&gt;<i> &gt;   &quot;long2short(xvimage*, xvimage*)&quot;, referenced from:
+</I>&gt;<i> &gt;       export_function168()     in pypink.cpp.o
+</I>&gt;<i> &gt;       pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i> &gt;  pink::ujoi&lt;dcomplex&gt;, &amp;(long2short(xvimage*,
+</I>&gt;<i> &gt;  xvimage*))&gt;(pink::ujoi&lt;dcomplex&gt;)in pypink.cpp.o pink::ujoi&lt;int&gt;
+</I>&gt;<i> &gt;  pink::python::make_result&lt;pink::ujoi&lt;int&gt;, pink::ujoi&lt;fcomplex&gt;,
+</I>&gt;<i> &gt;  &amp;(long2short(xvimage*, xvimage*))&gt;(pink::ujoi&lt;fcomplex&gt;)in pypink.cpp.o
+</I>&gt;<i> &gt;  pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i> &gt;  pink::ujoi&lt;double&gt;, &amp;(long2short(xvimage*,
+</I>&gt;<i> &gt;  xvimage*))&gt;(pink::ujoi&lt;double&gt;)in pypink.cpp.o pink::ujoi&lt;int&gt;
+</I>&gt;<i> &gt;  pink::python::make_result&lt;pink::ujoi&lt;int&gt;, pink::ujoi&lt;float&gt;,
+</I>&gt;<i> &gt;  &amp;(long2short(xvimage*, xvimage*))&gt;(pink::ujoi&lt;float&gt;)in pypink.cpp.o
+</I>&gt;<i> &gt;  pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i> &gt;  pink::ujoi&lt;int&gt;, &amp;(long2short(xvimage*, xvimage*))&gt;(pink::ujoi&lt;int&gt;)in
+</I>&gt;<i> &gt;  pypink.cpp.o pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i> &gt;  pink::ujoi&lt;unsigned short&gt;, &amp;(long2short(xvimage*,
+</I>&gt;<i> &gt;  xvimage*))&gt;(pink::ujoi&lt;unsigned short&gt;)in pypink.cpp.o ...
+</I>&gt;<i> &gt;   &quot;short2long(xvimage*, xvimage*)&quot;, referenced from:
+</I>&gt;<i> &gt;       export_function167()     in pypink.cpp.o
+</I>&gt;<i> &gt;       pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i> &gt;  pink::ujoi&lt;dcomplex&gt;, &amp;(short2long(xvimage*,
+</I>&gt;<i> &gt;  xvimage*))&gt;(pink::ujoi&lt;dcomplex&gt;)in pypink.cpp.o pink::ujoi&lt;int&gt;
+</I>&gt;<i> &gt;  pink::python::make_result&lt;pink::ujoi&lt;int&gt;, pink::ujoi&lt;fcomplex&gt;,
+</I>&gt;<i> &gt;  &amp;(short2long(xvimage*, xvimage*))&gt;(pink::ujoi&lt;fcomplex&gt;)in pypink.cpp.o
+</I>&gt;<i> &gt;  pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i> &gt;  pink::ujoi&lt;double&gt;, &amp;(short2long(xvimage*,
+</I>&gt;<i> &gt;  xvimage*))&gt;(pink::ujoi&lt;double&gt;)in pypink.cpp.o pink::ujoi&lt;int&gt;
+</I>&gt;<i> &gt;  pink::python::make_result&lt;pink::ujoi&lt;int&gt;, pink::ujoi&lt;float&gt;,
+</I>&gt;<i> &gt;  &amp;(short2long(xvimage*, xvimage*))&gt;(pink::ujoi&lt;float&gt;)in pypink.cpp.o
+</I>&gt;<i> &gt;  pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i> &gt;  pink::ujoi&lt;int&gt;, &amp;(short2long(xvimage*, xvimage*))&gt;(pink::ujoi&lt;int&gt;)in
+</I>&gt;<i> &gt;  pypink.cpp.o pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i> &gt;  pink::ujoi&lt;unsigned short&gt;, &amp;(short2long(xvimage*,
+</I>&gt;<i> &gt;  xvimage*))&gt;(pink::ujoi&lt;unsigned short&gt;)in pypink.cpp.o ...
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Pink-image-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110606/4625493a/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110606/4625493a/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000006.html">[Pink-image-devel] Missing &quot;long2short&quot; and &quot;short2long&quot; from	pink
+</A></li>
+	<LI>Next message: <A HREF="000007.html">[Pink-image-devel] compilation time
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

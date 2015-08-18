@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Patches &amp; new things
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Patches%20%26%20new%20things&In-Reply-To=%3C1631638.ZeW5E5P2iv%40kasia.site%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000210.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Patches &amp; new things</H1>
+    <B>Kacper Pluta</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Patches%20%26%20new%20things&In-Reply-To=%3C1631638.ZeW5E5P2iv%40kasia.site%3E"
+       TITLE="[Pink-image-devel] Patches &amp; new things">kacperp at lavabit.com
+       </A><BR>
+    <I>Sun Jul  7 23:41:17 CEST 2013</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000210.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#209">[ date ]</a>
+              <a href="thread.html#209">[ thread ]</a>
+              <a href="subject.html#209">[ subject ]</a>
+              <a href="author.html#209">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear All,
+
+My name is Kacper Pluta and I'm the master student from Poland. Since 2011 I 
+have been working with Ph.D Janaszewski and M.Sc. Postolski. We use Pink and 
+libpink very widely and I just need to say that: Pink is great and thank you 
+for your work and sharing it as open source. 
+
+Unfortunately we have been using too many versions of Pink, sometimes with our 
+patches, and some time ago I have come to the conclusion that the only way out 
+of this situation is to support the main source of pink and drop all of the 
+old versions.
+
+Today I want to say &quot;Hello&quot; and send you only few things but as I mentioned I 
+want to support your work.
+
+List of content( <A HREF="https://www.wuala.com/hilsim/Pink-070713/?key=r7tLZWtAhMTP">https://www.wuala.com/hilsim/Pink-070713/?key=r7tLZWtAhMTP</A> ):
+
+Patches:
+
+-- Patch for raw2pgm(file raw2pgm.c.patch):
+---- short data type support now work properly
+
+-- Patches for ltangent.cxx(file ltangent.cxx.patch):
+---- wrong memory releases,
+---- memory leaks(debugged with Valgrind),
+---- nan values in output of lambdaMST2/3D (debugged with C99 function 
+feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW)) 
+
+New things:
+
+-- Bridge between libpink and ITK(files ImageTypeConverter.h, 
+ImageTypeConverter.hxx)
+
+-- Adaptive medial axis described in M. Postolski Ph.D. thesis (file: 
+adaptivemedialaxis.c) I also added files of airway tree to compare this method 
+with lambdamedialaxis(files; medial.png(threshold: 2.5), 
+adaptive.png(threshold: 0.65), tree.png) 
+
+-- changevalue.c - swap value in input file to another(equivalent may already 
+exist).
+ 
+Finally, I would like to ask about the test files. For example in file 
+lambdamedialaxis.c there are references to file: 
+
+%IMAGES/2dbyte/binary/b2hebreu.pgm
+
+but in pink dir &quot;images&quot; it not exist.
+
+
+-- 
+Pozdrawiam/Regards,
+Kacper Pluta,
+PGP public key: keys.gnupg.net - 6AA4AF6B
+
+
+PS Sorry for my weak English
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130707/bc2033fb/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130707/bc2033fb/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 490 bytes
+Desc: This is a digitally signed message part.
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130707/bc2033fb/attachment.pgp">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130707/bc2033fb/attachment.pgp</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000210.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#209">[ date ]</a>
+              <a href="thread.html#209">[ thread ]</a>
+              <a href="subject.html#209">[ subject ]</a>
+              <a href="author.html#209">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

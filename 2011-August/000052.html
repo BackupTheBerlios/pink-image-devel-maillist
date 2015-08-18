@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Committing Pink Exercises
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-August/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Committing%20Pink%20Exercises&In-Reply-To=%3C201108182254.37849.ujoimro%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000050.html">
+   <LINK REL="Next"  HREF="000053.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Committing Pink Exercises</H1>
+    <B>Laszlo Marak</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Committing%20Pink%20Exercises&In-Reply-To=%3C201108182254.37849.ujoimro%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Committing Pink Exercises">ujoimro at gmail.com
+       </A><BR>
+    <I>Thu Aug 18 22:54:31 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000050.html">[Pink-image-devel] Problems compiling last version of pink
+</A></li>
+        <LI>Next message: <A HREF="000053.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello, 
+
+sorry for the delay, but I was out-of-reach for a few days. I think numa_bind 
+comes with the version of the numa library. Try to search on the internet, my 
+fix will take few more days. I hope to be available from now.
+
+----- &lt;begin original message&gt; -----
+Date: 2011-08-14T10:57:41Z
+From: Ravi Kiran &lt;Ravi Kiran &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">beedotkiran at gmail.com</A>&gt;&gt;
+To: Laszlo Marak
+Cc: 
+Subject: Re: Committing Pink Exercises
+
+&gt;<i> Dear Laszlo,
+</I>&gt;<i> 
+</I>&gt;<i> I face another short error. This one is happens when i try to run an import
+</I>&gt;<i> cpp command after running the pink.sh script.
+</I>&gt;<i> 
+</I>&gt;<i> The error says the pink library has undefined symbol numa bind (i have
+</I>&gt;<i> installed libnuma, numactl and libnuma dev and debug packages)
+</I>&gt;<i> 
+</I>&gt;<i> Error:
+</I>&gt;<i> from pink import cpp as pink
+</I>&gt;<i> Traceback (most recent call last):
+</I>&gt;<i>   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+</I>&gt;<i>   File &quot;/home/beedot/build/python/pink/__init__.py&quot;, line 17, in &lt;module&gt;
+</I>&gt;<i>     import cpp # the functions imported directly from c/c++
+</I>&gt;<i>   File &quot;/home/beedot/build/python/pink/cpp/__init__.py&quot;, line 14, in
+</I>&gt;<i> &lt;module&gt;
+</I>&gt;<i>     from libcpp_pink import *
+</I>&gt;<i> ImportError: /home/beedot/build/python/libcpp_pink.so: undefined symbol:
+</I>&gt;<i> numa_bind
+</I>&gt;<i> 
+</I>&gt;<i> Please let me know if you have seen this before ?
+</I>&gt;<i> 
+</I>&gt;<i> Cheers
+</I>&gt;<i> Ravi
+</I>&gt;<i> 
+</I>&gt;<i> On Fri, Aug 12, 2011 at 1:03 AM, Ravi Kiran &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">beedotkiran at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Hey Laszlo,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; It works ! thank you for the fix.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Best
+</I>&gt;<i> &gt; Ravi
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; On Wed, Aug 10, 2011 at 6:50 PM, Laszlo Marak &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;&gt; should compile now, sorry
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; On 2011-08-07 Sunday 08:19:12 you wrote:
+</I>&gt;<i> &gt;&gt; &gt; Dear Laszlo,
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; Firstly, I was able to checkout the source of pink and perform a
+</I>&gt;<i> &gt;&gt; &gt; commit
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; as
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; &gt; you have suggested. I continue further a bit later. thank you for the
+</I>&gt;<i> &gt;&gt; &gt; comments!
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; Secondly I try to build the new version of the source: 1. The cmake
+</I>&gt;<i> &gt;&gt; &gt; goes well 2. the make fails with these errors:
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; ------------------------------------------
+</I>&gt;<i> &gt;&gt; &gt; [ 80%] Building CXX object python/CMakeFiles/cpp_pink.dir/pyflow.cpp.o
+</I>&gt;<i> &gt;&gt; &gt; In file included from
+</I>&gt;<i> &gt;&gt; &gt; /home/beedot/docs/Pink-Dev/Pink-svn/include/ui_flow_simd.hpp:24:0,
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt;                  from
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; /home/beedot/docs/Pink-Dev/Pink-svn/src/python/pyflow.cpp:19:
+</I>&gt;<i> &gt;&gt; &gt; /home/beedot/docs/Pink-Dev/Pink-svn/include/ui_simd.hpp:25:3: warning:
+</I>&gt;<i> &gt;&gt; &gt; #warning : highest simd instruction set available at compilation SSE2
+</I>&gt;<i> &gt;&gt; &gt; In file included from
+</I>&gt;<i> &gt;&gt; &gt; /home/beedot/docs/Pink-Dev/Pink-svn/src/python/pyflow.cpp:20:0:
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; &gt; /home/beedot/docs/Pink-Dev/Pink-svn/include/ui_flow_opencl.hpp:20:19:
+</I>&gt;<i> &gt;&gt; fatal
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; &gt; error: CL/cl.h: No such file or directory
+</I>&gt;<i> &gt;&gt; &gt; compilation terminated.
+</I>&gt;<i> &gt;&gt; &gt; make[2]: *** [python/CMakeFiles/cpp_pink.dir/pyflow.cpp.o] Error 1
+</I>&gt;<i> &gt;&gt; &gt; make[1]: *** [python/CMakeFiles/cpp_pink.dir/all] Error 2
+</I>&gt;<i> &gt;&gt; &gt; make: *** [all] Error 2
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; ------------------------------------------
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; On searching a bit and futher installing pyopencl and cyprit packages
+</I>&gt;<i> &gt;&gt; &gt; i tried again. It gave me the same error.
+</I>&gt;<i> &gt;&gt; &gt; Are there any other new configurations or packages i would need to
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; include
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; &gt; ? Please let me know :)
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; Best
+</I>&gt;<i> &gt;&gt; &gt; Ravi
+</I>&gt;<i> &gt;&gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; On Thu, Aug 4, 2011 at 5:09 PM, Laszlo Marak &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;&gt; &gt; &gt; Hello Ravi,
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; you can access the repository with your esiee password. Here is the
+</I>&gt;<i> &gt;&gt; &gt; &gt; command to
+</I>&gt;<i> &gt;&gt; &gt; &gt; check out:
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; svn co
+</I>&gt;<i> &gt;&gt; &gt; &gt; svn+<A HREF="ssh://username@ssh.esiee.fr/user/coupriem/SVN/PinkSVN/trunkPink-">ssh://username@ssh.esiee.fr/user/coupriem/SVN/PinkSVN/trunkPink-</A>
+</I>&gt;<i> &gt;&gt; &gt; &gt; svn
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; you should replace username with your esiee login.
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; You can commit changes with
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; svn ci -m &quot;these are my changes&quot;
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; You can replace it with the appropriate message.
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; Tell me how it went.
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; Laszlo
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; On 2011-08-04 Thursday 00:26:13 you wrote:
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; Dear Laszlo,
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; How are you ? Hope you are having a good vacation !
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; I plan to work in pink in the next 2 months. I shall shortly mail
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; my plan on what the areas would be.
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; But apart from this i though i would start updating the examples
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; that
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; we worked on and add a few
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; more here while i am in Bangalore. For now i plan to clean the
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; code
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; written
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; and commit them.
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; An important reason i mailed - is for one to know how to commit
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; code
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; using
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; the SVN code resposotiry tool.
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; Would i need to create a login for the svn repository for pink ?
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; Could
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; you
+</I>&gt;<i> &gt;&gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; please send me a link or instructions on how i could do this.
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; 
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; Regards
+</I>&gt;<i> &gt;&gt; &gt; &gt; &gt; Ravi
+</I>Laszlo MARAK
+Phd. student of ESIEE
+email: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>
+
+The gentlemen looked one another over with microscopic carelessness.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000050.html">[Pink-image-devel] Problems compiling last version of pink
+</A></li>
+	<LI>Next message: <A HREF="000053.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#52">[ date ]</a>
+              <a href="thread.html#52">[ thread ]</a>
+              <a href="subject.html#52">[ subject ]</a>
+              <a href="author.html#52">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

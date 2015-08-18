@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Numpy to pink and back
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Numpy%20to%20pink%20and%20back&In-Reply-To=%3C4850F76274F80D4D8F6D043FAD35F8270747BCB2%40ex2.fmi.ch%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000023.html">
+   <LINK REL="Next"  HREF="000025.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Numpy to pink and back</H1>
+    <B>Fajardo, Otto</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Numpy%20to%20pink%20and%20back&In-Reply-To=%3C4850F76274F80D4D8F6D043FAD35F8270747BCB2%40ex2.fmi.ch%3E"
+       TITLE="[Pink-image-devel] Numpy to pink and back">otto.fajardo at fmi.ch
+       </A><BR>
+    <I>Wed Jul  6 12:43:18 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000023.html">[Pink-image-devel] Numpy to pink and back
+</A></li>
+        <LI>Next message: <A HREF="000025.html">[Pink-image-devel] Numpy to pink and back
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#24">[ date ]</a>
+              <a href="thread.html#24">[ thread ]</a>
+              <a href="subject.html#24">[ subject ]</a>
+              <a href="author.html#24">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Jerome, 
+ 
+your code from pink to scipy works for my images, nice!!!
+ 
+now the problem is how to import the images from numpy to pink ...
+ 
+I think the problem is the pink image is not just raw data but is
+compressed or encoded in some way I don't understand. Therefore, you
+need to encode the data first before put it into the pink image (in the
+case of your code, the get_pixels method is decoding from the pink to
+raw pixel data). I guess without this decoding, the whole thing will
+fail. As an example, you can get the buffer data from a numpy array,
+just by the buit in method data: mynumpyarray.data. But then, if you try
+to write it to the pink image, it fails. 
+ 
+So, I think we really need some help from the pink experts for a
+function to import from numpy/scipy to pink.
+ 
+Another option I am thinking, is to first convert the image to image
+(scipy.misc.toimage), then, save it as a pgm image (scipy.misc.imsave),
+and then load this pgm image into pink (pink.cpp.readimage). This works,
+and is about 25 times faster than the for loops. Of course it's very
+silly to write an image to the disk each time you want to do this
+convertion, and therefore would be nice to save the image in an object
+or pipe, and then open it with pink, again from the object or pipe. I
+don't know how to do this, and I don't know if it would work.
+ 
+any idea?
+ 
+Otto
+
+________________________________
+
+From: Jerome Ferrari [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">zonderrr at gmail.com</A>] 
+Sent: Tuesday, July 05, 2011 2:05 PM
+To: Fajardo, Otto
+Subject: Re: [Pink-image-devel] Numpy to pink and back
+
+
+2011/7/5 Fajardo, Otto &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">otto.fajardo at fmi.ch</A>&gt;
+
+
+	
+	Hi Jerome, 
+	 
+	quite interesting. is your code working? 
+
+
+I thought so when I pasted this code in the bug tracker, but since then
+I think I found a case that did not work properly. It probably has to be
+refined at least. Maybe it works as it is for your video problems, you
+are invited to test :)
+ 
+
+	maybe we can join efforts to write something ?
+
+
+I would sure be interested in the solution, but I don't know much about
+computing, I just started python this year. I actually just copied what
+is done in the pil_photoimage.py file.
+
+I think I understand the idea behind weave, it is supposed to accelerate
+the &quot;code&quot;, I can't help with that high level thing.
+
+Another solution is to go on with the &quot;buffer format&quot; like in the
+pink_to_ndimage function I wrote, but I don't know how to transform a
+NDimage into a buffer nor how to read a buffer with pink. If someone has
+an idea?
+
+Jerome
+
+
+ 
+
+	Otto
+
+________________________________
+
+	From: Jerome Ferrari [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">zonderrr at gmail.com</A>] 
+	Sent: Monday, July 04, 2011 6:25 PM
+	To: Fajardo, Otto
+	Subject: Re: [Pink-image-devel] Numpy to pink and back
+	
+	
+	Hi,
+	
+	I don't have time to test your weave, but i already filed a
+feature request about that:
+	
+<A HREF="http://developer.berlios.de/feature/?func=detailfeature&amp;feature_id=5360&amp;">http://developer.berlios.de/feature/?func=detailfeature&amp;feature_id=5360&amp;</A>
+group_id=12429
+	
+	with something done about it, but not much:
+	
+	def pink_to_ndimage(image):
+	    if type(image) == pink.char_image:
+	        return
+	
+scipy.frombuffer(image.get_pixels(),'int8').reshape(image.size[1],image.
+size[0])
+	    elif type(image) == pink.float_image:
+	        return
+	
+scipy.frombuffer(image.get_pixels(),'float32').reshape(image.size[1],ima
+ge.size[0])
+	    elif type(image) == pink.int_image:
+	        return
+	
+scipy.frombuffer(image.get_pixels(),'int32').reshape(image.size[1],image
+.size[0])
+	    else :
+	        print(&quot;format non-detecte&quot;)
+
+	2011/7/4 Fajardo, Otto &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">otto.fajardo at fmi.ch</A>&gt;
+	
+
+		Hello,
+		
+		I'm new to pink. I got my images as numpy arrays
+(because I'm extracting
+		them from videos, and then doing some pre-processing on
+open cv and
+		scipy-numpy), and would like an efficient way to convert
+this numpy
+		arrays to pink char images. Laszlo already pointed me at
+a solution that
+		works, using for loops in python, but it's a bit slow.
+Does anyone have
+		a solution? Would it be possible to implement such a
+feature in pink. If
+		yes, the way back to numpy would be necessary as well.
+		
+		I was trying also to write it using scipy.weave, but for
+some reason it
+		fails, any suggestion?
+		My code looks like this:
+		
+		
+		#bwtest is the binary image I would like to convert to
+pink. Size_x and
+		size_y are the x and y dimensions of bwtest.
+		
+		I=pink.cpp.char_image([size_x,size_y])
+		
+		code = '''
+		       int i;
+		       int m;
+		
+		       for (i=0; i &lt;size_x; ++i){
+		           for (m=0; m&lt;size_y;++m){
+		
+		                I(i,m) = bwtest(m,i);
+		            }
+		       }
+		       '''
+		
+		err = weave.inline(code,
+arg_names=['size_x','size_y','bwtest','I'],
+	
+type_converters=weave.converters.blitz,
+		                  compiler = 'gcc')
+		
+		Many thanks!
+		
+		_______________________________________________
+		Pink-image-devel mailing list
+		<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+	
+<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+		
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110706/1e6dab91/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110706/1e6dab91/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000023.html">[Pink-image-devel] Numpy to pink and back
+</A></li>
+	<LI>Next message: <A HREF="000025.html">[Pink-image-devel] Numpy to pink and back
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#24">[ date ]</a>
+              <a href="thread.html#24">[ thread ]</a>
+              <a href="subject.html#24">[ subject ]</a>
+              <a href="author.html#24">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

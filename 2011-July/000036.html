@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Pink on Windows
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20on%20Windows&In-Reply-To=%3C5DA4283F-0A60-4617-87B9-764DB7D398C6%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000035.html">
+   <LINK REL="Next"  HREF="000037.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Pink on Windows</H1>
+    <B>Karsten</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20on%20Windows&In-Reply-To=%3C5DA4283F-0A60-4617-87B9-764DB7D398C6%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Pink on Windows">karo03de at gmail.com
+       </A><BR>
+    <I>Thu Jul 21 16:10:11 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000035.html">[Pink-image-devel] This is a test message
+</A></li>
+        <LI>Next message: <A HREF="000037.html">[Pink-image-devel] Memory not being free()
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#36">[ date ]</a>
+              <a href="thread.html#36">[ thread ]</a>
+              <a href="subject.html#36">[ subject ]</a>
+              <a href="author.html#36">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi, 
+I am interested to use Pink programs also under Windows (pink-0.9.r579-Source). Perhaps there are others too interested in this non-Python installation. 
+
+I use the Pink progams with a simple wrapper under G'MIC  (<A HREF="http://gmic.sourceforge.net/">http://gmic.sourceforge.net/</A>) either in the Terminal or under the gmic_gimp Gimp plugin.
+
+Using makemgw.bat there were several errors. 
+
+First some variables seemingly were not defined:
+  IDIR = $(PINK)/include
+  CDIR = $(PINK)/src/com
+  LDIR = $(PINK)/src/lib
+  LIARDIR = $(PINK)/src/liar
+  DDIR = $(PINK)/src/bdd
+  TDIR = $(PINK)/src/tables
+
+Second, under my Windows 7 32 bit version mcchrono did not compile. Only commenting out a small part in mcchrono.h helped.
+
+Third, some programs (crop/shrinkondisk) did not compile.
+
+Perhaps caused by my virtual Windows system I had to resave the makefile as Windows file. By the way the linux build file makelin works under Mac OSX too.
+
+Regards
+
+Karsten
+<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">karo03de at gmail.com</A>
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110721/1746a777/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110721/1746a777/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000035.html">[Pink-image-devel] This is a test message
+</A></li>
+	<LI>Next message: <A HREF="000037.html">[Pink-image-devel] Memory not being free()
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#36">[ date ]</a>
+              <a href="thread.html#36">[ thread ]</a>
+              <a href="subject.html#36">[ subject ]</a>
+              <a href="author.html#36">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

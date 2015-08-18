@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Image embedding in documentation using	doxygen
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-May/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Image%20embedding%20in%20documentation%20using%0A%09doxygen&In-Reply-To=%3C201105282304.08795.ujoimro%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000004.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Image embedding in documentation using	doxygen</H1>
+    <B>Laszlo Marak</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Image%20embedding%20in%20documentation%20using%0A%09doxygen&In-Reply-To=%3C201105282304.08795.ujoimro%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Image embedding in documentation using	doxygen">ujoimro at gmail.com
+       </A><BR>
+    <I>Sat May 28 23:04:07 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000004.html">[Pink-image-devel] Image embedding in documentation using doxygen
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5">[ date ]</a>
+              <a href="thread.html#5">[ thread ]</a>
+              <a href="subject.html#5">[ subject ]</a>
+              <a href="author.html#5">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This solution may be feasible. In fact all we need is a pre-parser, which 
+takes the python script parts, executes them, and replaces the image links 
+where appropriate in the doxygen file. 
+
+The code can look like this:
+
+my example code:
+
+import pink.cpp as pink
+image1 = pink.readimage(&quot;path/relative/to/svn/or/hg&quot;)
+image2 = pink.some_function(image1, 3)
+
+in the end the pre-parser would add two lines to the script (before 
+executing):
+
+image1.writeimage(&quot;/internal/image/name/for/the/script&quot;)
+image2.writeimage(&quot;/internal/image/name/for/the/script2&quot;)
+
+and then in the rest of the code it would replace $image1 and $image2 with the 
+relative paths of the images.
+
+I would also need to look into the proposed self-testing feature, because, we 
+maybe able to unify the two.
+
+The only question is how  easy it would be to use?
+
+Have you find other tools, independent from doxygen, for documentation auto-
+generation or testing?
+
+
+----- &lt;begin original message&gt; -----
+Date: 2011-05-28T13:09:58Z
+From: Ravi Kiran &lt;Ravi Kiran &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">beedotkiran at gmail.com</A>&gt;&gt;
+To: pink-image-devel
+Cc: 
+Subject: [Pink-image-devel] Image embedding in documentation using doxygen
+
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> I work on pink, I am an intern at ESIEE. I tried some experimenting with
+</I>&gt;<i> Doxygen and it seems that one can insert/embedd
+</I>&gt;<i> image&lt;<A HREF="http://www.star.bnl.gov/public/comp/sofi/doxygen/commands.html#cmdima">http://www.star.bnl.gov/public/comp/sofi/doxygen/commands.html#cmdima</A>
+</I>&gt;<i> ge&gt;s within the documentation. I have inserted the respective links. This
+</I>&gt;<i> simplifies our case if it works for python codes. I have tested this on  a
+</I>&gt;<i> sample C code for now.
+</I>&gt;<i> 
+</I>&gt;<i> For the python examples I guess it would be good to explore the doxypy
+</I>&gt;<i> &lt;<A HREF="http://code.foosel.org/doxypy">http://code.foosel.org/doxypy</A>&gt;filter.
+</I>&gt;<i> 
+</I>&gt;<i> Nevertheless if this should work - it would reduce the requirement for
+</I>&gt;<i> a *script
+</I>&gt;<i> *within pink(still to be decided) to just running doxygen after producing
+</I>&gt;<i> the image and other outputs. One should keep in mind that the outputs to be
+</I>&gt;<i> generated are to be uniquely named. This might be a minor problem if the
+</I>&gt;<i> the tool doesnt allow recursive searching. I shall test this within pink
+</I>&gt;<i> shortly.
+</I>&gt;<i> 
+</I>&gt;<i> The purpose is to produce documentation that has the usual doxygen level
+</I>&gt;<i> for all the basic operators and functions in pink, while including the
+</I>&gt;<i> input and outputs at the application and operator level. This way an user
+</I>&gt;<i> can write his own example showing the different steps and outputs
+</I>&gt;<i> produced.
+</I>&gt;<i> 
+</I>&gt;<i> Bon weekend
+</I>&gt;<i> 
+</I>&gt;<i> Best
+</I>&gt;<i> Ravi
+</I>
+uj
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000004.html">[Pink-image-devel] Image embedding in documentation using doxygen
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5">[ date ]</a>
+              <a href="thread.html#5">[ thread ]</a>
+              <a href="subject.html#5">[ subject ]</a>
+              <a href="author.html#5">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] New problems with Cmake, boost and OS/X
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-November/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20New%20problems%20with%20Cmake%2C%20boost%20and%20OS/X&In-Reply-To=%3C9CA55657-185A-477B-B2DA-B3F095E697A6%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000178.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] New problems with Cmake, boost and OS/X</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20New%20problems%20with%20Cmake%2C%20boost%20and%20OS/X&In-Reply-To=%3C9CA55657-185A-477B-B2DA-B3F095E697A6%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] New problems with Cmake, boost and OS/X">h.talbot at esiee.fr
+       </A><BR>
+    <I>Thu Nov  1 11:49:58 CET 2012</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000178.html">[Pink-image-devel] lost pgp-mail,	how do I push changes to HG pink repository ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#177">[ date ]</a>
+              <a href="thread.html#177">[ thread ]</a>
+              <a href="subject.html#177">[ subject ]</a>
+              <a href="author.html#177">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+Once again things have changed with Boost without any warning. 
+
+In boost version 1.51, the library libboost_system *must* now be specified to compile with the boost thread library.
+
+As a result, the Pink cmake test concerning libboot_thread fails every time.
+
+In the log file, I have
+
+&gt;<i> /usr/bin/c++    -I/opt/local/include    -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -L/opt/local/lib CMakeFiles/cmTryCompileExec3728070013.dir/CheckIncludeFile.cxx.o  -o cmTryCompileExec3728070013  
+</I>&gt;<i> Undefined symbols:
+</I>&gt;<i>   &quot;boost::system::system_category()&quot;, referenced from:
+</I>&gt;<i>       __static_initialization_and_destruction_0(int, int)in CheckIncludeFile.cxx.o
+</I>&gt;<i>   &quot;boost::system::generic_category()&quot;, referenced from:
+</I>&gt;<i>       __static_initialization_and_destruction_0(int, int)in CheckIncludeFile.cxx.o
+</I>&gt;<i>       __static_initialization_and_destruction_0(int, int)in CheckIncludeFile.cxx.o
+</I>&gt;<i> ld: symbol(s) not found
+</I>&gt;<i> collect2: ld returned 1 exit status
+</I>&gt;<i> make[1]: *** [cmTryCompileExec3728070013] Error 1
+</I>
+
+Now I've been trying for several hours to add this library to the compilation line using the cmake system.
+
+I have ascertained that adding -lboost_system to the above compilation test does indeed work.
+
+However there is no obvious way to add this requirement in the current system. I have tried the following:
+
+- adding -lboost_system to CMAKE_CXX_FLAGS, CMAKE_C_FLAGS and CMAKE_EXE_LINKER_FLAGS
+
+	result: nothing. These variables are completely ignored by the test 
+
+- adding -lboost_sysytem to PYTHON_LIBRARY
+
+	result: this allows the test to go through, however the library compilation stops later because this variable is no longer recognized as a library name
+
+- adding the correct flags to UJ_CheckIncludeFileCXX.cmake
+
+	result: screaming and hair being pulled off. This file is undocumented and so are the functions that it uses. I honestly cannot follow what it does. In particular this line:
+
+    TRY_COMPILE(${VARIABLE}
+      ${CMAKE_BINARY_DIR}
+      ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeTmp/CheckIncludeFile.cxx
+      COMPILE_DEFINITIONS ${CMAKE_REQUIRED_DEFINITIONS}
+      CMAKE_FLAGS 
+      -DCOMPILE_DEFINITIONS:STRING=${MACRO_CHECK_INCLUDE_FILE_FLAGS}
+      &quot;${CHECK_INCLUDE_FILE_CXX_INCLUDE_DIRS}&quot;
+      OUTPUT_VARIABLE OUTPUT) 
+
+
+	I cannot find anywhere the syntax for TRY_COMPILE ; 
+
+	the line  -DCOMPILE_DEFINITIONS:STRING=${MACRO_CHECK_INCLUDE_FILE_FLAGS} 
+
+	is totally bizarre. I have managed to add all the libraries I need to MACRO_CHECK_INCLUDE_FILE_FLAGS, however only the *first item* is recognized. Why ??
+
+I'm open to any suggestion.
+
+
+I have for some time been dreading recompiling pink with cmake. Very often something breaks that can sometime take hours to fix. The combination with boost is definitely not pleasant.
+
+I think seriously that we need to reconsider how pink is being built at the moment, this is definitely not something for the amateur, and when Laszlo is no longer in a position to maintain it, I fear we will have to refactor everything. A lot of effort will have been wasted.
+
+This is compounded by the fact that on OS/X the only serious way to get boost is through the  macport system ; however it is &quot;upgraded&quot; constantly and so we have to cope with these shenanigans all the time.
+
+One suggestion by Laurent Najman is to ditch Boost completely for the Pink/Python interface, and go with SWIG, which would have the definite advantages of not strictly requiring C++ and providing bindings to other languages as well. For instance it would be very useful to bind Pink to Java, and from there to ImageJ.
+
+This is a major undertaking, what do people think ? Am I the only one having problems with the current build system ?
+
+Thanks.
+
+
+
+
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+Laws do not persuade just because they threaten. --Seneca
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20121101/65bb74ff/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20121101/65bb74ff/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000178.html">[Pink-image-devel] lost pgp-mail,	how do I push changes to HG pink repository ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#177">[ date ]</a>
+              <a href="thread.html#177">[ thread ]</a>
+              <a href="subject.html#177">[ subject ]</a>
+              <a href="author.html#177">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] undefined reference to CreeFifoVide, etc
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-October/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20undefined%20reference%20to%20CreeFifoVide%2C%20etc&In-Reply-To=%3C38624517.jKvS94KdQi%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000170.html">
+   <LINK REL="Next"  HREF="000172.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] undefined reference to CreeFifoVide, etc</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20undefined%20reference%20to%20CreeFifoVide%2C%20etc&In-Reply-To=%3C38624517.jKvS94KdQi%40anyu%3E"
+       TITLE="[Pink-image-devel] undefined reference to CreeFifoVide, etc">ujoimro at gmail.com
+       </A><BR>
+    <I>Mon Oct 22 15:08:45 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000170.html">[Pink-image-devel] undefined reference to CreeFifoVide, etc
+</A></li>
+        <LI>Next message: <A HREF="000172.html">[Pink-image-devel] undefined reference to CreeFifoVide, etc
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#171">[ date ]</a>
+              <a href="thread.html#171">[ thread ]</a>
+              <a href="subject.html#171">[ subject ]</a>
+              <a href="author.html#171">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello, 
+
+Is there any particular reason that You're not using CMake for building Pink? 
+
+Laszlo
+
+On 2012-10-19 21:56:17 Mark Brophy wrote:
+&gt;<i> Hi all, I hate to resort to spamming the mailing list, but I'm running out
+</I>&gt;<i> of ideas here. I'm using 32-bit Ubuntu 11.10, I've installed all of the
+</I>&gt;<i> pre-requirements, but when I run ./makelin I eventually get the following
+</I>&gt;<i> when compiling from the mercurial repo. Can anyone tell me how to resolve
+</I>&gt;<i> this?
+</I>&gt;<i> 
+</I>&gt;<i> *
+</I>&gt;<i> ./linux/obj/libpink.a(mcgraphe.o): In function `RootTree':
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1855: undefined reference to `CreeFifoVide'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1871: undefined reference to `FifoPush'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1875: undefined reference to `FifoPop'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1883: undefined reference to `FifoPush'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1893: undefined reference to `FifoPush'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1873: undefined reference to `FifoVide'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1898: undefined reference to `FifoTermine'
+</I>&gt;<i> ./linux/obj/libpink.a(mcgraphe.o): In function `DistRoot':
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1917: undefined reference to `CreeFifoVide'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1921: undefined reference to `FifoPush'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1925: undefined reference to `FifoPop'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1932: undefined reference to `FifoPush'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1923: undefined reference to `FifoVide'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:1937: undefined reference to `FifoTermine'
+</I>&gt;<i> ./linux/obj/libpink.a(mcgraphe.o): In function `Lee':
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2078: undefined reference to `CreeFifoVide'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2082: undefined reference to `FifoPush'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2086: undefined reference to `FifoPop'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2093: undefined reference to `FifoPush'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2084: undefined reference to `FifoVide'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2098: undefined reference to `FifoTermine'
+</I>&gt;<i> ./linux/obj/libpink.a(mcgraphe.o): In function `LeeNO':
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2117: undefined reference to `CreeFifoVide'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2121: undefined reference to `FifoPush'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2125: undefined reference to `FifoPop'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2132: undefined reference to `FifoPush'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2141: undefined reference to `FifoPush'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2123: undefined reference to `FifoVide'
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:2146: undefined reference to `FifoTermine'
+</I>&gt;<i> ./linux/obj/libpink.a(mcgraphe.o): In function `ldrawgraph':
+</I>&gt;<i> /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mcgrap
+</I>&gt;<i> he.c:3326: undefined reference to `ldrawline'
+</I>&gt;<i> collect2: ld returned 1 exit status
+</I>&gt;<i> make: *** [linux/bin/graph2pgm] Error 1
+</I>&gt;<i> *
+</I>&gt;<i> Alternatively, if anyone could point me to a 32-bit deb then I'd be
+</I>&gt;<i> infinitely grateful.
+</I>&gt;<i> 
+</I>&gt;<i> Best,
+</I>&gt;<i> Mark
+</I></PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000170.html">[Pink-image-devel] undefined reference to CreeFifoVide, etc
+</A></li>
+	<LI>Next message: <A HREF="000172.html">[Pink-image-devel] undefined reference to CreeFifoVide, etc
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#171">[ date ]</a>
+              <a href="thread.html#171">[ thread ]</a>
+              <a href="subject.html#171">[ subject ]</a>
+              <a href="author.html#171">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

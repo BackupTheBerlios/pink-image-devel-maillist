@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Other issues with boost / pink and other packages
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Other%20issues%20with%20boost%20/%20pink%20and%20other%20packages&In-Reply-To=%3C0BE3BA2D-8AE3-4652-AFA0-195AFAF0283E%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000153.html">
+   <LINK REL="Next"  HREF="000151.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Other issues with boost / pink and other packages</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Other%20issues%20with%20boost%20/%20pink%20and%20other%20packages&In-Reply-To=%3C0BE3BA2D-8AE3-4652-AFA0-195AFAF0283E%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Other issues with boost / pink and other packages">h.talbot at esiee.fr
+       </A><BR>
+    <I>Wed Jul 11 02:01:18 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000153.html">[Pink-image-devel] Difficult to compile the command-line	version of pink
+</A></li>
+        <LI>Next message: <A HREF="000151.html">[Pink-image-devel] Binary version for CentOS 6.x
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#150">[ date ]</a>
+              <a href="thread.html#150">[ thread ]</a>
+              <a href="subject.html#150">[ subject ]</a>
+              <a href="author.html#150">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello all,
+
+Another problem for which I do not have a solution at present, related to numpy.
+
+Obviously pink / python does not exist in a vacuum, and so we should expect pink to work well with other packages. 
+A major provider of scientific python goodness is Enthought. They have a high performance python distribution called EPD with a parallel version of numpy, which is sometimes an order of magnitude faster than regular numpy to use, among other things.
+
+<A HREF="http://www.enthought.com/products/epd.php">http://www.enthought.com/products/epd.php</A>
+
+EPD is OSS and free for academic institutions
+
+Under Linux I have manage to make EPD and Pink work together quite successfully, however this is not the case under mac OSX.
+
+The reason for this I believe is boost. Boost needs to be compiled for a particular version of python.
+
+for instance:
+% otool -L /opt/local/lib/libboost_python-mt.dylib
+/opt/local/lib/libboost_python-mt.dylib:
+        /opt/local/lib/libboost_python-mt.dylib (compatibility version 0.0.0, current version 0.0.0)
+        /opt/local/Library/Frameworks/Python.framework/Versions/2.7/Python (compatibility version 2.7.0, current version 2.7.0)
+        /usr/lib/libstdc++.6.dylib (compatibility version 7.0.0, current version 7.9.0)
+        /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 125.2.11)
+
+Here, the OSX port version of boost python is compiled against the the port version of python.
+
+however, compiling pink with the EPD results in using a different version of the Python library, together with the aforementioned version of libboost-python
+
+otool -L lib/libpink.dylib 
+lib/libpink.dylib:
+        /Volumes/Home/Users/talbot/projects/pink/Pink_MC_SVN/obj_epd/lib/libpink.dylib (compatibility version 0.0.0, current version 0.0.0)
+        /usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 125.2.11)
+        /opt/local/lib/libSM.6.dylib (compatibility version 7.0.0, current version 7.1.0)
+        /opt/local/lib/libICE.6.dylib (compatibility version 10.0.0, current version 10.0.0)
+        /opt/local/lib/libX11.6.dylib (compatibility version 10.0.0, current version 10.0.0)
+        /opt/local/lib/libXext.6.dylib (compatibility version 11.0.0, current version 11.0.0)
+        /opt/local/lib/libtiff.3.dylib (compatibility version 13.0.0, current version 13.5.0)
+        /opt/local/lib/libgsl.0.dylib (compatibility version 17.0.0, current version 17.0.0)
+        /opt/local/lib/libgslcblas.0.dylib (compatibility version 1.0.0, current version 1.0.0)
+        /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libLAPACK.dylib (compatibility version 1.0.0, current version 219.0.0)
+        /opt/local/lib/libboost_python-mt.dylib (compatibility version 0.0.0, current version 0.0.0)
+        /opt/local/lib/libboost_thread-mt.dylib (compatibility version 0.0.0, current version 0.0.0)
+        /Library/Frameworks/EPD64.framework/Versions/7.3/Python (compatibility version 2.7.0, current version 2.7.0)
+        /usr/lib/libstdc++.6.dylib (compatibility version 7.0.0, current version 7.9.0)
+
+
+Unsurprisingly, this crashes at startup
+
+The solution might be to recompile boost to link against the EPD version of python. 
+
+However, this is for another day because compiling boost, particularly boost-python, can be called an experience.
+
+
+
+Take-home message: life is hard.
+
+
+
+
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+The lyf so short, the craft so long to lerne, The'assay so hard, so sharp the conqueryinge (Chaucer)
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120711/4be5bc90/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120711/4be5bc90/attachment.html</A>&gt;
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000153.html">[Pink-image-devel] Difficult to compile the command-line	version of pink
+</A></li>
+	<LI>Next message: <A HREF="000151.html">[Pink-image-devel] Binary version for CentOS 6.x
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#150">[ date ]</a>
+              <a href="thread.html#150">[ thread ]</a>
+              <a href="subject.html#150">[ subject ]</a>
+              <a href="author.html#150">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

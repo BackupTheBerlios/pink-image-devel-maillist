@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] debian/ubuntu/linuxmint ccmake issue
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-February/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20debian/ubuntu/linuxmint%20ccmake%20issue&In-Reply-To=%3CCAAAj9poc5hEdLRga49G1E1zeho7fRBxcP7w5Qn8yk1_Uqvc-_w%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000119.html">
+   <LINK REL="Next"  HREF="000120.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] debian/ubuntu/linuxmint ccmake issue</H1>
+    <B>Michael Cheng</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20debian/ubuntu/linuxmint%20ccmake%20issue&In-Reply-To=%3CCAAAj9poc5hEdLRga49G1E1zeho7fRBxcP7w5Qn8yk1_Uqvc-_w%40mail.gmail.com%3E"
+       TITLE="[Pink-image-devel] debian/ubuntu/linuxmint ccmake issue">michael.cheng at emphron.com
+       </A><BR>
+    <I>Fri Feb  3 03:51:15 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000119.html">[Pink-image-devel] pgm2skel and skel2graph
+</A></li>
+        <LI>Next message: <A HREF="000120.html">[Pink-image-devel] debian/ubuntu/linuxmint ccmake issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#118">[ date ]</a>
+              <a href="thread.html#118">[ thread ]</a>
+              <a href="subject.html#118">[ subject ]</a>
+              <a href="author.html#118">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+Using ccmake to configure pink on linuxmint12 and ubuntu11.10 throw an
+error during configuration:
+
+ CMake Error at CMakeLists.txt:381 (message):
+   error boost/python/list.hpp does not compile.  You need at least version
+   1.37 or newer.  Check if its correctly installed.  There is a known
+issue.
+   If PYTHON_LIBRARY='/usr/lib/libpython2.7.so' does not point to the
+correct
+   location of python's libraries, please specify them manually or delete
+the
+   file in question.  (seen on OpenSuSE 11.2)
+
+
+
+I've found that simply commenting out all the HTEST5/6 tests (which test
+for boost python) solves the problem, but there must be a way to fix the
+ccmake script.
+
+
+Mike
+
+
+==========================
+Dependencies for pink installed via:
+apt-get install libmagick++-dev libatlas-dev libeigen2-dev libgsl0-dev
+libboost-thread1.46-dev libboost-python1.46-dev libboost-python-dev ipython
+libfftw3-dev fftw-dev cmake cmake-curses-gui libncurses5-dev liblapack-dev
+imview python-imaging-tk python-numpy
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120203/362b92d5/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120203/362b92d5/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000119.html">[Pink-image-devel] pgm2skel and skel2graph
+</A></li>
+	<LI>Next message: <A HREF="000120.html">[Pink-image-devel] debian/ubuntu/linuxmint ccmake issue
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#118">[ date ]</a>
+              <a href="thread.html#118">[ thread ]</a>
+              <a href="subject.html#118">[ subject ]</a>
+              <a href="author.html#118">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

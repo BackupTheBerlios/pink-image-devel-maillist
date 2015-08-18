@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] compilation issue for 0.9.r617
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20compilation%20issue%20for%200.9.r617&In-Reply-To=%3CCANYiBk0Q%3D0sqhvq6%3D-SY-FQ5Le1%2B%2BmRPfvg%3D6RrDgm5E-6Buug%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000058.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] compilation issue for 0.9.r617</H1>
+    <B>Jerome Ferrari</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20compilation%20issue%20for%200.9.r617&In-Reply-To=%3CCANYiBk0Q%3D0sqhvq6%3D-SY-FQ5Le1%2B%2BmRPfvg%3D6RrDgm5E-6Buug%40mail.gmail.com%3E"
+       TITLE="[Pink-image-devel] compilation issue for 0.9.r617">zonderrr at gmail.com
+       </A><BR>
+    <I>Wed Sep  7 09:00:54 CEST 2011</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000058.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I managed to get installed libnuma-dev, libnuma-dbg and libnuma1and it
+wokrs, I managed to get to the end of the compilation (version 0.9.r622),
+but I can't import pink properly under python:
+*
+In [1]: import pink
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+
+/local00/home/F36852/opt/&lt;ipython console&gt; in &lt;module&gt;()
+
+/home/F36852/opt/pink/python/pink/__init__.py in &lt;module&gt;()
+     15 from exceptions import python_component_missing
+     16 from isize import iSize
+---&gt; 17 import cpp # the functions imported directly from c/c++
+     18
+     19 from windowing import windowing
+
+/home/F36852/opt/pink/python/pink/cpp/__init__.py in &lt;module&gt;()
+     10 # Universit&#233; Paris-Est, Laboratoire d'Informatique Gaspard-Monge,
+Equipe A3SI, ESIEE Paris, 93162, Noisy le Grand CEDEX
+
+     11 # <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>
+
+     12 #
+
+     13
+---&gt; 14 from libcpp_pink import *
+
+ImportError: /home/F36852/opt/pink/python/libcpp_pink.so: undefined symbol:
+numa_bind*
+
+
+I asked for the installation of the numactl package. We will see, but if you
+have another proposal...
+
+Sincerely,
+
+Jerome
+
+
+
+2011/8/30 Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+
+&gt;<i> we will fix the problem ASAP at our end.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On 30 Aug 2011, at 30 Aug, 9:10, Jerome Ferrari wrote:
+</I>&gt;<i>
+</I>&gt;<i> Thank you for your answer,
+</I>&gt;<i>
+</I>&gt;<i> I'll try that. Unfortunately, I don't have root access to my machine, it
+</I>&gt;<i> will take some time to have it ...
+</I>&gt;<i>
+</I>&gt;<i> 2011/8/29 Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+</I>&gt;<i>
+</I>&gt;&gt;<i> Hello,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> This is a mistake at our end, of course we should test for the presence of
+</I>&gt;&gt;<i> the NUMA headers.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> In the meantime, to fix it, try installing the NUMA development kit.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I'm not sure how it is called under Debian, but try installing a package
+</I>&gt;&gt;<i> called &quot;libnuma-dev&quot; or something similar.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110907/38b7bf36/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110907/38b7bf36/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000058.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#56">[ date ]</a>
+              <a href="thread.html#56">[ thread ]</a>
+              <a href="subject.html#56">[ subject ]</a>
+              <a href="author.html#56">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

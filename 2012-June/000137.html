@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Embryo%20of%20numpy%20%3C-%3E%20pink%20conversion%20routines&In-Reply-To=%3CA1DBC81D-E114-4444-95F0-6E6AADE85705%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000136.html">
+   <LINK REL="Next"  HREF="000138.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Embryo%20of%20numpy%20%3C-%3E%20pink%20conversion%20routines&In-Reply-To=%3CA1DBC81D-E114-4444-95F0-6E6AADE85705%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines">h.talbot at esiee.fr
+       </A><BR>
+    <I>Fri Jun 22 04:33:32 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000136.html">[Pink-image-devel] Simple arithmetics is slow
+</A></li>
+        <LI>Next message: <A HREF="000138.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#137">[ date ]</a>
+              <a href="thread.html#137">[ thread ]</a>
+              <a href="subject.html#137">[ subject ]</a>
+              <a href="author.html#137">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Laszlo,
+
+Because I really need this I've started adding an embryo of numpy / pink conversion routines.
+
+There are two bits to it
+
+1- a &quot;set_pixels(pointer, size)&quot; method for images, which basically does a memcpy
+2- a couple of python call in trunk/python/pink/numpy_conv.py
+
+So far this seems to work, but it is not well written or safe.
+
+I'll add some test routines in the next day or so.
+
+
+This is in SVN.
+
+Cheers.
+
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+Academic politics are so vicious precisely because the stakes are so small.
+H. Kissinger
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120622/22936c6e/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120622/22936c6e/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000136.html">[Pink-image-devel] Simple arithmetics is slow
+</A></li>
+	<LI>Next message: <A HREF="000138.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#137">[ date ]</a>
+              <a href="thread.html#137">[ thread ]</a>
+              <a href="subject.html#137">[ subject ]</a>
+              <a href="author.html#137">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

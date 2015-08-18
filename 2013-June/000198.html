@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Pink from Python
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20from%20Python&In-Reply-To=%3C5263752.bT5DovtJWP%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000199.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Pink from Python</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20from%20Python&In-Reply-To=%3C5263752.bT5DovtJWP%40anyu%3E"
+       TITLE="[Pink-image-devel] Pink from Python">ujoimro at gmail.com
+       </A><BR>
+    <I>Tue Jun 11 14:15:40 CEST 2013</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000199.html">[Pink-image-devel] Pink from Python
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#198">[ date ]</a>
+              <a href="thread.html#198">[ thread ]</a>
+              <a href="subject.html#198">[ subject ]</a>
+              <a href="author.html#198">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear S&#233;bastien, 
+
+
+On 2013-06-10 20:11:00 S&#233;bastien Tosi wrote:
+&gt;<i> Hi Lazlo,
+</I>&gt;<i> 
+</I>&gt;<i> I installed Pink under Windows and I am able to call some of its functions
+</I>&gt;<i> from Python thanks to your wrappers. I am unfortunately having trouble
+</I>&gt;<i> visualizing the images (either slice by slice or as a 3D rendering): I
+</I>&gt;<i> could not get the function pink.cpp.Pimview to work: do I need to install
+</I>&gt;<i> some other Python modules (you used iPython in your example, is it required
+</I>&gt;<i> for some of the functions?)
+</I>
+Imview is not supported on Windows(tm), at least I have never seen Imview 
+working.
+
+&gt;<i> 
+</I>&gt;<i> Another question is whether all the functions from the original Pink
+</I>&gt;<i> library are exposed to Python or not? For instance I could not find any
+</I>&gt;<i> function to save an image to file...
+</I>
+Not all the functions are supported, but saving images is definitely 
+supported. There is a method called &quot;writeimage&quot; attached to every image 
+object like:
+
+import pink
+
+I=pink.cpp.readimage(&quot;filename.pgm&quot;)
+I.writeimage(&quot;new_filename.pgm&quot;)
+
+There are also functions to convert pink objects from and to numpy, which can 
+also be saved form Python.
+
+&gt;<i> 
+</I>&gt;<i> More generally which other Python exposed library do you recommend me to
+</I>&gt;<i> install to complement Pink (for instance but not only for image
+</I>&gt;<i> visualization)? This library should ideally be able to handle Pink image
+</I>&gt;<i> format to get a better inter-operability (is this image format originating
+</I>&gt;<i> from Boost library?). I  was thinking about Boost, Vigra and SimpleITK for
+</I>&gt;<i> instance...
+</I>&gt;<i> 
+</I>
+The visualization of the images is a complex question and I cannot give a 
+single answer. Imview is a very useful visualizer and it does support pink's 
+images. Even if it's not connected with pink.python, You can save the image 
+and open them from Imview. 
+
+&gt;<i> Is there a tutorial or document demonstrating this sort of interaction? I
+</I>&gt;<i> found a pdf document from Michel Couprie where VTK-Python and Python-TK
+</I>&gt;<i> were suggested but there is no script example, could you help me out?
+</I>
+Try pink.manipulate from the examples, it is a good example for Python.Tk 
+interaction.
+
+&gt;<i> 
+</I>&gt;<i> Best,
+</I>&gt;<i> S&#233;bastien
+</I></PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000199.html">[Pink-image-devel] Pink from Python
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#198">[ date ]</a>
+              <a href="thread.html#198">[ thread ]</a>
+              <a href="subject.html#198">[ subject ]</a>
+              <a href="author.html#198">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

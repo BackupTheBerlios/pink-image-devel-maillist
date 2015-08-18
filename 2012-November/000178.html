@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] lost pgp-mail,	how do I push changes to HG pink repository ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-November/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20lost%20pgp-mail%2C%0A%09how%20do%20I%20push%20changes%20to%20HG%20pink%20repository%20%3F&In-Reply-To=%3CAA75F8D7-C377-4D98-B257-EE6B494401A8%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000177.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] lost pgp-mail,	how do I push changes to HG pink repository ?</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20lost%20pgp-mail%2C%0A%09how%20do%20I%20push%20changes%20to%20HG%20pink%20repository%20%3F&In-Reply-To=%3CAA75F8D7-C377-4D98-B257-EE6B494401A8%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] lost pgp-mail,	how do I push changes to HG pink repository ?">h.talbot at esiee.fr
+       </A><BR>
+    <I>Thu Nov  1 14:01:18 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000177.html">[Pink-image-devel] New problems with Cmake, boost and OS/X
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#178">[ date ]</a>
+              <a href="thread.html#178">[ thread ]</a>
+              <a href="subject.html#178">[ subject ]</a>
+              <a href="author.html#178">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello all,
+
+Eventually found a solution to my problem posted before, So what I've done:
+
+1- test for the presence of Boost_SYSTEM_LIBRARY (libboost_system) in the main CMakeList.txt and do all the associated stuff (add to LIBS, etc)
+2- before the test for boost thread, add this library to CMAKE_CXX_FLAGS (this is a heresy in my opinion, feel free to propose something else)
+3- after the final boost tests, remove this library from CMAKE_CXX_FLAGS (otherwise warnings in the last 20% of the compilation of pink because there is a linking directive in the compilation command)
+4- add Boost_SYSTEM_LIBRARY to the correct LIBS in src/lib/CMakeList.txt (this took me a long time to find out)
+
+I think that's it. It is relatively simple but for me this is a hack.
+
+Eventually I removed all the experiments I made in the UJ_xxx files. I hope I didn't break anything. It is in mercurial and Laszlo is testing it.
+
+This has taken me several hours of trial and errors.
+
+Cheers to all.
+
+On 1 Nov 2012, at 1 Nov, 13:48, ujoimro wrote:
+
+&gt;<i> OK, it is building.
+</I>&gt;<i> 
+</I>&gt;<i> On 2012-11-01 13:41:51 Hugues Talbot wrote:
+</I>&gt;&gt;<i> OK, pushed now.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> See if it still works for you ...
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> On 1 Nov 2012, at 1 Nov, 13:33, ujoimro wrote:
+</I>&gt;&gt;&gt;<i> You can push now.
+</I>&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;<i> On 2012-11-01 13:30:18 Hugues Talbot wrote:
+</I>&gt;&gt;&gt;&gt;<i> OK, I had found it in fact.
+</I>&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;<i> I have found a solution to my problem but there was a lot of hair
+</I>&gt;&gt;&gt;&gt;<i> pulling.&gt;&gt; 
+</I>&gt;&gt;&gt;&gt;<i> On 1 Nov 2012, at 1 Nov, 13:28, ujoimro wrote:
+</I>&gt;&gt;&gt;&gt;&gt;<i> pinkhq.com/redmine
+</I>&gt;&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;&gt;<i> On 2012-11-01 13:26:41 ujoimro wrote:
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i> Register on Redmine, and I give You access. Then just
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i> hg push, and give the credentials.
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i> Laszlo
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;<i> On 2012-11-01 12:35:52 Hugues Talbot wrote:
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> Hello Laszlo,
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> How do I push changes to the pink mercurial repository ?
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> Thanks.
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> ====
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> Hugues Talbot, Professeur associ&#233;
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> Universit&#233; Paris-Est,
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> Laboratoire d'informatique Gaspard-Monge
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> Equipe A3SI
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> ESIEE - BP 99
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;&gt;&gt;&gt;<i> There are two popes per square kilometer in Vatican.
+</I>&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;<i> ===
+</I>&gt;&gt;&gt;&gt;<i> Hugues Talbot, Professeur associ&#233;
+</I>&gt;&gt;&gt;&gt;<i> Universit&#233; Paris-Est,
+</I>&gt;&gt;&gt;&gt;<i> Laboratoire d'informatique Gaspard-Monge
+</I>&gt;&gt;&gt;&gt;<i> Equipe A3SI
+</I>&gt;&gt;&gt;&gt;<i> ESIEE - BP 99
+</I>&gt;&gt;&gt;&gt;<i> 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;&gt;&gt;&gt;<i> (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;&gt;<i> Twenty years of schooling and they put you on the day shift.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> ===
+</I>&gt;&gt;<i> Hugues Talbot, Professeur associ&#233;
+</I>&gt;&gt;<i> Universit&#233; Paris-Est,
+</I>&gt;&gt;<i> Laboratoire d'informatique Gaspard-Monge
+</I>&gt;&gt;<i> Equipe A3SI
+</I>&gt;&gt;<i> ESIEE - BP 99
+</I>&gt;&gt;<i> 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;&gt;<i> (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> I keep seeing all these comments about all that He has done for us, I really
+</I>&gt;&gt;<i> think H should get more of the credit though. He is merely a byproduct.
+</I>
+===
+
+&quot;Anything that is in the world when you're born is normal and ordinary and is just a natural part of the way the world works. Anything that's invented between when you're fifteen and thirty-five is new and exciting and revolutionary and you can probably get a career in it. Anything invented after you're thirty-five is against the natural order of things.&quot;
+
+-- Douglas Adams
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000177.html">[Pink-image-devel] New problems with Cmake, boost and OS/X
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#178">[ date ]</a>
+              <a href="thread.html#178">[ thread ]</a>
+              <a href="subject.html#178">[ subject ]</a>
+              <a href="author.html#178">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

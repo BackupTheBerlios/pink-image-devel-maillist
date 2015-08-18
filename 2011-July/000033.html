@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Compilation problems
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Compilation%20problems&In-Reply-To=%3C7D10B985-C758-42CF-8D2F-3F9DEEC0613C%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000032.html">
+   <LINK REL="Next"  HREF="000034.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Compilation problems</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Compilation%20problems&In-Reply-To=%3C7D10B985-C758-42CF-8D2F-3F9DEEC0613C%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Compilation problems">hugues.talbot at gmail.com
+       </A><BR>
+    <I>Tue Jul 19 02:43:41 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000032.html">[Pink-image-devel] FW: Compiling with bjam
+</A></li>
+        <LI>Next message: <A HREF="000034.html">[Pink-image-devel] Still testing compilation issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#33">[ date ]</a>
+              <a href="thread.html#33">[ thread ]</a>
+              <a href="subject.html#33">[ subject ]</a>
+              <a href="author.html#33">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Laszlo,
+
+I can't link pink/python:
+
+Linking CXX shared library libcpp_pink.dylib
+Undefined symbols:  &quot;boost::thread::hardware_concurrency()&quot;, referenced from:
+      pink::ujoi&lt;double&gt; pink::frame_around&lt;pink::ujoi&lt;double&gt; &gt;(pink::ujoi&lt;double&gt; const&amp;, pink::ujoi&lt;double&gt;::pixel_type)in pymorpho.cpp.o      pink::ujoi&lt;float&gt; pink::frame_around&lt;pink::ujoi&lt;float&gt; &gt;(pink::ujoi&lt;float&gt; const&amp;, pink::ujoi&lt;float&gt;::pixel_type)in pymorpho.cpp.o      pink::ujoi&lt;int&gt; pink::frame_around&lt;pink::ujoi&lt;int&gt; &gt;(pink::ujoi&lt;int&gt; const&amp;, pink::ujoi&lt;int&gt;::pixel_type)in pymorpho.cpp.o
+      pink::ujoi&lt;unsigned short&gt; pink::frame_around&lt;pink::ujoi&lt;unsigned short&gt; &gt;(pink::ujoi&lt;unsigned short&gt; const&amp;, pink::ujoi&lt;unsigned short&gt;::pixel_type)in pymorpho.cpp.o
+      pink::ujoi&lt;unsigned char&gt; pink::frame_around&lt;pink::ujoi&lt;unsigned char&gt; &gt;(pink::ujoi&lt;unsigned char&gt; const&amp;, pink::ujoi&lt;unsigned char&gt;::pixel_type)in pymorpho.cpp.o
+  &quot;boost::detail::thread_data_base::~thread_data_base()&quot;, referenced from:
+      boost::detail::thread_data&lt;boost::_bi::bind_t&lt;void, void (*)(pink::ujoi&lt;double&gt;, pink::ujoi&lt;double&gt;, int, int, double), boost::_bi::list5&lt;boost::_bi::value&lt;pink::ujoi&lt;double&gt; &gt;, boost::_bi::value&lt;pink::
+ujoi&lt;double&gt; &gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;double&gt; &gt; &gt; &gt;::~thread_data()in pymorpho.cpp.o
+      boost::detail::thread_data&lt;boost::_bi::bind_t&lt;void, void (*)(pink::ujoi&lt;double&gt;, pink::ujoi&lt;double&gt;, int, int, double), boost::_bi::list5&lt;boost::_bi::value&lt;pink::ujoi&lt;double&gt; &gt;, boost::_bi::value&lt;pink::
+ujoi&lt;double&gt; &gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;double&gt; &gt; &gt; &gt;::~thread_data()in pymorpho.cpp.o
+      boost::detail::thread_data&lt;boo
+
+[...]
+
+ &quot;boost::thread::join()&quot;, referenced from:   
+      pink::ujoi&lt;double&gt; pink::frame_around&lt;pink::ujoi&lt;double&gt; &gt;(pink::ujoi&lt;double&gt; const&amp;, pink::ujoi&lt;double&gt;::pixel_type)in pymorpho.cpp.o
+      pink::ujoi&lt;float&gt; pink::frame_around&lt;pink::ujoi&lt;float&gt; &gt;(pink::ujoi&lt;float&gt; const&amp;, pink::ujoi&lt;float&gt;::pixel_type)in pymorpho.cpp.o
+      pink::ujoi&lt;int&gt; pink::frame_around&lt;pink::ujoi&lt;int&gt; &gt;(pink::ujoi&lt;int&gt; const&amp;, pink::ujoi&lt;int&gt;::pixel_type)in pymorpho.cpp.o
+      pink::ujoi&lt;unsigned short&gt; pink::frame_around&lt;pink::ujoi&lt;unsigned short&gt; &gt;(pink::ujoi&lt;unsigned short&gt; const&amp;, pink::ujoi&lt;unsigned short&gt;::pixel_type)in pymorpho.cpp.o
+      pink::ujoi&lt;unsigned char&gt; pink::frame_around&lt;pink::ujoi&lt;unsigned char&gt; &gt;(pink::ujoi&lt;unsigned char&gt; const&amp;, pink::ujoi&lt;unsigned char&gt;::pixel_type)in pymorpho.cpp.o
+  &quot;vtable for boost::detail::thread_data_base&quot;, referenced from:
+      boost::detail::thread_data_base::thread_data_base()in pymorpho.cpp.o
+  &quot;typeinfo for boost::detail::thread_data_base&quot;, referenced from:
+      typeinfo for boost::detail::thread_data&lt;boost::_bi::bind_t&lt;void, void (*)(pink::ujoi&lt;double&gt;, pink::ujoi&lt;double&gt;, int, int, double), boost::_bi::list5&lt;boost::_bi::value&lt;pink::ujoi&lt;double&gt; &gt;, boost::_bi::value&lt;pink::ujoi&lt;double&gt; &gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;double&gt; &gt; &gt; &gt;in pymorpho.cpp.o
+      typeinfo for boost::detail::thread_data&lt;boost::_bi::bind_t&lt;void, void (*)(pink::ujoi&lt;float&gt;, pink::ujoi&lt;float&gt;, int, int, float), boost::_bi::list5&lt;boost::_bi::value&lt;pink::ujoi&lt;float&gt; &gt;, boost::_bi::value&lt;pink::ujoi&lt;float&gt; &gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;float&gt; &gt; &gt; &gt;in pymorpho.cpp.o
+      typeinfo for boost::detail::thread_data&lt;boost::_bi::bind_t&lt;void, void (*)(pink::ujoi&lt;int&gt;, pink::ujoi&lt;int&gt;, int, int, int), boost::_bi::list5&lt;boost::_bi::value&lt;pink::ujoi&lt;int&gt; &gt;, boost::_bi::value&lt;pink::ujoi&lt;int&gt; &gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;int&gt; &gt; &gt; &gt;in pymorpho.cpp.o
+      typeinfo for boost::detail::thread_data&lt;boost::_bi::bind_t&lt;void, void (*)(pink::ujoi&lt;unsigned short&gt;, pink::ujoi&lt;unsigned short&gt;, int, int, unsigned short), boost::_bi::list5&lt;boost::_bi::value&lt;pink::ujoi&lt;unsigned short&gt; &gt;, boost::_bi::value&lt;pink::ujoi&lt;unsigned short&gt; &gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;unsigned short&gt; &gt; &gt; &gt;in pymorpho.cpp.o
+      typeinfo for boost::detail::thread_data&lt;boost::_bi::bind_t&lt;void, void (*)(pink::ujoi&lt;unsigned char&gt;, pink::ujoi&lt;unsigned char&gt;, int, int, unsigned char), boost::_bi::list5&lt;boost::_bi::value&lt;pink::ujoi&lt;unsigned char&gt; &gt;, boost::_bi::value&lt;pink::ujoi&lt;unsigned char&gt; &gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;int&gt;, boost::_bi::value&lt;unsigned char&gt; &gt; &gt; &gt;in pymorpho.cpp.o
+  &quot;boost::thread::~thread()&quot;, referenced from:
+      void boost::checked_delete&lt;boost::thread&gt;(boost::thread*)in pymorpho.cpp.o
+
+
+===
+Hugues Talbot
+9 all&#233;es des cornouillers, 77420 Champs sur Marne, France
++33 6 72 07 51 26
+
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000032.html">[Pink-image-devel] FW: Compiling with bjam
+</A></li>
+	<LI>Next message: <A HREF="000034.html">[Pink-image-devel] Still testing compilation issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#33">[ date ]</a>
+              <a href="thread.html#33">[ thread ]</a>
+              <a href="subject.html#33">[ subject ]</a>
+              <a href="author.html#33">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

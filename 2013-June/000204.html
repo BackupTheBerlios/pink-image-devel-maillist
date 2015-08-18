@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20building%20pink%20on%20ubuntu%2013.04%20%2832%20bits%29%20with%0A%09python%20support%20failed&In-Reply-To=%3C1932451.JgfR7l46fy%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000203.html">
+   <LINK REL="Next"  HREF="000206.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20building%20pink%20on%20ubuntu%2013.04%20%2832%20bits%29%20with%0A%09python%20support%20failed&In-Reply-To=%3C1932451.JgfR7l46fy%40anyu%3E"
+       TITLE="[Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed">ujoimro at gmail.com
+       </A><BR>
+    <I>Fri Jun 21 14:25:30 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000203.html">[Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed
+</A></li>
+        <LI>Next message: <A HREF="000206.html">[Pink-image-devel] float2byte silently extends range to 0 - 255
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#204">[ date ]</a>
+              <a href="thread.html#204">[ thread ]</a>
+              <a href="subject.html#204">[ subject ]</a>
+              <a href="author.html#204">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It is not necessary if You use pink.sh. 
+
+If You want to install it, do not forget to set the installation path using 
+CMAKE_INSTALL_PREFIX.
+
+On 2013-06-21 14:21:35 Jean-Patrick Pommier wrote:
+&gt;<i> Thank you,
+</I>&gt;<i> Now, make is doing its job. sudo make install is not necessary?
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 2013/6/21 ujoimro &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>&gt;
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Dear Patrick,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I have checked your report, and the compilation error comes from a cmake
+</I>&gt;<i> &gt; 2.8
+</I>&gt;<i> &gt; try_compile bug. I have removed the test in question and now it should
+</I>&gt;<i> &gt; compile
+</I>&gt;<i> &gt; on ubuntu 13.04.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; For future reference, please note that the pink-svn CMake build system
+</I>&gt;<i> &gt; has been phased out in favor of pink-hg. The changes in pink-svn,
+</I>&gt;<i> &gt; however, are still pulled into pink-hg, so I recommend using the hg
+</I>&gt;<i> &gt; (mercurial) repository.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Here is how can You build pink:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; sudo apt-get install gcc g++ cmake cmake-qt-gui libx11-dev make
+</I>&gt;<i> &gt; mercurial
+</I>&gt;<i> &gt; ncurses-dev libgsl0-dev liblapack-dev libboost1.53-all-dev libtiff4-dev
+</I>&gt;<i> &gt; cmake-
+</I>&gt;<i> &gt; curses-gui python-matplotlib python-vtk ipython python-numpy
+</I>&gt;<i> &gt; python-imaging python-imaging-tk
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; hg clone <A HREF="https://pinkhq.com/hg/pink">https://pinkhq.com/hg/pink</A>
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; mkdir build
+</I>&gt;<i> &gt; cd build
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; cmake ../pink/ -DPYTHON_FRONT_END=ON -DCMAKE_VERBOSE_MAKEFILE=ON
+</I>&gt;<i> &gt; cmake ../pink/ -DPYTHON_FRONT_END=ON -DCMAKE_VERBOSE_MAKEFILE=ON
+</I>&gt;<i> &gt; cmake ../pink/ -DPYTHON_FRONT_END=ON -DCMAKE_VERBOSE_MAKEFILE=ON
+</I>&gt;<i> &gt; make
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; note that CMake is an iterative process, that's why we configure the
+</I>&gt;<i> &gt; directory
+</I>&gt;<i> &gt; three times. You can change further settings with
+</I>&gt;<i> &gt; cmake-gui .
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; You can start using pink by
+</I>&gt;<i> &gt; ./pink.sh
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; and then
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; import pink
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Sorry for the inconvenience,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Laszlo
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; On 2013-06-21 11:20:32 Jean-Patrick Pommier wrote:
+</I>&gt;<i> &gt; &gt; Dear M. Marak,
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; I would like to experiment pink in python environnement running on
+</I>&gt;<i> &gt; &gt; the
+</I>&gt;<i> &gt; &gt; ubuntu 13.04 (32 bits) platform.
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; First,let me apologize for contacting you directly but  I am realy
+</I>&gt;<i> &gt; &gt; stuck&gt; 
+</I>&gt;<i> &gt; on
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; the configuring step with cmake (cmake-gui) which fails when the
+</I>&gt;<i> &gt; &gt; variable PYTHON_FRONT_END is checked. Having read different
+</I>&gt;<i> &gt; &gt; messages from the pink mailing list, I  understand that I will not
+</I>&gt;<i> &gt; &gt; succeed without help.
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; I download the code with:
+</I>&gt;<i> &gt; &gt; hg clone <A HREF="https://pinkhq.com/hg/pink">https://pinkhq.com/hg/pink</A>
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; From cmake-gui, the configuration fails with the message:
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; *Boost version: 1.49.0*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; *Found the following Boost libraries:*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; * python*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; * thread*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; * system*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; * date_time*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; *Looking for C++ include boost/shared_ptr.hpp*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; *Looking for C++ include boost/shared_ptr.hpp - found*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; *Looking for C++ include boost/shared_array.hpp*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; *Looking for C++ include boost/shared_array.hpp - found*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; *Looking for C++ include boost/python/list.hpp*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; *Looking for C++ include boost/python/list.hpp - not found*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; *CMake Error at CMakeLists.txt:437 (message):*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; * error boost/python/list.hpp does not compile. You need at least
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; version*
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; * 1.37 or newer. Check if its correctly installed. There is a known
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; issue.*
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; * If PYTHON_LIBRARY='/usr/lib/i386-linux-gnu/libpython2.7.so' does
+</I>&gt;<i> &gt; &gt; not
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; point
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; *
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; * to the correct location of python's libraries, please specify them
+</I>&gt;<i> &gt; &gt; manually*
+</I>&gt;<i> &gt; &gt; * *
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; * or delete the file in question. (seen on OpenSuSE 11.2)*
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; However when I look in /usr/include/boost/python *both list.hpp* and
+</I>&gt;<i> &gt; &gt; *
+</I>&gt;<i> &gt; &gt; extract.hpp* are present. The settings of cmake-gui are:
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; [image: Images int&#233;gr&#233;es 1]
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; I don't know what to do with the Boost_DIR variable. When the lines
+</I>&gt;<i> &gt; &gt; 436
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; to
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; 448 (HTEST5 and HTEST6) are commented, the configuration can go to
+</I>&gt;<i> &gt; &gt; the
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; end
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; but then the compilation fails. When PYTHON_FRONT_END is unchecked,
+</I>&gt;<i> &gt; &gt; configurartion/make steps succeed.
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; Sincerly yours
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; Jean-Patrick Pommier
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; <A HREF="http://dip4fish.blogspot.fr/">http://dip4fish.blogspot.fr/</A>
+</I></PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000203.html">[Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed
+</A></li>
+	<LI>Next message: <A HREF="000206.html">[Pink-image-devel] float2byte silently extends range to 0 - 255
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#204">[ date ]</a>
+              <a href="thread.html#204">[ thread ]</a>
+              <a href="subject.html#204">[ subject ]</a>
+              <a href="author.html#204">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

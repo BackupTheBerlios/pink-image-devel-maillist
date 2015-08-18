@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-February/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Compile%20test%20in%20CMAKE%20have%20arguments%20in%20the%0A%09wrong%20order&In-Reply-To=%3C1568744.kBb6bkcpti%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000189.html">
+   <LINK REL="Next"  HREF="000192.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Compile%20test%20in%20CMAKE%20have%20arguments%20in%20the%0A%09wrong%20order&In-Reply-To=%3C1568744.kBb6bkcpti%40anyu%3E"
+       TITLE="[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order">ujoimro at gmail.com
+       </A><BR>
+    <I>Fri Feb  8 09:36:02 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000189.html">[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order
+</A></li>
+        <LI>Next message: <A HREF="000192.html">[Pink-image-devel] Started user documentation, dynamic content ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#191">[ date ]</a>
+              <a href="thread.html#191">[ thread ]</a>
+              <a href="subject.html#191">[ subject ]</a>
+              <a href="author.html#191">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>You can disable them, if they compile it's fine. I will takle with cmake when 
+problems arise. 
+
+
+On 2013-02-08 02:27:56 Hugues Talbot wrote:
+&gt;<i> Hello Laszlo,
+</I>&gt;<i> 
+</I>&gt;<i> So I've looked for a solution for a few hours, and basically this boils down
+</I>&gt;<i> to this macro
+</I>&gt;<i> 
+</I>&gt;<i> CHECK_INCLUDE_FILE_CXX( boost/python/list.hpp  HTEST5 )
+</I>&gt;<i> 
+</I>&gt;<i> This macro
+</I>&gt;<i> 
+</I>&gt;<i> 1- does not just try to find out if boost/python/list.hpp is available, it
+</I>&gt;<i> tries to compile a program with it too 2- however this requires
+</I>&gt;<i> libpython.so
+</I>&gt;<i> 3- there is no reasonable way to specify this library to this macro.
+</I>&gt;<i> 
+</I>&gt;<i> Currently the library is specified it as a compile-only flag (like a -I or
+</I>&gt;<i> -O flag). I don't think this is the way it should be used (because for
+</I>&gt;<i> instance, compile-only parts of the expression of the macro still include
+</I>&gt;<i> libpython.so on the command-line, and so we have weird warnings when the
+</I>&gt;<i> macro generates code like this
+</I>&gt;<i> 
+</I>&gt;<i> /usr/bin/gcc /usr/lib/libpython.so -c toto.cxx
+</I>&gt;<i> 
+</I>&gt;<i> most importantly, it does not work anymore.
+</I>&gt;<i> 
+</I>&gt;<i> So I have basically disabled this macro and a couple of others like it. I
+</I>&gt;<i> think they serve no useful purpose because we demand that boost_python be
+</I>&gt;<i> installed somewhere else in the configuration file, so it is reasonable to
+</I>&gt;<i> assume that list.hpp is going to work.
+</I>&gt;<i> 
+</I>&gt;<i> With these macros out of the way, Pink configures, compiles and works fine
+</I>&gt;<i> on Ubuntu.
+</I>&gt;<i> 
+</I>&gt;<i> If there exists a better solution, I'm more than happy to hear about it.
+</I>&gt;<i> 
+</I>&gt;<i> All the best.
+</I>&gt;<i> 
+</I>&gt;<i> On 8 Feb 2013, at 8 Feb, 0:09, Hugues Talbot wrote:
+</I>&gt;<i> &gt; Hello Laszlo,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I have a problem that I hope you can help with. It seems that in newer
+</I>&gt;<i> &gt; versions of gcc/g++, the order of objects files matters. This has an
+</I>&gt;<i> &gt; influence on CMAKE configure scripts.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; For instance, when trying to test if boost list.hpp compiles, the tests
+</I>&gt;<i> &gt; produced by CMAKE looks like this
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /usr/bin/c++ /opt/local/EPD/lib/libpython2.7.so -I/usr/local/include
+</I>&gt;<i> &gt; -I/opt/local/EPD/include/python2.7 CheckIncludeFile.cxx
+</I>&gt;<i> &gt; /tmp/ccZyjJwf.o: In function `boost::python::api::object::object()':
+</I>&gt;<i> &gt; CheckIncludeFile.cxx:(.text._ZN5boost6python3api6objectC2Ev[_ZN5boost6p
+</I>&gt;<i> &gt; ython3api6objectC5Ev]+0xd): undefined reference to `_Py_NoneStruct'
+</I>&gt;<i> &gt; collect2: ld returned 1 exit status
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; It fails.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; However it is a simple matter of putting the library last:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /usr/bin/c++ -I/usr/local/include -I/opt/local/EPD/include/python2.7
+</I>&gt;<i> &gt; CheckIncludeFile.cxx  /opt/local/EPD/lib/libpython2.7.so
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; This compiles.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; This is preventing Pink from configuring itself on newer releases of
+</I>&gt;<i> &gt; Ubuntu, for instance.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I don't know how to fix this in the CMakeList.txt file. Any hint ?
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Thanks.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; ===
+</I>&gt;<i> &gt; Hugues Talbot, Professeur associ&#233;
+</I>&gt;<i> &gt; Universit&#233; Paris-Est,
+</I>&gt;<i> &gt; Laboratoire d'informatique Gaspard-Monge
+</I>&gt;<i> &gt; Equipe A3SI
+</I>&gt;<i> &gt; ESIEE - BP 99
+</I>&gt;<i> &gt; 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;<i> &gt; (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; In theory there is no difference between theory and practice. In
+</I>&gt;<i> &gt; practice there is.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Pink-image-devel mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>&gt;<i> 
+</I>&gt;<i> ===
+</I>&gt;<i> Hugues Talbot
+</I>&gt;<i> 9 all&#233;es des cornouillers, 77420 Champs sur Marne, France
+</I>&gt;<i> +33 6 72 07 51 26
+</I>&gt;<i> 
+</I>&gt;<i> Ecclesiaste 7:10  Do not long for &quot;the good old days.&quot; This is not wise.
+</I></PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000189.html">[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order
+</A></li>
+	<LI>Next message: <A HREF="000192.html">[Pink-image-devel] Started user documentation, dynamic content ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#191">[ date ]</a>
+              <a href="thread.html#191">[ thread ]</a>
+              <a href="subject.html#191">[ subject ]</a>
+              <a href="author.html#191">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

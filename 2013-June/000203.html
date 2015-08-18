@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20building%20pink%20on%20ubuntu%2013.04%20%2832%20bits%29%20with%0A%09python%20support%20failed&In-Reply-To=%3C2832046.BNbAXpVKHy%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000205.html">
+   <LINK REL="Next"  HREF="000204.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20building%20pink%20on%20ubuntu%2013.04%20%2832%20bits%29%20with%0A%09python%20support%20failed&In-Reply-To=%3C2832046.BNbAXpVKHy%40anyu%3E"
+       TITLE="[Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed">ujoimro at gmail.com
+       </A><BR>
+    <I>Fri Jun 21 13:20:05 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000205.html">[Pink-image-devel] Fwd: pink bug
+</A></li>
+        <LI>Next message: <A HREF="000204.html">[Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#203">[ date ]</a>
+              <a href="thread.html#203">[ thread ]</a>
+              <a href="subject.html#203">[ subject ]</a>
+              <a href="author.html#203">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear Patrick, 
+
+I have checked your report, and the compilation error comes from a cmake 2.8 
+try_compile bug. I have removed the test in question and now it should compile 
+on ubuntu 13.04. 
+
+For future reference, please note that the pink-svn CMake build system has 
+been phased out in favor of pink-hg. The changes in pink-svn, however, are 
+still pulled into pink-hg, so I recommend using the hg (mercurial) repository. 
+
+Here is how can You build pink:
+
+sudo apt-get install gcc g++ cmake cmake-qt-gui libx11-dev make mercurial 
+ncurses-dev libgsl0-dev liblapack-dev libboost1.53-all-dev libtiff4-dev cmake-
+curses-gui python-matplotlib python-vtk ipython python-numpy python-imaging 
+python-imaging-tk
+
+hg clone <A HREF="https://pinkhq.com/hg/pink">https://pinkhq.com/hg/pink</A>
+
+mkdir build
+cd build
+
+cmake ../pink/ -DPYTHON_FRONT_END=ON -DCMAKE_VERBOSE_MAKEFILE=ON
+cmake ../pink/ -DPYTHON_FRONT_END=ON -DCMAKE_VERBOSE_MAKEFILE=ON 
+cmake ../pink/ -DPYTHON_FRONT_END=ON -DCMAKE_VERBOSE_MAKEFILE=ON 
+make
+
+note that CMake is an iterative process, that's why we configure the directory 
+three times. You can change further settings with 
+cmake-gui .
+
+You can start using pink by 
+./pink.sh
+
+and then 
+
+import pink
+
+Sorry for the inconvenience, 
+
+Laszlo
+
+
+On 2013-06-21 11:20:32 Jean-Patrick Pommier wrote:
+&gt;<i> Dear M. Marak,
+</I>&gt;<i> 
+</I>&gt;<i> I would like to experiment pink in python environnement running on the
+</I>&gt;<i> ubuntu 13.04 (32 bits) platform.
+</I>&gt;<i> 
+</I>&gt;<i> First,let me apologize for contacting you directly but  I am realy stuck on
+</I>&gt;<i> the configuring step with cmake (cmake-gui) which fails when the variable
+</I>&gt;<i> PYTHON_FRONT_END is checked. Having read different messages from the pink
+</I>&gt;<i> mailing list, I  understand that I will not succeed without help.
+</I>&gt;<i> 
+</I>&gt;<i> I download the code with:
+</I>&gt;<i> hg clone <A HREF="https://pinkhq.com/hg/pink">https://pinkhq.com/hg/pink</A>
+</I>&gt;<i> 
+</I>&gt;<i> From cmake-gui, the configuration fails with the message:
+</I>&gt;<i> 
+</I>&gt;<i> *Boost version: 1.49.0*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> *Found the following Boost libraries:*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> * python*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> * thread*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> * system*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> * date_time*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> *Looking for C++ include boost/shared_ptr.hpp*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> *Looking for C++ include boost/shared_ptr.hpp - found*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> *Looking for C++ include boost/shared_array.hpp*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> *Looking for C++ include boost/shared_array.hpp - found*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> *Looking for C++ include boost/python/list.hpp*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> *Looking for C++ include boost/python/list.hpp - not found*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> *CMake Error at CMakeLists.txt:437 (message):*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> * error boost/python/list.hpp does not compile. You need at least version*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> * 1.37 or newer. Check if its correctly installed. There is a known issue.*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> * If PYTHON_LIBRARY='/usr/lib/i386-linux-gnu/libpython2.7.so' does not point
+</I>&gt;<i> *
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> * to the correct location of python's libraries, please specify them
+</I>&gt;<i> manually*
+</I>&gt;<i> * *
+</I>&gt;<i> 
+</I>&gt;<i> * or delete the file in question. (seen on OpenSuSE 11.2)*
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> However when I look in /usr/include/boost/python *both list.hpp* and *
+</I>&gt;<i> extract.hpp* are present. The settings of cmake-gui are:
+</I>&gt;<i> 
+</I>&gt;<i> [image: Images int&#233;gr&#233;es 1]
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> I don't know what to do with the Boost_DIR variable. When the lines 436 to
+</I>&gt;<i> 448 (HTEST5 and HTEST6) are commented, the configuration can go to the end
+</I>&gt;<i> but then the compilation fails. When PYTHON_FRONT_END is unchecked,
+</I>&gt;<i> configurartion/make steps succeed.
+</I>&gt;<i> 
+</I>&gt;<i> Sincerly yours
+</I>&gt;<i> 
+</I>&gt;<i> Jean-Patrick Pommier
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://dip4fish.blogspot.fr/">http://dip4fish.blogspot.fr/</A>
+</I></PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000205.html">[Pink-image-devel] Fwd: pink bug
+</A></li>
+	<LI>Next message: <A HREF="000204.html">[Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#203">[ date ]</a>
+              <a href="thread.html#203">[ thread ]</a>
+              <a href="subject.html#203">[ subject ]</a>
+              <a href="author.html#203">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

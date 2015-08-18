@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Embryo%20of%20numpy%20%3C-%3E%20pink%20conversion%20routines&In-Reply-To=%3C4A7B2AD7-964B-457E-9EC0-EEF858365BB5%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000137.html">
+   <LINK REL="Next"  HREF="000139.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Embryo%20of%20numpy%20%3C-%3E%20pink%20conversion%20routines&In-Reply-To=%3C4A7B2AD7-964B-457E-9EC0-EEF858365BB5%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines">h.talbot at esiee.fr
+       </A><BR>
+    <I>Fri Jun 22 09:19:32 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000137.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+        <LI>Next message: <A HREF="000139.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#138">[ date ]</a>
+              <a href="thread.html#138">[ thread ]</a>
+              <a href="subject.html#138">[ subject ]</a>
+              <a href="author.html#138">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hello Jer&#244;me,
+
+Thanks, this is indeed useful.
+
+Essentially I have added the reverse conversion (numpy -&gt; image)
+
+
+On 22 Jun 2012, at 22 Jun, 8:24, Jerome Ferrari wrote:
+
+&gt;<i> Hi Hugues,
+</I>&gt;<i> 
+</I>&gt;<i> I don't know if it can be useful to you, but one year ago, I had started something. Here is everything I have done.
+</I>&gt;<i> 
+</I>&gt;<i> def pink_to_ndimage(image):
+</I>&gt;<i>     if type(image) == pink.char_image:
+</I>&gt;<i>         return
+</I>&gt;<i> scipy.frombuffer(image.get_pixels(),'int8').reshape(image.size[1],image.size[0])
+</I>&gt;<i>     elif type(image) == pink.float_image:
+</I>&gt;<i>         return
+</I>&gt;<i> scipy.frombuffer(image.get_pixels(),'float32').reshape(image.size[1],image.size[0])
+</I>&gt;<i>     elif type(image) == pink.int_image:
+</I>&gt;<i>         return
+</I>&gt;<i> scipy.frombuffer(image.get_pixels(),'int32').reshape(image.size[1],image.size[0])
+</I>&gt;<i>     else :
+</I>&gt;<i>         print(&quot;format non-detecte&quot;)
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 2012/6/22 Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+</I>&gt;<i> Hello Laszlo,
+</I>&gt;<i> 
+</I>&gt;<i> Because I really need this I've started adding an embryo of numpy / pink conversion routines.
+</I>&gt;<i> 
+</I>&gt;<i> There are two bits to it
+</I>&gt;<i> 
+</I>&gt;<i> 1- a &quot;set_pixels(pointer, size)&quot; method for images, which basically does a memcpy
+</I>&gt;<i> 2- a couple of python call in trunk/python/pink/numpy_conv.py
+</I>&gt;<i> 
+</I>&gt;<i> So far this seems to work, but it is not well written or safe.
+</I>&gt;<i> 
+</I>&gt;<i> I'll add some test routines in the next day or so.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> This is in SVN.
+</I>&gt;<i> 
+</I>&gt;<i> Cheers.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ===
+</I>&gt;<i> Hugues Talbot, Professeur associ&#233;
+</I>&gt;<i> Universit&#233; Paris-Est,
+</I>&gt;<i> Laboratoire d'informatique Gaspard-Monge
+</I>&gt;<i> Equipe A3SI 
+</I>&gt;<i> ESIEE - BP 99 
+</I>&gt;<i> 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;<i> (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;<i> 
+</I>&gt;<i> Academic politics are so vicious precisely because the stakes are so small.
+</I>&gt;<i> H. Kissinger
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Pink-image-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>&gt;<i> 
+</I>
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+Laws do not persuade just because they threaten. --Seneca
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120622/61497de3/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120622/61497de3/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000137.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+	<LI>Next message: <A HREF="000139.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#138">[ date ]</a>
+              <a href="thread.html#138">[ thread ]</a>
+              <a href="subject.html#138">[ subject ]</a>
+              <a href="author.html#138">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

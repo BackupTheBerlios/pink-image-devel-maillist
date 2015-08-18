@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Image arithmetics less than ideal with pink	images
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Image%20arithmetics%20less%20than%20ideal%20with%20pink%0A%09images&In-Reply-To=%3CDD01AA6C-F87B-435D-BA41-C34840D66022%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000143.html">
+   <LINK REL="Next"  HREF="000145.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Image arithmetics less than ideal with pink	images</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Image%20arithmetics%20less%20than%20ideal%20with%20pink%0A%09images&In-Reply-To=%3CDD01AA6C-F87B-435D-BA41-C34840D66022%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Image arithmetics less than ideal with pink	images">h.talbot at esiee.fr
+       </A><BR>
+    <I>Wed Jun 27 12:20:34 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000143.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+        <LI>Next message: <A HREF="000145.html">[Pink-image-devel] Proposal for arithmetics in pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#144">[ date ]</a>
+              <a href="thread.html#144">[ thread ]</a>
+              <a href="subject.html#144">[ subject ]</a>
+              <a href="author.html#144">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+Image arithmetics is less than ideal right now in pink.
+
+Here is a recent example, which is fairly typical, on a 3D image (dimensions 326 x 345 x 255)
+
+I have two images with different sets of labels which I want to combine into one, to make an image of markers. The first image is a char image with a background at zero and a label at 255, the second is an int image with labels starting from 1.
+
+the pink version is complex and almost unreadable because of necessary explicit conversions.
+
+# pink version
+
+t1 = time()
+alllabelpink= pink.convert2long(pink.convert2float(label_backg)* 1./255 ) + pink.mult((label_ball+1),pink.seuil(label_ball, 1, 0,1))
+t2 = time()
+tf = (t2 - t1)
+print(&quot;Pink version= %f seconds&quot; % tf)
+
+
+This works, but it is frankly a mess. One has to use conversions all over the place, and explicit calls to the 'mult' function because A = B *C does not work in pink if B and C are both int32 image !! Calling the &quot;seuil&quot; function is also unfortunate.
+
+
+In the numpy version thing are simpler and clearer
+
+# numpy version
+t1 = time()
+nalllabel = nlbl_bkg/255. + (nlbl_ball+1)*(nlbl_ball&gt;0)
+t2 = time()
+tf = (t2 - t1)
+print(&quot;Numpy version= %f seconds&quot; % tf
+
+In addition, numpy is much faster
+
+Pink version= 2.761813 seconds
+
+Numpy version= 0.889997 seconds
+
+
+
+
+
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99.fr
+
+Well, there&#8217;s a quantum computer that can factor 15, so those of you using
+4-bit RSA should worry.
+&#8211; Bruce Schneier
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000143.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+	<LI>Next message: <A HREF="000145.html">[Pink-image-devel] Proposal for arithmetics in pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#144">[ date ]</a>
+              <a href="thread.html#144">[ thread ]</a>
+              <a href="subject.html#144">[ subject ]</a>
+              <a href="author.html#144">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

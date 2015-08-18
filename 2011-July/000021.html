@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Pink on windows
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20on%20windows&In-Reply-To=%3C201107011151.14276.ujoimro%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000022.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Pink on windows</H1>
+    <B>Laszlo Marak</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20on%20windows&In-Reply-To=%3C201107011151.14276.ujoimro%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Pink on windows">ujoimro at gmail.com
+       </A><BR>
+    <I>Fri Jul  1 11:51:13 CEST 2011</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000022.html">[Pink-image-devel] Fwd: Re:  Pink on windows
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 2011-06-30 Thursday 14:02:30 you wrote:
+&gt;<i> Many thanks Laszlo,
+</I>&gt;<i> 
+</I>&gt;<i> Indeed, running it on python 2.7 works smoothly.
+</I>&gt;<i> 
+</I>&gt;<i> Now, I would like to ask a couple of questions about the usage of the
+</I>&gt;<i> module.
+</I>&gt;<i> As I mentioned before, right now I am interested on obtaining a skeleton
+</I>&gt;<i> of a binary 2d image. I have these images stored as numpy arrays.
+</I>&gt;<i> To be clearer on what I want, I include three pictures: the original
+</I>&gt;<i> picture, the binarized picture, and the skeleton (desired output). In
+</I>&gt;<i> this case these were generated on matlab.
+</I>&gt;<i> 
+</I>&gt;<i> The questions:
+</I>&gt;<i> 
+</I>&gt;<i> 1- Which function should I use? On the documentation I have seen many
+</I>&gt;<i> interesting C files such as: skel_MK2, skel_AK2, skeleucl, skelpar,
+</I>&gt;<i> lantujoul. However I have not found any of these on the pink module. The
+</I>&gt;<i> only ones I have found look like for graysacale images, or ask me for a
+</I>&gt;<i> priority map I don't know how to generate. There is also a
+</I>&gt;<i> pink.cpp.2dthin function, but I cant use it because the program says
+</I>&gt;<i> it's an invalid name (maybe this kind of objects name cannot start with
+</I>&gt;<i> a number?. 
+</I>Not all the functions are wrapped to python yet. This is a simple limitation 
+of programmers time. As time passes more and more functions will be in the 
+front-end. (or, perhaps You can help to wrap them). To begin You can start 
+with simple skeleton. The 2dthin is just a bug I have corrected it to thin2d 
+and it will be in the distr. during the next compilation. 
+
+&gt;<i> Anyway,any suggestion on what to use?
+</I>
+For pink to work with the images, You need to get them into pink objects. 
+Here's how it can be done:
+
+1) pink can read pgm images (but not the pgm-s from matlab yet):
+import pink
+I=pink.cpp.readimage(&quot;C:/path/to/my/file.pgm&quot;)
+
+2) You can create empty images and fill them up with values. For binary images 
+You use chars with value 255:
+
+J=pink.cpp.char_image([size_x, size_y]) # for 2D images
+or
+J=pink.cpp.char_image([size_x, size_y, size_z]) # for 3D images
+
+then You can fill up the image with values (notice the double brackets):
+
+for q in range(size_x):
+  for w in range(size_y):
+    I[[q,w]]=255 # if there is a point in [q,w]
+
+
+
+Once You have pink objects, than You can feed the images to pink operators:
+
+I_inv = pink.cpp.inverse(I)
+or
+I_skel = pink.cpp.skeleton(I, ...)
+
+
+and save the results:
+
+I_inv.writeimage(&quot;C:/path/to/the/result.pgm&quot;)
+or 
+I_inv.writeamira(&quot;C:/path/to/the/result.am&quot;)
+
+&gt;<i> 
+</I>&gt;<i> 2- As mentioned before, I have my images as numpy arrays. What kind of
+</I>&gt;<i> input would the function in 1 be expecting? I was playing a bit with a
+</I>&gt;<i> couple of functions, and tried to feed a string but it didn't work.
+</I>&gt;<i> 
+</I>If You have numpy arrays You must get the values to an array somehow and then 
+You can use the above loop to do:
+I[[q,w]] = get_value_from_numpy(q,w)
+
+Here get_value_from_numpy must be appropriate
+
+&gt;<i> Many thanks again.
+</I>&gt;<i> 
+</I>&gt;<i> Otto
+</I>&gt;<i> 
+</I>&gt;<i> -----Original Message-----
+</I>&gt;<i> From: Laszlo Marak [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>]
+</I>&gt;<i> Sent: Thursday, June 30, 2011 12:26 PM
+</I>&gt;<i> To: Fajardo, Otto
+</I>&gt;<i> Subject: Re: [Pink-image-devel] Pink on windows
+</I>&gt;<i> 
+</I>&gt;<i> I compiled it on python 2.7
+</I>&gt;<i> try to install python27 and then pink
+</I>&gt;<i> 
+</I>&gt;<i> On 2011-06-30 Thursday 11:05:05 Fajardo, Otto wrote:
+</I>&gt;<i> &gt; Hi,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Many thanks! It's very nice from you!. However, I got a problem:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I installed the Microsoft Visual C++ 2010 Redistributable Package
+</I>&gt;<i> 
+</I>&gt;<i> (x86).
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Then, I installed pink. No error messages. However, when I try to
+</I>&gt;<i> &gt; import in Python (typing import pink), this error message appears:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Traceback (most recent call last):
+</I>&gt;<i> &gt;   File &quot;&lt;interactive input&gt;&quot;, line 1, in &lt;module&gt;
+</I>&gt;<i> &gt;   File &quot;C:\Python26\lib\site-packages\pink\__init__.py&quot;, line 17, in
+</I>&gt;<i> &gt; &lt;module&gt;
+</I>&gt;<i> &gt;     import cpp # the functions imported directly from c/c++
+</I>&gt;<i> &gt;   File &quot;C:\Python26\lib\site-packages\pink\cpp\__init__.py&quot;, line 14,
+</I>&gt;<i> &gt; in &lt;module&gt;
+</I>&gt;<i> &gt;     from libcpp_pink import *
+</I>&gt;<i> &gt; ImportError: DLL load failed: The specified module could not be found.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; What should I do to fix this?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Thanks again!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Otto
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -----Original Message-----
+</I>&gt;<i> &gt; From: Laszlo Marak [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>]
+</I>&gt;<i> &gt; Sent: Thursday, June 30, 2011 2:59 AM
+</I>&gt;<i> &gt; To: Fajardo, Otto; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; Subject: Re: [Pink-image-devel] Pink on windows
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I have updated the download page on pinkhq.com with the Windows
+</I>&gt;<i> &gt; installer.
+</I>&gt;<i> &gt; Please tell us if You need further assistance.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Also there are numerous Python packages used by certain Pink
+</I>&gt;<i> 
+</I>&gt;<i> operators.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; For example PIL, Tkinter, vtk, etc. You CAN import Pink even ff these
+</I>&gt;<i> &gt; packages are not present on the system. You will receive several
+</I>&gt;<i> &gt; messages. But the import should succeed.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ----- &lt;begin original message&gt; -----
+</I>&gt;<i> &gt; Date: 2011-06-29T11:44:17Z
+</I>&gt;<i> &gt; From: Fajardo, Otto &lt;&quot;Fajardo, Otto&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">otto.fajardo at fmi.ch</A>&gt;&gt;
+</I>&gt;<i> &gt; To: Laszlo Marak
+</I>&gt;<i> &gt; Cc:
+</I>&gt;<i> &gt; Subject: RE: [Pink-image-devel] Pink on windows
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; Hi again,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; By the way, I'm using python 2.6 on 32-bit XP windows. Maybe this
+</I>&gt;<i> &gt; &gt; info
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; is important ...
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Thanks again,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Otto
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; -----Original Message-----
+</I>&gt;<i> &gt; &gt; From: Laszlo Marak [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>]
+</I>&gt;<i> &gt; &gt; Sent: Tuesday, June 28, 2011 11:30 PM
+</I>&gt;<i> &gt; &gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; &gt; Cc: Fajardo, Otto
+</I>&gt;<i> &gt; &gt; Subject: Re: [Pink-image-devel] Pink on windows
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Hello,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I will make a package in a few days, I will send an email when it's
+</I>&gt;<i> &gt; &gt; done.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; ----- &lt;begin original message&gt; -----
+</I>&gt;<i> &gt; &gt; Date: 2011-06-28T18:22:09Z
+</I>&gt;<i> &gt; &gt; From: Fajardo, Otto &lt;&quot;Fajardo, Otto&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">otto.fajardo at fmi.ch</A>&gt;&gt;
+</I>&gt;<i> &gt; &gt; To: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; &gt; Cc:
+</I>&gt;<i> &gt; &gt; Subject: [Pink-image-devel] Pink on windows
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; Dear All,
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; My name is Otto,post-doc fellow at the Friedrich Miescher Institut
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; in Basel, Switzerland. I have just learned about Pink looking on
+</I>&gt;<i> &gt; &gt; &gt; the
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; web for a python module with a skeletonization/thinning of binary
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; images.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; &gt; Righ now I'm using mahotas, but the result is very branchy, and
+</I>&gt;<i> &gt; &gt; &gt; altough I can prune it, I would prefer to have a less branchy
+</I>&gt;<i> &gt; &gt; &gt; result
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; from the beginning. I have been using Matlab before (now trying to
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; switch to python), and there the skeletonizing algorithm does not
+</I>&gt;<i> &gt; &gt; &gt; give
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; so many branches on my pictures.
+</I>&gt;<i> &gt; &gt; &gt; I have seen that Pink has some skeletonizing functions (and dozens
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; of other interesting ones), and would love to try it. However, I
+</I>&gt;<i> &gt; &gt; &gt; am new to all the compilation business, and furthermore I'm using
+</I>&gt;<i> &gt; &gt; &gt; windows. I tried to compile with mingw but failed. I read on the
+</I>&gt;<i> &gt; &gt; &gt; webpage that there is a binary installation file for windows.
+</I>&gt;<i> &gt; &gt; &gt; Would it be possible to get it to try the software?.
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; Many thanks
+</I>&gt;<i> &gt; &gt; &gt;
+</I>&gt;<i> &gt; &gt; &gt; Otto Fajardo
+</I>&gt;<i> &gt; &gt; &gt; _______________________________________________
+</I>&gt;<i> &gt; &gt; &gt; Pink-image-devel mailing list
+</I>&gt;<i> &gt; &gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; &gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Laszlo MARAK
+</I>&gt;<i> &gt; &gt; Phd. student of ESIEE
+</I>&gt;<i> &gt; &gt; email: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Iron Law of Distribution: Them that has, gets.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Laszlo MARAK
+</I>&gt;<i> &gt; Phd. student of ESIEE
+</I>&gt;<i> &gt; email: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Hartley's First Law: You can lead a horse to water, but if you can get
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; him to float on his back, you've got something.
+</I>&gt;<i> 
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000022.html">[Pink-image-devel] Fwd: Re:  Pink on windows
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

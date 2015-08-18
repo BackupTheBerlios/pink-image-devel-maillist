@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Pink compiles but crashes on MacOS 10.7.2
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-February/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20compiles%20but%20crashes%20on%20MacOS%2010.7.2&In-Reply-To=%3CD9529A5E-3D89-4AD3-A94F-8357016CD5BA%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000120.html">
+   <LINK REL="Next"  HREF="000122.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Pink compiles but crashes on MacOS 10.7.2</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20compiles%20but%20crashes%20on%20MacOS%2010.7.2&In-Reply-To=%3CD9529A5E-3D89-4AD3-A94F-8357016CD5BA%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Pink compiles but crashes on MacOS 10.7.2">hugues.talbot at gmail.com
+       </A><BR>
+    <I>Sat Feb  4 18:44:52 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000120.html">[Pink-image-devel] debian/ubuntu/linuxmint ccmake issue
+</A></li>
+        <LI>Next message: <A HREF="000122.html">[Pink-image-devel] using pink from matlab?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello ,
+
+Pink crashes immediately upon load in 10.7.2
+
+Process:         Python [61620]
+Path:            /opt/local/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python
+Identifier:      Python
+Version:         ??? (???)
+Code Type:       X86-64 (Native)
+Parent Process:  bash [61619]
+
+Date/Time:       2012-02-04 18:42:34.252 +0100
+OS Version:      Mac OS X 10.7.2 (11C74)
+Report Version:  9
+
+Interval Since Last Report:          157936 sec
+Crashes Since Last Report:           4
+Per-App Crashes Since Last Report:   1
+Anonymous UUID:                      2BFE2A90-D3D3-45F4-ACFE-2240B8BB27A4
+
+Crashed Thread:  0  Dispatch queue: com.apple.main-thread
+
+Exception Type:  EXC_BAD_ACCESS (SIGSEGV)
+Exception Codes: KERN_INVALID_ADDRESS at 0x0000000000000000
+
+VM Regions Near 0:
+--&gt; 
+    __TEXT                 000000010f89c000-000000010f89d000 [    4K] r-x/rwx SM=COW  /opt/local/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python.app/Contents/MacOS/Python
+
+Application Specific Information:
+objc[61620]: garbage collection is OFF
+
+Thread 0 Crashed:: Dispatch queue: com.apple.main-thread
+0   org.python.python             	0x000000011102b672 PyInt_FromLong + 36
+1   libcpp_pink.so                	0x000000010fe111ab boost::python::detail::keywords&lt;1ul&gt;&amp; boost::python::detail::keywords&lt;1ul&gt;::operator=&lt;int&gt;(int const&amp;) + 27
+2   libcpp_pink.so                	0x000000010ff7af54 export_function10() + 68
+3   libcpp_pink.so                	0x000000010ff7adbb init_module_libcpp_pink() + 59
+4   libboost_python-mt.dylib      	0x0000000110f4e120 boost::python::handle_exception_impl(boost::function0&lt;void&gt;) + 144
+5   libboost_python-mt.dylib      	0x0000000110f4f1d7 bool boost::python::handle_exception&lt;void (*)()&gt;(void (*)()) + 55
+6   libboost_python-mt.dylib      	0x0000000110f4ef9b boost::python::detail::init_module(char const*, void (*)()) + 91
+7   org.python.python             	0x000000010f95db23 _PyImport_LoadDynamicModule + 179
+8   org.python.python             	0x000000010f95d82a import_submodule + 346
+9   org.python.python             	0x000000010f95d3b7 load_next + 327
+10  org.python.python             	0x000000010f95b0b0 PyImport_ImportModuleLevel + 1216
+11  org.python.python             	0x000000010f93a218 builtin___import__ + 136
+12  org.python.python             	0x000000010f8adfd1 PyObject_Call + 97
+13  org.python.python             	0x000000010f946b01 PyEval_CallObjectWithKeywords + 177
+14  org.python.python             	0x000000010f94430e PyEval_EvalFrameEx + 19710
+15  org.python.python             	0x000000010f93f5b9 PyEval_EvalCodeEx + 2201
+16  org.python.python             	0x000000010f93ed16 PyEval_EvalCode + 54
+17  org.python.python             	0x000000010f959a3a PyImport_ExecCodeModuleEx + 250
+18  org.python.python             	0x000000010f95cd39 load_source_module + 1305
+19  org.python.python             	0x000000010f95cf91 load_package + 369
+20  org.python.python             	0x000000010f95d82a import_submodule + 346
+21  org.python.python             	0x000000010f95d371 load_next + 257
+22  org.python.python             	0x000000010f95b0b0 PyImport_ImportModuleLevel + 1216
+23  org.python.python             	0x000000010f93a218 builtin___import__ + 136
+24  org.python.python             	0x000000010f8adfd1 PyObject_Call + 97
+25  org.python.python             	0x000000010f946b01 PyEval_CallObjectWithKeywords + 177
+26  org.python.python             	0x000000010f94430e PyEval_EvalFrameEx + 19710
+27  org.python.python             	0x000000010f93f5b9 PyEval_EvalCodeEx + 2201
+28  org.python.python             	0x000000010f93ed16 PyEval_EvalCode + 54
+29  org.python.python             	0x000000010f959a3a PyImport_ExecCodeModuleEx + 250
+30  org.python.python             	0x000000010f95cd39 load_source_module + 1305
+31  org.python.python             	0x000000010f95cf91 load_package + 369
+32  org.python.python             	0x000000010f95d82a import_submodule + 346
+33  org.python.python             	0x000000010f95d371 load_next + 257
+34  org.python.python             	0x000000010f95b0b0 PyImport_ImportModuleLevel + 1216
+35  org.python.python             	0x000000010f93a218 builtin___import__ + 136
+36  org.python.python             	0x000000010f8adfd1 PyObject_Call + 97
+37  org.python.python             	0x000000010f946b01 PyEval_CallObjectWithKeywords + 177
+38  org.python.python             	0x000000010f94430e PyEval_EvalFrameEx + 19710
+39  org.python.python             	0x000000010f93f5b9 PyEval_EvalCodeEx + 2201
+40  org.python.python             	0x000000010f93ed16 PyEval_EvalCode + 54
+41  org.python.python             	0x000000010f96691e PyRun_InteractiveOneFlags + 558
+42  org.python.python             	0x000000010f96635e PyRun_InteractiveLoopFlags + 206
+43  org.python.python             	0x000000010f9661e7 PyRun_AnyFileExFlags + 119
+44  org.python.python             	0x000000010f97a63e Py_Main + 2990
+45  org.python.python             	0x000000010f89cf24 0x10f89c000 + 3876
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000120.html">[Pink-image-devel] debian/ubuntu/linuxmint ccmake issue
+</A></li>
+	<LI>Next message: <A HREF="000122.html">[Pink-image-devel] using pink from matlab?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#121">[ date ]</a>
+              <a href="thread.html#121">[ thread ]</a>
+              <a href="subject.html#121">[ subject ]</a>
+              <a href="author.html#121">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

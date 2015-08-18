@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Embryo%20of%20numpy%20%3C-%3E%20pink%20conversion%20routines&In-Reply-To=%3C13044062.lmnQQHtFWe%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000139.html">
+   <LINK REL="Next"  HREF="000141.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Embryo%20of%20numpy%20%3C-%3E%20pink%20conversion%20routines&In-Reply-To=%3C13044062.lmnQQHtFWe%40anyu%3E"
+       TITLE="[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines">ujoimro at gmail.com
+       </A><BR>
+    <I>Tue Jun 26 19:43:50 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000139.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+        <LI>Next message: <A HREF="000141.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#140">[ date ]</a>
+              <a href="thread.html#140">[ thread ]</a>
+              <a href="subject.html#140">[ subject ]</a>
+              <a href="author.html#140">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello, I have found a simpler solution. 
+
+There are dedicated api calls for in C++ conversion. I have managed to create 
+an array. I'll finish it tomorrow and commit it. Then the conversion will be 
+done without python calls  (except the pink2numpy). 
+
+On 2012-06-22 09:19:32 Hugues Talbot wrote:
+&gt;<i> Hello Jer&#244;me,
+</I>&gt;<i> 
+</I>&gt;<i> Thanks, this is indeed useful.
+</I>&gt;<i> 
+</I>&gt;<i> Essentially I have added the reverse conversion (numpy -&gt; image)
+</I>&gt;<i> 
+</I>&gt;<i> On 22 Jun 2012, at 22 Jun, 8:24, Jerome Ferrari wrote:
+</I>&gt;<i> &gt; Hi Hugues,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I don't know if it can be useful to you, but one year ago, I had started
+</I>&gt;<i> &gt; something. Here is everything I have done.&gt; 
+</I>&gt;<i> &gt; def pink_to_ndimage(image):
+</I>&gt;<i> &gt;     if type(image) == pink.char_image:
+</I>&gt;<i> &gt;         return
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; scipy.frombuffer(image.get_pixels(),'int8').reshape(image.size[1],image.
+</I>&gt;<i> &gt; size[0])&gt; 
+</I>&gt;<i> &gt;     elif type(image) == pink.float_image:
+</I>&gt;<i> &gt;         return
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; scipy.frombuffer(image.get_pixels(),'float32').reshape(image.size[1],ima
+</I>&gt;<i> &gt; ge.size[0])&gt; 
+</I>&gt;<i> &gt;     elif type(image) == pink.int_image:
+</I>&gt;<i> &gt;         return
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; scipy.frombuffer(image.get_pixels(),'int32').reshape(image.size[1],image
+</I>&gt;<i> &gt; .size[0])&gt; 
+</I>&gt;<i> &gt;     else :
+</I>&gt;<i> &gt;         print(&quot;format non-detecte&quot;)
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 2012/6/22 Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+</I>&gt;<i> &gt; Hello Laszlo,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Because I really need this I've started adding an embryo of numpy / pink
+</I>&gt;<i> &gt; conversion routines.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; There are two bits to it
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 1- a &quot;set_pixels(pointer, size)&quot; method for images, which basically does
+</I>&gt;<i> &gt; a memcpy 2- a couple of python call in trunk/python/pink/numpy_conv.py
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; So far this seems to work, but it is not well written or safe.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I'll add some test routines in the next day or so.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; This is in SVN.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Cheers.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; ===
+</I>&gt;<i> &gt; Hugues Talbot, Professeur associ&#233;
+</I>&gt;<i> &gt; Universit&#233; Paris-Est,
+</I>&gt;<i> &gt; Laboratoire d'informatique Gaspard-Monge
+</I>&gt;<i> &gt; Equipe A3SI
+</I>&gt;<i> &gt; ESIEE - BP 99
+</I>&gt;<i> &gt; 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;<i> &gt; (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Academic politics are so vicious precisely because the stakes are so
+</I>&gt;<i> &gt; small. H. Kissinger
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; _______________________________________________
+</I>&gt;<i> &gt; Pink-image-devel mailing list
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>&gt;<i> 
+</I>&gt;<i> ===
+</I>&gt;<i> Hugues Talbot, Professeur associ&#233;
+</I>&gt;<i> Universit&#233; Paris-Est,
+</I>&gt;<i> Laboratoire d'informatique Gaspard-Monge
+</I>&gt;<i> Equipe A3SI
+</I>&gt;<i> ESIEE - BP 99
+</I>&gt;<i> 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;<i> (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;<i> 
+</I>&gt;<i> Laws do not persuade just because they threaten. --Seneca
+</I></PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000139.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+	<LI>Next message: <A HREF="000141.html">[Pink-image-devel] Embryo of numpy &lt;-&gt; pink conversion routines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#140">[ date ]</a>
+              <a href="thread.html#140">[ thread ]</a>
+              <a href="subject.html#140">[ subject ]</a>
+              <a href="author.html#140">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

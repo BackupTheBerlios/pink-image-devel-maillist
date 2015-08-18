@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Problems with lattrib.c
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Problems%20with%20lattrib.c&In-Reply-To=%3C1383618.3fstEuJgcm%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000211.html">
+   <LINK REL="Next"  HREF="000212.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Problems with lattrib.c</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Problems%20with%20lattrib.c&In-Reply-To=%3C1383618.3fstEuJgcm%40anyu%3E"
+       TITLE="[Pink-image-devel] Problems with lattrib.c">ujoimro at gmail.com
+       </A><BR>
+    <I>Fri Jul 12 16:58:39 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000211.html">[Pink-image-devel] Problems with lattrib.c
+</A></li>
+        <LI>Next message: <A HREF="000212.html">[Pink-image-devel] Completely lost
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#217">[ date ]</a>
+              <a href="thread.html#217">[ thread ]</a>
+              <a href="subject.html#217">[ subject ]</a>
+              <a href="author.html#217">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello, 
+
+I have removed lattrib.c as it was currently unused. Now it compiles in debug 
+mode. lattrib.h, a file very similar to lattrib.c is used by several 
+operators, but is not causing similar trouble. Merge the default into Your 
+branch to get the changes.
+
+hg checkout &quot;hugues' branch&quot;
+hg commit -m &quot;current outstanding changes&quot;
+hg merge default
+
+This file also contains lot's of exits, but those are all related to errors 
+detected in during the calculation. Please redo the tests and see if it still 
+exits python. If it does, then I can change them into appropriate return 
+values. 
+
+Laszlo
+
+
+On 2013-07-09 15:09:04 Hugues Talbot wrote:
+&gt;<i> Hello,
+</I>&gt;<i> 
+</I>&gt;<i> the file 'lattrib.c' in src/lib has some strange features:
+</I>&gt;<i> 
+</I>&gt;<i> 1- it compiles but does not link in Debug mode (??)
+</I>&gt;<i> 2- it calls exit() all the time.
+</I>&gt;<i> 
+</I>&gt;<i> Both are linked. For instance, on line 1246, we have the following code.
+</I>&gt;<i> 
+</I>&gt;<i>   while (!FahVideNiveau(FAH, h))               /* first step : propagation
+</I>&gt;<i> */ {                                            /* ========================
+</I>&gt;<i> */ p = FahPopNiveau(FAH, h);
+</I>&gt;<i> 
+</I>&gt;<i> ...
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> However, FahPopNiveau() is never defined in pink.
+</I>&gt;<i> 
+</I>&gt;<i> FahVideNiveau() is defined in mcfah.c thusly:
+</I>&gt;<i> 
+</I>&gt;<i> /* ==================================== */
+</I>&gt;<i> int32_t FahVideNiveau(
+</I>&gt;<i>   Fah * L,
+</I>&gt;<i>   int32_t niv)
+</I>&gt;<i> /* ==================================== */
+</I>&gt;<i> {
+</I>&gt;<i>   printf(&quot;FahVideNiveau: pas de sens avec la version impure de mcfah\n&quot;);
+</I>&gt;<i>   exit(0);
+</I>&gt;<i> } /* FahVideNiveau() */
+</I>&gt;<i> 
+</I>&gt;<i> Any call to this function will result in the python interpreter quitting,
+</I>&gt;<i> which is less than desirable.
+</I>&gt;<i> 
+</I>&gt;<i> Somehow, in Release mode, the optimizer gets read of this call and the code
+</I>&gt;<i> compiles and links.
+</I>&gt;<i> 
+</I>&gt;<i> In debug mode, however, pink cannot be loaded beause FahVideNiveau does not
+</I>&gt;<i> exist.
+</I>&gt;<i> 
+</I>&gt;<i> QUESTIONS:
+</I>&gt;<i> ==========
+</I>&gt;<i> 
+</I>&gt;<i> - Is lattrib.c used anywhere ? Can we get rid of it ?
+</I>&gt;<i> 
+</I>&gt;<i> - If not, what does FahPopNiveau() do ? Can we fix this ?
+</I>&gt;<i> 
+</I>&gt;<i> Thanks in advance.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ===
+</I>&gt;<i> Hugues Talbot, Professeur associ&#233;
+</I>&gt;<i> Universit&#233; Paris-Est,
+</I>&gt;<i> Laboratoire d'informatique Gaspard-Monge
+</I>&gt;<i> Equipe A3SI
+</I>&gt;<i> ESIEE - BP 99
+</I>&gt;<i> 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;<i> (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;<i> 
+</I>&gt;<i> Experience is not what happens to a man; it is what a man does with what
+</I>&gt;<i> happens to him. -Aldous Huxley, novelist (1894-1963)
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Pink-image-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I></PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000211.html">[Pink-image-devel] Problems with lattrib.c
+</A></li>
+	<LI>Next message: <A HREF="000212.html">[Pink-image-devel] Completely lost
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#217">[ date ]</a>
+              <a href="thread.html#217">[ thread ]</a>
+              <a href="subject.html#217">[ subject ]</a>
+              <a href="author.html#217">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

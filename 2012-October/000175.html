@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] missing function in pink
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-October/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20missing%20function%20in%20pink&In-Reply-To=%3C61BD4C7D-7591-4FB5-9C96-A615A39DD0DC%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000174.html">
+   <LINK REL="Next"  HREF="000176.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] missing function in pink</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20missing%20function%20in%20pink&In-Reply-To=%3C61BD4C7D-7591-4FB5-9C96-A615A39DD0DC%40gmail.com%3E"
+       TITLE="[Pink-image-devel] missing function in pink">hugues.talbot at gmail.com
+       </A><BR>
+    <I>Mon Oct 29 14:53:59 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000174.html">[Pink-image-devel] Fwd: missing function in pink
+</A></li>
+        <LI>Next message: <A HREF="000176.html">[Pink-image-devel] missing function in pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#175">[ date ]</a>
+              <a href="thread.html#175">[ thread ]</a>
+              <a href="subject.html#175">[ subject ]</a>
+              <a href="author.html#175">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Juliette,
+
+As reported by Laszlo, these functions have been subsumed into convert2long ; basically you can convert any image type to long by using
+
+pink.cpp.convert2long()
+
+Let me know if this works for you.
+
+Cheers.
+
+&gt;<i> In [6]: help(pink.cpp.convert2long)
+</I>&gt;<i> Help on built-in function convert2long in module libcpp_pink:
+</I>&gt;<i> 
+</I>&gt;<i> convert2long(...)
+</I>&gt;<i>     convert2long( (char_image)image) -&gt; int_image :
+</I>&gt;<i>         converts an image to long type
+</I>&gt;<i>     
+</I>&gt;<i>         C++ signature :
+</I>&gt;<i>             pink::ujoi&lt;int&gt; convert2long(pink::ujoi&lt;unsigned char&gt;)
+</I>&gt;<i>     
+</I>&gt;<i>     convert2long( (short_image)image) -&gt; int_image :
+</I>&gt;<i>         converts an image to long type
+</I>&gt;<i>     
+</I>&gt;<i>         C++ signature :
+</I>&gt;<i>             pink::ujoi&lt;int&gt; convert2long(pink::ujoi&lt;unsigned short&gt;)
+</I>&gt;<i>     
+</I>&gt;<i>     convert2long( (int_image)image) -&gt; int_image :
+</I>&gt;<i>         converts an image to long type
+</I>&gt;<i>     
+</I>&gt;<i>         C++ signature :
+</I>&gt;<i>             pink::ujoi&lt;int&gt; convert2long(pink::ujoi&lt;int&gt;)
+</I>&gt;<i>     
+</I>&gt;<i>     convert2long( (float_image)image) -&gt; int_image :
+</I>&gt;<i>         converts an image to long type
+</I>&gt;<i>     
+</I>&gt;<i>         C++ signature :
+</I>&gt;<i>             pink::ujoi&lt;int&gt; convert2long(pink::ujoi&lt;float&gt;)
+</I>&gt;<i>     
+</I>&gt;<i>     convert2long( (double_image)image) -&gt; int_image :
+</I>&gt;<i>         converts an image to long type
+</I>&gt;<i>     
+</I>&gt;<i>         C++ signature :
+</I>&gt;<i>             pink::ujoi&lt;int&gt; convert2long(pink::ujoi&lt;double&gt;)
+</I>
+
+
+
+On Oct 29, 2012, at 1:03 PM, ujoimro wrote:
+
+&gt;<i> I have convert2long and it should work for all image types
+</I>&gt;<i> 
+</I>&gt;<i> On 2012-10-29 09:47:40 Hugues Talbot wrote:
+</I>&gt;&gt;<i> Hello,
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> As reported by Juliette, some functions seems to have disappeared in Pink  
+</I>&gt;<i> (0.9.r566):
+</I>&gt;&gt;&gt;<i> - float2long
+</I>&gt;&gt;&gt;<i> - byte2long
+</I>&gt;&gt;&gt;<i> - convert2long
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Have these functions changed names ?
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Begin forwarded message:
+</I>&gt;&gt;&gt;<i> From: Juliette Charpentier &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">charpentier.juliette at gmail.com</A>&gt;
+</I>&gt;&gt;&gt;<i> Subject: missing function in pink
+</I>&gt;&gt;&gt;<i> Date: October 29, 2012 7:25:14 AM GMT+01:00
+</I>&gt;&gt;&gt;<i> To: Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+</I>&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;<i> Il y a des fonctions ne sont plus dans ma version de pink (0.9.r566):
+</I>&gt;&gt;&gt;<i> - float2long
+</I>&gt;&gt;&gt;<i> - byte2long
+</I>&gt;&gt;&gt;<i> - convert2long
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000174.html">[Pink-image-devel] Fwd: missing function in pink
+</A></li>
+	<LI>Next message: <A HREF="000176.html">[Pink-image-devel] missing function in pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#175">[ date ]</a>
+              <a href="thread.html#175">[ thread ]</a>
+              <a href="subject.html#175">[ subject ]</a>
+              <a href="author.html#175">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

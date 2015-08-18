@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] compilation issue for 0.9.r617
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-September/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20compilation%20issue%20for%200.9.r617&In-Reply-To=%3C201109121651.55802.ujoimro%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000056.html">
+   <LINK REL="Next"  HREF="000062.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] compilation issue for 0.9.r617</H1>
+    <B>Laszlo Marak</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20compilation%20issue%20for%200.9.r617&In-Reply-To=%3C201109121651.55802.ujoimro%40gmail.com%3E"
+       TITLE="[Pink-image-devel] compilation issue for 0.9.r617">ujoimro at gmail.com
+       </A><BR>
+    <I>Mon Sep 12 16:51:52 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000056.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+        <LI>Next message: <A HREF="000062.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#58">[ date ]</a>
+              <a href="thread.html#58">[ thread ]</a>
+              <a href="subject.html#58">[ subject ]</a>
+              <a href="author.html#58">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This bug has been fixed and is present in package r632
+
+On 2011-09-07 Wednesday 09:00:54 Jerome Ferrari wrote:
+&gt;<i> Hello,
+</I>&gt;<i> 
+</I>&gt;<i> I managed to get installed libnuma-dev, libnuma-dbg and libnuma1and it
+</I>&gt;<i> wokrs, I managed to get to the end of the compilation (version 0.9.r622),
+</I>&gt;<i> but I can't import pink properly under python:
+</I>&gt;<i> *
+</I>&gt;<i> In [1]: import pink
+</I>&gt;<i> ---------------------------------------------------------------------------
+</I>&gt;<i> ImportError                               Traceback (most recent call last)
+</I>&gt;<i> 
+</I>&gt;<i> /local00/home/F36852/opt/&lt;ipython console&gt; in &lt;module&gt;()
+</I>&gt;<i> 
+</I>&gt;<i> /home/F36852/opt/pink/python/pink/__init__.py in &lt;module&gt;()
+</I>&gt;<i>      15 from exceptions import python_component_missing
+</I>&gt;<i>      16 from isize import iSize
+</I>&gt;<i> ---&gt; 17 import cpp # the functions imported directly from c/c++
+</I>&gt;<i>      18
+</I>&gt;<i>      19 from windowing import windowing
+</I>&gt;<i> 
+</I>&gt;<i> /home/F36852/opt/pink/python/pink/cpp/__init__.py in &lt;module&gt;()
+</I>&gt;<i>      10 # Universit&#233; Paris-Est, Laboratoire d'Informatique Gaspard-Monge,
+</I>&gt;<i> Equipe A3SI, ESIEE Paris, 93162, Noisy le Grand CEDEX
+</I>&gt;<i> 
+</I>&gt;<i>      11 # <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>
+</I>&gt;<i> 
+</I>&gt;<i>      12 #
+</I>&gt;<i> 
+</I>&gt;<i>      13
+</I>&gt;<i> ---&gt; 14 from libcpp_pink import *
+</I>&gt;<i> 
+</I>&gt;<i> ImportError: /home/F36852/opt/pink/python/libcpp_pink.so: undefined symbol:
+</I>&gt;<i> numa_bind*
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> I asked for the installation of the numactl package. We will see, but if
+</I>&gt;<i> you have another proposal...
+</I>&gt;<i> 
+</I>&gt;<i> Sincerely,
+</I>&gt;<i> 
+</I>&gt;<i> Jerome
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 2011/8/30 Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+</I>&gt;<i> 
+</I>&gt;<i> &gt; we will fix the problem ASAP at our end.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; On 30 Aug 2011, at 30 Aug, 9:10, Jerome Ferrari wrote:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Thank you for your answer,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I'll try that. Unfortunately, I don't have root access to my machine, it
+</I>&gt;<i> &gt; will take some time to have it ...
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 2011/8/29 Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt;
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;&gt; Hello,
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; This is a mistake at our end, of course we should test for the presence
+</I>&gt;<i> &gt;&gt; of the NUMA headers.
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; In the meantime, to fix it, try installing the NUMA development kit.
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; I'm not sure how it is called under Debian, but try installing a package
+</I>&gt;<i> &gt;&gt; called &quot;libnuma-dev&quot; or something similar.
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000056.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+	<LI>Next message: <A HREF="000062.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#58">[ date ]</a>
+              <a href="thread.html#58">[ thread ]</a>
+              <a href="subject.html#58">[ subject ]</a>
+              <a href="author.html#58">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

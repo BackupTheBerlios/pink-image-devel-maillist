@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Various problems with pink
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-October/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Various%20problems%20with%20pink&In-Reply-To=%3C2466761F-55F1-44F1-AB7A-C669EE088EA1%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000095.html">
+   <LINK REL="Next"  HREF="000098.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Various problems with pink</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Various%20problems%20with%20pink&In-Reply-To=%3C2466761F-55F1-44F1-AB7A-C669EE088EA1%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Various problems with pink">h.talbot at esiee.fr
+       </A><BR>
+    <I>Tue Oct 11 10:33:26 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000095.html">[Pink-image-devel] berlios comes to an end
+</A></li>
+        <LI>Next message: <A HREF="000098.html">[Pink-image-devel] Various problems with pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#92">[ date ]</a>
+              <a href="thread.html#92">[ thread ]</a>
+              <a href="subject.html#92">[ subject ]</a>
+              <a href="author.html#92">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello all,
+
+I'm desperately trying to use h-maxima. 
+ 
+I think there is a but with the various involved functions, please try this:
+
+(I'm using cells.pgm from trunk/tutorial/python/HT-TP1/images/cells.pgm)
+
+dist cells.pgm 1 distcells.pgm
+heightmaxima distcells.pgm 4 4 hmax.pgm
+
+
+This looks like this:
+
+
+
+
+Clearly heightmaxima only works on 1/4 of the image. This suggest heighmaxima only work on char images, but it doesn't say. This is bug #1
+
+We can try this idea:
+
+../bash/long2byte distcells.pgm distchar.pgm
+../bash/heightmaxima distchar.pgm 4 4 hmaxchar.pgm
+
+
+
+This works better. However, this is a problem, because I have objects that are larger than 255 in radius, so it would be nice to be able to use h-maxima on int images.
+
+The function segmentheight has the same behaviour
+
+The involved function have the same behaviour under python.
+
+Now question: how does one convert an image to char under python?
+
+There exist the functions 
+
+pink.cpp.convert2float  
+pink.cpp.convert2long
+
+but no pink.cpp.convert2char ?
+
+thanks for any help.
+
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+The wonderful thing about project schedules and requirements is nobody saves the previous version.
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20111011/c25f030b/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20111011/c25f030b/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Screen shot 2011-10-11 at Tuesday11 Oct,10.22.png
+Type: image/png
+Size: 38521 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20111011/c25f030b/attachment.png">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20111011/c25f030b/attachment.png</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Screen shot 2011-10-11 at Tuesday11 Oct,10.27.png
+Type: image/png
+Size: 36866 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20111011/c25f030b/attachment-0001.png">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20111011/c25f030b/attachment-0001.png</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000095.html">[Pink-image-devel] berlios comes to an end
+</A></li>
+	<LI>Next message: <A HREF="000098.html">[Pink-image-devel] Various problems with pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#92">[ date ]</a>
+              <a href="thread.html#92">[ thread ]</a>
+              <a href="subject.html#92">[ subject ]</a>
+              <a href="author.html#92">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

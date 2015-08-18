@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Completely lost
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Completely%20lost&In-Reply-To=%3CDEF5A148-214A-4AC3-85D0-78124F308A2C%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000212.html">
+   <LINK REL="Next"  HREF="000215.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Completely lost</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Completely%20lost&In-Reply-To=%3CDEF5A148-214A-4AC3-85D0-78124F308A2C%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Completely lost">hugues.talbot at gmail.com
+       </A><BR>
+    <I>Wed Jul 10 11:08:03 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000212.html">[Pink-image-devel] Completely lost
+</A></li>
+        <LI>Next message: <A HREF="000215.html">[Pink-image-devel] Completely lost
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#213">[ date ]</a>
+              <a href="thread.html#213">[ thread ]</a>
+              <a href="subject.html#213">[ subject ]</a>
+              <a href="author.html#213">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Laszlo,
+
+To add some information, at the linking stage, libpink.dylib fails to build with the following messages:
+
+Undefined symbols for architecture x86_64:
+  &quot;_PyErr_Occurred&quot;, referenced from:
+      boost::python::len(boost::python::api::object const&amp;) in ui_pink_types.cpp.o
+  &quot;_PyLong_FromLongLong&quot;, referenced from:
+      boost::python::converter::arg_to_python&lt;long long&gt;::arg_to_python(long long const&amp;) in ui_pink_types.cpp.o
+  &quot;_PyObject_Size&quot;, referenced from:
+      boost::python::len(boost::python::api::object const&amp;) in ui_pink_types.cpp.o
+  &quot;_Sep&quot;, referenced from:
+      _phaseVoronoiY in lvoronoilabelling.c.o
+      _phaseVoronoiZ in lvoronoilabelling.c.o
+     (maybe you meant: _SeparatingEdge)
+  &quot;__Py_NoneStruct&quot;, referenced from:
+      boost::python::api::object::object() in lhello.cpp.o
+      boost::python::api::object::object() in lminmax.cpp.o
+      boost::python::api::object::object() in readpnm.cpp.o
+      boost::python::api::object::object() in uiFileIO.cpp.o
+      boost::python::api::object::object() in uiGradient.cpp.o
+      boost::python::api::object::object() in uiImage.cpp.o
+      boost::python::api::object::object() in uiSqhool.cpp.o
+      ...
+  &quot;boost::python::throw_error_already_set()&quot;, referenced from:
+  &quot;boost::python::throw_error_already_set()&quot;, referenced from:
+      boost::python::len(boost::python::api::object const&amp;) in ui_pink_types.cpp.o
+      _object* boost::python::expect_non_null&lt;_object&gt;(_object*) in ui_pink_types.cpp.o
+  &quot;boost::python::api::getitem(boost::python::api::object const&amp;, boost::python::api::object const&amp;)&quot;, referenced from:
+      boost::python::api::const_item_policies::get(boost::python::api::object const&amp;, boost::python::api::object const&amp;) in ui_pink_types.cpp.o
+  &quot;boost::python::converter::rvalue_from_python_stage1(_object*, boost::python::converter::registration const&amp;)&quot;, referenced from:
+      boost::python::converter::extract_rvalue&lt;long long&gt;::extract_rvalue(_object*) in ui_pink_types.cpp.o
+  &quot;boost::python::converter::rvalue_from_python_stage2(_object*, boost::python::converter::rvalue_from_python_stage1_data&amp;, boost::python::converter::registration cons
+t&amp;)&quot;, referenced from:
+      boost::python::converter::extract_rvalue&lt;long long&gt;::operator()() const in ui_pink_types.cpp.o
+  &quot;boost::python::converter::registry::lookup(boost::python::type_info)&quot;, referenced from:
+      boost::python::converter::registration const&amp; boost::python::converter::detail::registry_lookup2&lt;long long const volatile&gt;(long long const volatile&amp; (*)()) in ui
+_pink_types.cpp.o
+  &quot;boost::system::system_category()&quot;, referenced from:
+      ___cxx_global_var_init3 in lhello.cpp.o
+      ___cxx_global_var_init3 in lminmax.cpp.o
+      ___cxx_global_var_init3 in uiFileIO.cpp.o
+      ___cxx_global_var_init3 in uiSqhool.cpp.o
+      ___cxx_global_var_init3 in uiUngerFlow.cpp.o
+      ___cxx_global_var_init3 in ujimage.cpp.o
+      ___cxx_global_var_init3 in liar_fseries.cxx.o
+      ...
+  &quot;boost::system::generic_category()&quot;, referenced from:
+      ___cxx_global_var_init1 in lhello.cpp.o
+      ___cxx_global_var_init2 in lhello.cpp.o
+      ___cxx_global_var_init1 in lminmax.cpp.o
+      ___cxx_global_var_init2 in lminmax.cpp.o
+      ___cxx_global_var_init1 in uiFileIO.cpp.o
+      ___cxx_global_var_init2 in uiFileIO.cpp.o
+      ___cxx_global_var_init1 in uiSqhool.cpp.o
+      ...
+  &quot;_det_matrice_4&quot;, referenced from:
+      _build_sphere in lballincl.c.o
+  &quot;_dist_2&quot;, referenced from:
+      _lmedax_Hesselink in lvoronoilabelling.c.o
+  &quot;_dist_3&quot;, referenced from:
+      _lmedax_Hesselink in lvoronoilabelling.c.o
+  &quot;_lvoronoilabelling_F&quot;, referenced from:
+      _phaseVoronoiY in lvoronoilabelling.c.o
+
+</PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000212.html">[Pink-image-devel] Completely lost
+</A></li>
+	<LI>Next message: <A HREF="000215.html">[Pink-image-devel] Completely lost
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#213">[ date ]</a>
+              <a href="thread.html#213">[ thread ]</a>
+              <a href="subject.html#213">[ subject ]</a>
+              <a href="author.html#213">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

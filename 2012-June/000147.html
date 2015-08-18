@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Proposal for arithmetics in pink
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Proposal%20for%20arithmetics%20in%20pink&In-Reply-To=%3C1715915.GCkWJFom86%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000146.html">
+   <LINK REL="Next"  HREF="000148.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Proposal for arithmetics in pink</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Proposal%20for%20arithmetics%20in%20pink&In-Reply-To=%3C1715915.GCkWJFom86%40anyu%3E"
+       TITLE="[Pink-image-devel] Proposal for arithmetics in pink">ujoimro at gmail.com
+       </A><BR>
+    <I>Wed Jun 27 16:34:06 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000146.html">[Pink-image-devel] Proposal for arithmetics in pink
+</A></li>
+        <LI>Next message: <A HREF="000148.html">[Pink-image-devel] Proposal for arithmetics in pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#147">[ date ]</a>
+              <a href="thread.html#147">[ thread ]</a>
+              <a href="subject.html#147">[ subject ]</a>
+              <a href="author.html#147">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is certainly a good idea. Based on what I have seen it can be reasonably 
+easy, but it has a few drawbacks:
+
+1) Numpy is using the traditional linalg memory representation. This means 
+that You can have non continuous matrices if You want to work only with a 
+window of the image. For example if you have a 100x100 image and You only want 
+to work with 10x12 image starting at 40x80. While this representation is not 
+particularly difficult it is alien to Pink. The strides (as they are called in 
+linalg) cannot be adapted to Pink by the means we have today (We would need to 
+check every operator and adapt most of them). We could work around this issue 
+by mandating continuous matrices. This could however mean that we would need 
+to make a continuous copy implicitely, before passing them to Pink.
+
+2) The bridging of complex numbers has to be done separately, as Pink uses 
+it's own struct now. Fortunately there are not many complex operators, so we 
+could do that hopefully.
+
+3) There are some operators in Pink which are useful like IM[[x,y]]. I do not 
+know what is Numpy's approach, but I think in the end we can write our own 
+operators. 
+
+4) I don't know how well Numpy adapts to 3D and 4D images. The traditional 
+linalg tools work with matrices. 
+
+5) I would need to check the memory management, particularly the smart 
+pointers / reference counters as python does them. This would require some 
+time, but it is feasible. 
+ 
+
+On 2012-06-27 12:27:55 Hugues Talbot wrote:
+&gt;<i> Hello all,
+</I>&gt;<i> 
+</I>&gt;<i> So given the previous email, I think it would require lots of efforts to
+</I>&gt;<i> duplicate numpy-like arithmetics under pink. Yet this kind of arithmetics
+</I>&gt;<i> is extremely useful. This is only one example, there are many other
+</I>&gt;<i> toolkits that are image-related under python, and almost without exception
+</I>&gt;<i> they use numpy as their basis.
+</I>&gt;<i> 
+</I>&gt;<i> Given the current work that Laszlo is doing for pink &lt;-&gt; numpy conversion,
+</I>&gt;<i> how much effort, or overhead, would it be for *all* pink function to accept
+</I>&gt;<i> a numpy array as imput instead of our current &quot;proprietary&quot; image format ?
+</I>&gt;<i> Also, if a pink image is given only numpy arrays as input, can it
+</I>&gt;<i> transparently output a numpy array instead of a pink image ?
+</I>&gt;<i> 
+</I>&gt;<i> This would allow us to leverage all the enormous effort put into
+</I>&gt;<i> numpy/scipy/scikit by other groups, and would likely make pink much much
+</I>&gt;<i> more popular and useful.
+</I>&gt;<i> 
+</I>&gt;<i> What do people think ?
+</I>&gt;<i> 
+</I>&gt;<i> ===
+</I>&gt;<i> Hugues Talbot, Professeur associ&#233;
+</I>&gt;<i> Universit&#233; Paris-Est,
+</I>&gt;<i> Laboratoire d'informatique Gaspard-Monge
+</I>&gt;<i> Equipe A3SI
+</I>&gt;<i> ESIEE - BP 99
+</I>&gt;<i> 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;<i> (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99.fr
+</I>&gt;<i> 
+</I>&gt;<i> I'd rather be a climbing ape than a falling angel. -Terry Pratchett,
+</I>&gt;<i> novelist (b. 1948)
+</I></PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000146.html">[Pink-image-devel] Proposal for arithmetics in pink
+</A></li>
+	<LI>Next message: <A HREF="000148.html">[Pink-image-devel] Proposal for arithmetics in pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#147">[ date ]</a>
+              <a href="thread.html#147">[ thread ]</a>
+              <a href="subject.html#147">[ subject ]</a>
+              <a href="author.html#147">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

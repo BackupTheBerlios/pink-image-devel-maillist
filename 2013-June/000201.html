@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Failed to build pink on ubuntu 13.04: a boost	issue
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Failed%20to%20build%20pink%20on%20ubuntu%2013.04%3A%20a%20boost%0A%09issue&In-Reply-To=%3CCAJHHrbs2PtqF89D2uruVRRGY57c%3DthTUWS%3DRLRMfH0ADMkWoJw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000200.html">
+   <LINK REL="Next"  HREF="000202.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Failed to build pink on ubuntu 13.04: a boost	issue</H1>
+    <B>Jean-Patrick Pommier</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Failed%20to%20build%20pink%20on%20ubuntu%2013.04%3A%20a%20boost%0A%09issue&In-Reply-To=%3CCAJHHrbs2PtqF89D2uruVRRGY57c%3DthTUWS%3DRLRMfH0ADMkWoJw%40mail.gmail.com%3E"
+       TITLE="[Pink-image-devel] Failed to build pink on ubuntu 13.04: a boost	issue">jeanpatrick.pommier at gmail.com
+       </A><BR>
+    <I>Wed Jun 19 17:18:31 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000200.html">[Pink-image-devel] Pink from Python
+</A></li>
+        <LI>Next message: <A HREF="000202.html">[Pink-image-devel] Fwd: pink bug
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#201">[ date ]</a>
+              <a href="thread.html#201">[ thread ]</a>
+              <a href="subject.html#201">[ subject ]</a>
+              <a href="author.html#201">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>dear all,
+
+I tried to build pink from svn, on ubuntu 13.04 (32bits). From Cmake-gui,
+the configuration failed with the message:
+
+ Boost version: 1.49.0
+
+Found the following Boost libraries:
+
+python
+
+thread
+
+system
+
+date_time
+
+Looking for C++ include boost/shared_ptr.hpp
+
+Looking for C++ include boost/shared_ptr.hpp - found
+
+Looking for C++ include boost/shared_array.hpp
+
+Looking for C++ include boost/shared_array.hpp - found
+
+Looking for C++ include boost/python/list.hpp
+
+Looking for C++ include boost/python/list.hpp - not found
+
+CMake Error at CMakeLists.txt:437 (message):
+
+error boost/python/list.hpp does not compile. You need at least version
+
+1.37 or newer. Check if its correctly installed. There is a known issue.
+
+If PYTHON_LIBRARY='/usr/lib/i386-linux-gnu/libpython2.7.so' does not point
+
+to the correct location of python's libraries, please specify them manually
+
+or delete the file in question. (seen on OpenSuSE 11.2)
+
+
+
+The whole boost dev files are installed. I don't know how to set up
+the varPYTHON_LIBRARY.
+
+Thank you for your advices.
+
+Jea-Patrick Pommier
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130619/bc6909ca/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130619/bc6909ca/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000200.html">[Pink-image-devel] Pink from Python
+</A></li>
+	<LI>Next message: <A HREF="000202.html">[Pink-image-devel] Fwd: pink bug
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#201">[ date ]</a>
+              <a href="thread.html#201">[ thread ]</a>
+              <a href="subject.html#201">[ subject ]</a>
+              <a href="author.html#201">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

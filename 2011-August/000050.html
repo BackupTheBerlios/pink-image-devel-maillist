@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Problems compiling last version of pink
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-August/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Problems%20compiling%20last%20version%20of%20pink&In-Reply-To=%3C201108112343.04181.ujoimro%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000043.html">
+   <LINK REL="Next"  HREF="000052.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Problems compiling last version of pink</H1>
+    <B>Laszlo Marak</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Problems%20compiling%20last%20version%20of%20pink&In-Reply-To=%3C201108112343.04181.ujoimro%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Problems compiling last version of pink">ujoimro at gmail.com
+       </A><BR>
+    <I>Thu Aug 11 23:43:02 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000043.html">[Pink-image-devel] using pink from matlab?
+</A></li>
+        <LI>Next message: <A HREF="000052.html">[Pink-image-devel] Committing Pink Exercises
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I will try to reproduce the error. It is missing some files, and in my opinion 
+it is a file-name issue. 
+
+----- &lt;begin original message&gt; -----
+Date: 2011-08-10T15:26:20Z
+From: Fajardo, Otto &lt;&quot;Fajardo, Otto&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">otto.fajardo at fmi.ch</A>&gt;&gt;
+To: Laszlo Marak
+Cc: 
+Subject: Problems compiling last version of pink
+
+&gt;<i> Hi Laszlo,
+</I>&gt;<i> 
+</I>&gt;<i> I am suffering from memory leak problems with the old version of pink I
+</I>&gt;<i> managed to compile with your instructions (0.9-r566) on python 2.6, so I
+</I>&gt;<i> decided to compile the lastest version of pink, as I saw in recent
+</I>&gt;<i> emails you solved this issue. However something goes wrong. If I change
+</I>&gt;<i> Jamroot, user-config.jam and boost-build jam to match my boost
+</I>&gt;<i> directory, and python 2.6, it does not compile.
+</I>&gt;<i> I actually found that last time I compile saying python 2.7 for bjam,
+</I>&gt;<i> and then later, when creating the installer by running setup.py, I did
+</I>&gt;<i> with 2.6, and it worked just fine. So, I decided to try this again.
+</I>&gt;<i> However, If I try to do it with python 2.7, it does compile, but at the
+</I>&gt;<i> end, there is no libcpp_pink.pyd, actually there is nothing at
+</I>&gt;<i> bin\msvc-10.0\debug\link-static\threading-multi except for the src
+</I>&gt;<i> folder that was already there.
+</I>&gt;<i> What should I do?
+</I>&gt;<i> 
+</I>&gt;<i> Thanks!
+</I>&gt;<i> 
+</I>&gt;<i> Otto
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Here I paste the last messages from the comand window before it
+</I>&gt;<i> finishes, in case it's useful:
+</I>&gt;<i> 
+</I>&gt;<i>     call &quot;c:\Program Files\Microsoft Visual Studio
+</I>&gt;<i> 10.0\VC\vcvarsall.bat&quot; x86 &gt;n
+</I>&gt;<i> ul
+</I>&gt;<i> cl /Zm800 -nologo
+</I>&gt;<i> @&quot;bin\msvc-10.0\debug\link-static\threading-multi\src\lib\liar
+</I>&gt;<i> _fseries.obj.rsp&quot;
+</I>&gt;<i> 
+</I>&gt;<i> ...failed compile-c-c++
+</I>&gt;<i> bin\msvc-10.0\debug\link-static\threading-multi\src\lib\
+</I>&gt;<i> liar_fseries.obj...
+</I>&gt;<i> compile-c-c++
+</I>&gt;<i> bin\msvc-10.0\debug\link-static\threading-multi\src\lib\ltangents.
+</I>&gt;<i> obj
+</I>&gt;<i> ltangents.cxx
+</I>&gt;<i> compile-c-c++
+</I>&gt;<i> bin\msvc-10.0\debug\link-static\threading-multi\src\lib\ssexport.o
+</I>&gt;<i> bj
+</I>&gt;<i> ssexport.cxx
+</I>&gt;<i> ...skipped
+</I>&gt;<i> &lt;pbin\msvc-10.0\debug\link-static\threading-multi&gt;libcpp_pink.pyd for
+</I>&gt;<i>  lack of
+</I>&gt;<i> &lt;pbin\msvc-10.0\debug\link-static\threading-multi&gt;src\lib\lfindline.obj
+</I>&gt;<i> ...
+</I>&gt;<i> ...skipped
+</I>&gt;<i> &lt;pbin\msvc-10.0\debug\link-static\threading-multi&gt;libcpp_pink.lib for
+</I>&gt;<i>  lack of
+</I>&gt;<i> &lt;pbin\msvc-10.0\debug\link-static\threading-multi&gt;src\lib\lfindline.obj
+</I>&gt;<i> ...
+</I>&gt;<i> ...skipped
+</I>&gt;<i> &lt;pbin\msvc-10.0\debug\link-static\threading-multi&gt;libcpp_pink.pdb for
+</I>&gt;<i>  lack of
+</I>&gt;<i> &lt;pbin\msvc-10.0\debug\link-static\threading-multi&gt;src\lib\lfindline.obj
+</I>&gt;<i> ...
+</I>&gt;<i> ...failed updating 3 targets...
+</I>&gt;<i> ...skipped 3 targets...
+</I>&gt;<i> ...updated 285 targets...
+</I>
+Laszlo MARAK
+Phd. student of ESIEE
+email: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>
+
+GEMINI (May 21 - June 20) You are a quick and intelligent thinker. People like 
+you because you are bisexual. However, you are inclined to expect too much for 
+too little. This means you are cheap. Geminis are known for committing incest.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000043.html">[Pink-image-devel] using pink from matlab?
+</A></li>
+	<LI>Next message: <A HREF="000052.html">[Pink-image-devel] Committing Pink Exercises
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

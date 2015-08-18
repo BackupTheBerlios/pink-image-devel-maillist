@@ -1,0 +1,181 @@
+From karo03de at gmail.com  Sun Nov  3 23:30:51 2013
+From: karo03de at gmail.com (Karsten)
+Date: Sun, 3 Nov 2013 23:30:51 +0100
+Subject: [Pink-image-devel] Mac OSX trials to build Pink with cmake
+Message-ID: <50584D2C-85F8-491C-99A9-64E486EEDE40@gmail.com>
+
+
+Hi everybody,
+
+from a colleague I heard that building Pink makes problems. In fact, using makeli64 on my Mac stopped building pgm2GA and diZenzo. Both programs claimed definitions of lderiche3d not in the makefile! Commenting both in general.make let at least finish the build.
+
+After this partial success I continued:
+Occasionally I tried to build Pink with cmake on my Mac (OS X 10.8.5), up to today always without success. Still today, after a new effort it looks much better than ever before.
+
+First:
+Some additions in the library and include definition part of the CMakeLists.txt (I am using MacPorts located in /opt/local and X11 in /opt/X11) had also to be reflected in the default include file search path (CPATH) of the compiler (I have Xcode 5 installed).
+
+Second
+There are some files trying to include malloc.h not existent on Mac: ldilutbin3d, lprofile, mcscene. I replaced the include directive by
+
+#if !defined (__APPLE__)
+#include <malloc.h>
+#endif
+
+Third besides lots of warnings (Xcode 5 installs clang as the standard compiler) there was one error
+
+In file included from /.../pink_v/pink/src/lib/liar_fseries.cxx:54:
+In file included from /.../pink_v/pink/include/pink.h:323:
+/.../pink_v/pink/include/uiSqhool.hpp:195:17: error: default arguments cannot be added to a function template that has already been declared
+                                std::string full_path=""
+
+I deleted in uiSqhool.hpp:195 the default argument ="" .
+
+Forth I switched over to gcc-apple-4.2 from MacPorts. This reduced considerably the number of warnings.
+
+Fifth I have still problems with the built of several modules most probably resulting from link problems of liar_line and liar_fseries concerning missing references in boost!
+
+Undefined symbols for architecture x86_64:
+  "boost::system::system_category()", referenced from:
+      __static_initialization_and_destruction_0(int, int)in liar_fseries.cxx.o
+      __static_initialization_and_destruction_0(int, int)in liar_line.cxx.o
+  "boost::system::generic_category()", referenced from:
+      __static_initialization_and_destruction_0(int, int)in liar_fseries.cxx.o
+      __static_initialization_and_destruction_0(int, int)in liar_line.cxx.o
+ld: symbol(s) not found for architecture x86_64
+
+I don't know if only I have all these problems with cmake of pink. I would appreciate to hear from other (Mac-)Users about their experiences. Up to now I have only tried the bash_front_end to build. I don't know when I am encouraged enough to start with the python_front_end.
+
+Regards
+Karsten
+
+PS my cmake configuration
+
+64BIT                            ON                                                                                                                                        
+ BASH_FRONT_END                   ON                                                                                                                                        
+ BOOST_INCLUDEDIR                 /opt/local/include                                                                                                                        
+ BUILD_DOCUMENTATION              OFF                                                                                                                                       
+ CFITSIO_DIR                      CFITSIO_DIR-NOTFOUND                                                                                                                      
+ CMAKE_BUILD_TYPE                 Release                                                                                                                                   
+ CMAKE_INSTALL_PREFIX             /usr/local                                                                                                                                
+ CMAKE_OSX_ARCHITECTURES                                                                                                                                                    
+ CMAKE_OSX_DEPLOYMENT_TARGET                                                                                                                                                
+ CMAKE_OSX_SYSROOT                                                                                                                                                          
+ DEVELOPMENT                      OFF                                                                                                                                       
+ GSLCBLAS_LIB                     /opt/local/lib/libgslcblas.dylib                                                                                                          
+ GSL_INCLUDE                      /opt/local/include                                                                                                                        
+ GSL_LIB                          /opt/local/lib/libgsl.dylib                                                                                                               
+ LAPACK_LIB                       /usr/lib/liblapack.dylib                                                                                                                  
+ MATH_LIB                         /usr/lib/libm.dylib                                                                                                                       
+ NUMA                             OFF                                                                                                                                       
+OPENCL                           OFF                                                                                                                                       
+ PINKTEST_DIRECTORY               /Users/karo/sw/pink_v/pink/"../Pinktest"                                                                                                  
+ PINK_PACKAGE_TYPE                TBZ2                                                                                                                                      
+ PYTHON_FRONT_END                 OFF                                                                                                                                       
+ SIMD                             ON                                                                                                                                        
+
+
+From hugues.talbot at esiee.fr  Sun Nov  3 23:42:52 2013
+From: hugues.talbot at esiee.fr (Hugues Talbot)
+Date: Sun, 3 Nov 2013 23:42:52 +0100
+Subject: [Pink-image-devel] Mac OSX trials to build Pink with cmake
+In-Reply-To: <50584D2C-85F8-491C-99A9-64E486EEDE40@gmail.com>
+References: <50584D2C-85F8-491C-99A9-64E486EEDE40@gmail.com>
+Message-ID: <9DF02DCD-445C-4537-A31D-FCF440F19BF4@gmail.com>
+
+Hello Karsten,
+
+Thanks, you are quite right that an effort is necessary to make compiling Pink much easier. At the moment it is barely feasible.
+
+Normally malloc.h should *not* be used at all, it is not an ISO standard header. #include <stdlib.h> should be used instead.
+
+http://stackoverflow.com/questions/12973311/difference-between-stdlib-h-and-malloc-h
+
+I also think some parts the library should be put into experimental rather than maintree ; also compiling the command-line version should be feasible from cmake, which is not the case at the moment.
+
+Thanks again for looking into this.
+
+All the best.
+
+
+On Nov 3, 2013, at 11:30 PM, Karsten <karo03de at gmail.com> wrote:
+
+> 
+> Hi everybody,
+> 
+> from a colleague I heard that building Pink makes problems. In fact, using makeli64 on my Mac stopped building pgm2GA and diZenzo. Both programs claimed definitions of lderiche3d not in the makefile! Commenting both in general.make let at least finish the build.
+> 
+> After this partial success I continued:
+> Occasionally I tried to build Pink with cmake on my Mac (OS X 10.8.5), up to today always without success. Still today, after a new effort it looks much better than ever before.
+> 
+> First:
+> Some additions in the library and include definition part of the CMakeLists.txt (I am using MacPorts located in /opt/local and X11 in /opt/X11) had also to be reflected in the default include file search path (CPATH) of the compiler (I have Xcode 5 installed).
+> 
+> Second
+> There are some files trying to include malloc.h not existent on Mac: ldilutbin3d, lprofile, mcscene. I replaced the include directive by
+> 
+> #if !defined (__APPLE__)
+> #include <malloc.h>
+> #endif
+> 
+> Third besides lots of warnings (Xcode 5 installs clang as the standard compiler) there was one error
+> 
+> In file included from /.../pink_v/pink/src/lib/liar_fseries.cxx:54:
+> In file included from /.../pink_v/pink/include/pink.h:323:
+> /.../pink_v/pink/include/uiSqhool.hpp:195:17: error: default arguments cannot be added to a function template that has already been declared
+>                                std::string full_path=""
+> 
+> I deleted in uiSqhool.hpp:195 the default argument ="" .
+> 
+> Forth I switched over to gcc-apple-4.2 from MacPorts. This reduced considerably the number of warnings.
+> 
+> Fifth I have still problems with the built of several modules most probably resulting from link problems of liar_line and liar_fseries concerning missing references in boost!
+> 
+> Undefined symbols for architecture x86_64:
+>  "boost::system::system_category()", referenced from:
+>      __static_initialization_and_destruction_0(int, int)in liar_fseries.cxx.o
+>      __static_initialization_and_destruction_0(int, int)in liar_line.cxx.o
+>  "boost::system::generic_category()", referenced from:
+>      __static_initialization_and_destruction_0(int, int)in liar_fseries.cxx.o
+>      __static_initialization_and_destruction_0(int, int)in liar_line.cxx.o
+> ld: symbol(s) not found for architecture x86_64
+> 
+> I don't know if only I have all these problems with cmake of pink. I would appreciate to hear from other (Mac-)Users about their experiences. Up to now I have only tried the bash_front_end to build. I don't know when I am encouraged enough to start with the python_front_end.
+> 
+> Regards
+> Karsten
+> 
+> PS my cmake configuration
+> 
+> 64BIT                            ON                                                                                                                                        
+> BASH_FRONT_END                   ON                                                                                                                                        
+> BOOST_INCLUDEDIR                 /opt/local/include                                                                                                                        
+> BUILD_DOCUMENTATION              OFF                                                                                                                                       
+> CFITSIO_DIR                      CFITSIO_DIR-NOTFOUND                                                                                                                      
+> CMAKE_BUILD_TYPE                 Release                                                                                                                                   
+> CMAKE_INSTALL_PREFIX             /usr/local                                                                                                                                
+> CMAKE_OSX_ARCHITECTURES                                                                                                                                                    
+> CMAKE_OSX_DEPLOYMENT_TARGET                                                                                                                                                
+> CMAKE_OSX_SYSROOT                                                                                                                                                          
+> DEVELOPMENT                      OFF                                                                                                                                       
+> GSLCBLAS_LIB                     /opt/local/lib/libgslcblas.dylib                                                                                                          
+> GSL_INCLUDE                      /opt/local/include                                                                                                                        
+> GSL_LIB                          /opt/local/lib/libgsl.dylib                                                                                                               
+> LAPACK_LIB                       /usr/lib/liblapack.dylib                                                                                                                  
+> MATH_LIB                         /usr/lib/libm.dylib                                                                                                                       
+> NUMA                             OFF                                                                                                                                       
+> OPENCL                           OFF                                                                                                                                       
+> PINKTEST_DIRECTORY               /Users/karo/sw/pink_v/pink/"../Pinktest"                                                                                                  
+> PINK_PACKAGE_TYPE                TBZ2                                                                                                                                      
+> PYTHON_FRONT_END                 OFF                                                                                                                                       
+> SIMD                             ON                                                                                                                                        
+> 
+> _______________________________________________
+> Pink-image-devel mailing list
+> Pink-image-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/pink-image-devel
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/pink-image-devel/attachments/20131103/5e481446/attachment-0001.html>
+

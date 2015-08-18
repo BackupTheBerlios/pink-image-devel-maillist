@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] compiling pink r669 on OSX 10.6.8
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-November/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20compiling%20pink%20r669%20on%20OSX%2010.6.8&In-Reply-To=%3C0387C44E-EAF6-4724-B19A-99AB85157D6F%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000107.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] compiling pink r669 on OSX 10.6.8</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20compiling%20pink%20r669%20on%20OSX%2010.6.8&In-Reply-To=%3C0387C44E-EAF6-4724-B19A-99AB85157D6F%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] compiling pink r669 on OSX 10.6.8">hugues.talbot at gmail.com
+       </A><BR>
+    <I>Fri Nov 11 12:46:26 CET 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000107.html">[Pink-image-devel] compiling pink r669 on OSX 10.6.8
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#108">[ date ]</a>
+              <a href="thread.html#108">[ thread ]</a>
+              <a href="subject.html#108">[ subject ]</a>
+              <a href="author.html#108">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello All,
+
+Laszlo is desperately trying to finish his manuscript.
+
+I'll try and see what I can do. If it doesn't compile on OSX it's probably my fault.
+
+
+
+On Nov 11, 2011, at 6:27 AM, Michael Cheng wrote:
+
+&gt;<i> Hi Laszlo,
+</I>&gt;<i> 
+</I>&gt;<i> I'm trying to compile r669 on OSX 10.6.8 (in order to access the powerwatershed).  I have previously compiled r596 on this machine without problems (with the python frontend on).
+</I>&gt;<i> 
+</I>&gt;<i> It seems that GSL is now a requirement, and I have this installed with  headers in /opt/local/include/gsl/*.h
+</I>&gt;<i> 
+</I>&gt;<i> When running ccmake, a config error occurs stating that:
+</I>&gt;<i> 
+</I>&gt;<i>  CMake Error at CMakeLists.txt:213 (message):
+</I>&gt;<i>    gsl header file failed to compile.  If it is installed, than check the gsl
+</I>&gt;<i>    flags
+</I>&gt;<i> 
+</I>&gt;<i> Looking at CMakeLists it seems to be a failing search for gsl_interp.h i.e.
+</I>&gt;<i> 
+</I>&gt;<i>  	CHECK_INCLUDE_FILE( gsl/gsl_interp.h HTEST )
+</I>&gt;<i>  	if (NOT HTEST)
+</I>&gt;<i>  	    message( FATAL_ERROR &quot;gsl header file failed to compile. If it is installed, than check the gsl flags&quot;) 
+</I>&gt;<i>          endif(NOT HTEST)
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> There definitely is the file &quot;/opt/local/include/gsl/gsl_interp.h&quot; on my system, but it is not being found by ccmake.
+</I>&gt;<i> 
+</I>&gt;<i> If I ignore this error by commenting out the check in CMakeLists, I get an error:
+</I>&gt;<i>  /System/Library/Frameworks/Python.framework/Headers/pyconfig.h
+</I>&gt;<i> 
+</I>&gt;<i>  CMake Error at CMakeLists.txt:358 (message):
+</I>&gt;<i>     pyconfig.h header file failed to compile. If it is installed, than check the python flags and directories
+</I>&gt;<i> 
+</I>&gt;<i> The pyconfig.h file is definitely on my system.
+</I>&gt;<i> 
+</I>&gt;<i> In summary, the build process isn't finding files that I know really do exist on my system.  Any thoughts?  Is there a new hard-coded search path that needs to be changed?
+</I>&gt;<i> 
+</I>&gt;<i> Mike.
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Pink-image-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20111111/4498919f/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20111111/4498919f/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000107.html">[Pink-image-devel] compiling pink r669 on OSX 10.6.8
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#108">[ date ]</a>
+              <a href="thread.html#108">[ thread ]</a>
+              <a href="subject.html#108">[ subject ]</a>
+              <a href="author.html#108">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

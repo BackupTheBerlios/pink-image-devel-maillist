@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Patches &amp; new things
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Patches%20%26%20new%20things&In-Reply-To=%3C3788462.EBGM4aQIjP%40kasia.site%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000210.html">
+   <LINK REL="Next"  HREF="000218.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Patches &amp; new things</H1>
+    <B>Kacper Pluta</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Patches%20%26%20new%20things&In-Reply-To=%3C3788462.EBGM4aQIjP%40kasia.site%3E"
+       TITLE="[Pink-image-devel] Patches &amp; new things">kacperp at lavabit.com
+       </A><BR>
+    <I>Wed Jul 10 23:55:54 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000210.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+        <LI>Next message: <A HREF="000218.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#216">[ date ]</a>
+              <a href="thread.html#216">[ thread ]</a>
+              <a href="subject.html#216">[ subject ]</a>
+              <a href="author.html#216">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Drear Laszlo,
+
+Thank you for your quick response. Today I just had some time to play with 
+mercurial and You find a little patch attached.
+
+Access to the test repository would be a good idea. Thank you.
+
+BTW Some time age I had a problem with the CMake and CFITSIO,  and I fixed it  
+by changing:
+
+set(CFITSIO_DIR &quot;${pink_SOURCE_DIR}&quot;)
+to
+set( CFITSIO_DIR ${CMAKE_SOURCE_DIR} )
+
+Why do you use pink_SOURCE_DIR instead CMAKE_SOURCE_DIR?
+
+Regards,
+Kacper
+
+
+On Monday 08 of July 2013 14:20:22 ujoimro wrote:
+&gt;<i> Dear Kacper,
+</I>&gt;<i> 
+</I>&gt;<i> we are very delighted to see You being interested in Pink.  About the
+</I>&gt;<i> versions that You have been maintaining: mercurial (the source code
+</I>&gt;<i> manager) of Pink is fully capable of managing Your separate versions of
+</I>&gt;<i> Pink. It is also capable of pulling the new changes from us (the default,
+</I>&gt;<i> main branch) and keeping Your changes. For this You do not need any access.
+</I>&gt;<i> You can also save Your changes into the repository on Your machine and
+</I>&gt;<i> still receive the changes from pinkhq.
+</I>&gt;<i> 
+</I>&gt;<i> About Your patches: I will review Your changes, but the simplest long-term
+</I>&gt;<i> solution is to give You access to the Pink repository. There is a testing
+</I>&gt;<i> repository, which is less developed as the library itself, and I can give
+</I>&gt;<i> You access to that repository too.
+</I>&gt;<i> 
+</I>&gt;<i> To learn to use mercurial, I would just ask You to prepare Your patches in
+</I>&gt;<i> &quot;mercurial&quot; form  using the following tutorial:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://mercurial.selenic.com/wiki/Workflows#One-off_patch_submission">http://mercurial.selenic.com/wiki/Workflows#One-off_patch_submission</A>
+</I>&gt;<i> 
+</I>&gt;<i> after I have reviewed Your changes I can give You full access to the
+</I>&gt;<i> mercurial repository and You can merge back Your patches if You like.
+</I>&gt;<i> 
+</I>&gt;<i> I hope to hear about You soon,
+</I>&gt;<i> 
+</I>&gt;<i> Cordially,
+</I>&gt;<i> 
+</I>&gt;<i> Laszlo
+</I>&gt;<i> 
+</I>-- 
+Pozdrawiam/Regards,
+Kacper Pluta,
+PGP public key: keys.gnupg.net - 6AA4AF6B
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130710/b97426f0/attachment-0001.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130710/b97426f0/attachment-0001.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: pink-kpluta-100713.patch
+Type: text/x-patch
+Size: 13491 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130710/b97426f0/attachment-0001.bin">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130710/b97426f0/attachment-0001.bin</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000210.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+	<LI>Next message: <A HREF="000218.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#216">[ date ]</a>
+              <a href="thread.html#216">[ thread ]</a>
+              <a href="subject.html#216">[ subject ]</a>
+              <a href="author.html#216">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

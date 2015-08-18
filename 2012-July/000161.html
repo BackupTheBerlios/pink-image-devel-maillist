@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Pink Windows(tm) Port
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20Windows%28tm%29%20Port&In-Reply-To=%3C8469831.AKegsOG4j6%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000160.html">
+   <LINK REL="Next"  HREF="000162.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Pink Windows(tm) Port</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20Windows%28tm%29%20Port&In-Reply-To=%3C8469831.AKegsOG4j6%40anyu%3E"
+       TITLE="[Pink-image-devel] Pink Windows(tm) Port">ujoimro at gmail.com
+       </A><BR>
+    <I>Tue Jul 24 10:42:16 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000160.html">[Pink-image-devel] Bash &amp; python
+</A></li>
+        <LI>Next message: <A HREF="000162.html">[Pink-image-devel] Pink Windows(tm) Port
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#161">[ date ]</a>
+              <a href="thread.html#161">[ thread ]</a>
+              <a href="subject.html#161">[ subject ]</a>
+              <a href="author.html#161">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear Pink Users, 
+
+After much work I have managed to change Pink's CMake file to also compile on 
+Windows(tm).
+
+I have created packages with an installer for Python 2.6 64bit and Python 2.7 
+64bit. These packages a continuously built after each commit in the repository 
+together with the Linux packages. The packages are full and contain all the 
+standart and development operators. 
+
+<A HREF="https://www.pinkhq.com/download/packages/pink/windows/">https://www.pinkhq.com/download/packages/pink/windows/</A>
+
+What is missing: The Python 3.2 package does not compile yet, and I will only 
+investigate it later. The imview function is not yet ready as it is using 
+named pipes which are not present on Windows(tm). The unit tests are not 
+applied. 
+
+Now the compilation is much more difficult than on Linux. It includes the need 
+to compile all the dependencies by hand. For those who would like to try it 
+all the config files and scripts used to build the packages are in the 
+repository at pink/data/configs/*.
+
+
+Cordially, 
+
+Laszlo Marak
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000160.html">[Pink-image-devel] Bash &amp; python
+</A></li>
+	<LI>Next message: <A HREF="000162.html">[Pink-image-devel] Pink Windows(tm) Port
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#161">[ date ]</a>
+              <a href="thread.html#161">[ thread ]</a>
+              <a href="subject.html#161">[ subject ]</a>
+              <a href="author.html#161">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

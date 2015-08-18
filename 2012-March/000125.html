@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Lots of grief on OSX
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Lots%20of%20grief%20on%20OSX&In-Reply-To=%3CF4A6342B-258A-4AFA-B294-27F8D7121413%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000124.html">
+   <LINK REL="Next"  HREF="000126.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Lots of grief on OSX</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Lots%20of%20grief%20on%20OSX&In-Reply-To=%3CF4A6342B-258A-4AFA-B294-27F8D7121413%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Lots of grief on OSX">h.talbot at esiee.fr
+       </A><BR>
+    <I>Sat Mar  3 22:15:08 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000124.html">[Pink-image-devel] Crash continues on 1.49
+</A></li>
+        <LI>Next message: <A HREF="000126.html">[Pink-image-devel] More information on OSX 10.6
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#125">[ date ]</a>
+              <a href="thread.html#125">[ thread ]</a>
+              <a href="subject.html#125">[ subject ]</a>
+              <a href="author.html#125">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+Sorry, venting my frustration :-)
+
+On OSX 10.6 with hand-compiled boost 1.43, I do manage to import pink.
+
+However, the documentation crashes:
+&gt;<i> 
+</I>&gt;<i> (gdb) c
+</I>&gt;<i> Continuing.
+</I>&gt;<i> Python 2.7.2 (default, Mar  3 2012, 15:45:22)
+</I>&gt;<i> [GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+</I>&gt;<i> Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+</I>&gt;<i> &gt;&gt;&gt; import pink
+</I>&gt;<i> Reading symbols for shared libraries . done
+</I>&gt;<i> &gt;&gt;&gt; pink.cpp.readimage
+</I>&gt;<i> &lt;Boost.Python.function object at 0x100389230&gt;
+</I>&gt;<i> &gt;&gt;&gt; help(pink.cpp.readimage)
+</I>&gt;<i> Python(81084,0x7fff70691cc0) malloc: *** error for object 0x7fff70d0b500: pointer being freed was not allocated
+</I>&gt;<i> *** set a breakpoint in malloc_error_break to debug
+</I>
+(gdb) bt 10
+#0  0x00007fff83dfc499 in malloc_error_break ()
+#1  0x00007fff83d26183 in free ()
+#2  0x0000000102ded177 in boost::python::objects::function_doc_signature_generator::pretty_signature (f=0x100389230, n_overloads=&lt;value temporarily unavailable, due to optimizations&gt;, cpp_types=&lt;value temporarily unavailable, due to optimizations&gt;) at basic_string.h:236
+#3  0x0000000102dedd7e in boost::python::api::object_base::ptr () at /Volumes/Home/Users/talbot/sources/fromNet/boost/boost_1_43_0/boost/python/object_core.hpp:311
+#4  0x0000000102dedd7e in get_managed_object [inlined] () at /Volumes/Home/Users/talbot/sources/fromNet/boost/boost_1_43_0/boost/python/object_core.hpp:576
+#5  0x0000000102dedd7e in object_base_initializer&lt;boost::python::str&gt; [inlined] () at /Volumes/Home/Users/talbot/sources/fromNet/boost/boost_1_43_0/boost/python/object_core.hpp:415
+#6  0x0000000102dedd7e in get&lt;boost::python::str, boost::integral_constant&lt;bool, true&gt; &gt; [inlined] () at /Volumes/Home/Users/talbot/sources/fromNet/boost/boost_1_43_0/boost/python/object_core.hpp:334
+#7  0x0000000102dedd7e in object&lt;boost::python::str&gt; [inlined] () at libs/python/src/object/function_doc_signature.cpp:315
+#8  0x0000000102dedd7e in operator+=&lt;boost::python::str&gt; [inlined] () at /Volumes/Home/Users/talbot/sources/fromNet/boost/boost_1_43_0/boost/python/object_operators.hpp:120
+#9  0x0000000102dedd7e in boost::python::objects::function_doc_signature_generator::function_doc_signatures (f=&lt;value temporarily unavailable, due to optimizations&gt;) at libs/python/src/object/function_doc_signature.cpp:312
+(More stack frames follow...)
+
+
+No way to tell if this is a boost bug.
+
+
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+The lyf so short, the craft so long to lerne, The'assay so hard, so sharp the conqueryinge (Chaucer)
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120303/ab7707e7/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120303/ab7707e7/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000124.html">[Pink-image-devel] Crash continues on 1.49
+</A></li>
+	<LI>Next message: <A HREF="000126.html">[Pink-image-devel] More information on OSX 10.6
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#125">[ date ]</a>
+              <a href="thread.html#125">[ thread ]</a>
+              <a href="subject.html#125">[ subject ]</a>
+              <a href="author.html#125">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

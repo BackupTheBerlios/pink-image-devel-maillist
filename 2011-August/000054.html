@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] compilation issue for 0.9.r617
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-August/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20compilation%20issue%20for%200.9.r617&In-Reply-To=%3C4834B8AF-8641-4321-AA0E-7176129A46BE%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000053.html">
+   <LINK REL="Next"  HREF="000055.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] compilation issue for 0.9.r617</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20compilation%20issue%20for%200.9.r617&In-Reply-To=%3C4834B8AF-8641-4321-AA0E-7176129A46BE%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] compilation issue for 0.9.r617">h.talbot at esiee.fr
+       </A><BR>
+    <I>Mon Aug 29 17:54:04 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000053.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+        <LI>Next message: <A HREF="000055.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#54">[ date ]</a>
+              <a href="thread.html#54">[ thread ]</a>
+              <a href="subject.html#54">[ subject ]</a>
+              <a href="author.html#54">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+This is a mistake at our end, of course we should test for the presence of the NUMA headers.
+
+In the meantime, to fix it, try installing the NUMA development kit.
+
+I'm not sure how it is called under Debian, but try installing a package called &quot;libnuma-dev&quot; or something similar.
+
+
+On 29 Aug 2011, at 29 Aug, 13:35, Jerome Ferrari wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> I can't install Pink on my Debian squeeze 64bit. I used ccmake to toggle the python front-end. After I quit ccmake, I type make and I get:
+</I>&gt;<i> 
+</I>&gt;<i>  [ 67%] Building CXX object lib/CMakeFiles/pink.dir/ui_systest.cpp.o                                                                                                   
+</I>&gt;<i> /home/F36852/opt/pink-0.9.r617-Source/src/lib/ui_systest.cpp:16:18: error: numa.h: Aucun fichier ou dossier de ce type                                                
+</I>&gt;<i> In file included from /home/F36852/opt/pink-0.9.r617-Source/src/lib/ui_systest.cpp:22:
+</I>&gt;<i> /home/F36852/opt/pink-0.9.r617-Source/include/ui_simd.hpp:25:3: warning: #warning : highest simd instruction set available at compilation SSE2
+</I>&gt;<i> make[2]: *** [lib/CMakeFiles/pink.dir/ui_systest.cpp.o] Erreur 1
+</I>&gt;<i> make[1]: *** [lib/CMakeFiles/pink.dir/all] Erreur 2
+</I>&gt;<i> make: *** [all] Erreur 2
+</I>&gt;<i> 
+</I>&gt;<i> I can compile correctly the pink-0.9.r596.
+</I>&gt;<i> 
+</I>&gt;<i> By the way, in the read me file, it says &quot;For the python interface, the variable 'PYTHON_FRONT_END' and the variable 'LIAR' should be both 'ON'.
+</I>&gt;<i> &quot;, but there is no variable 'LIAR'?
+</I>&gt;<i> 
+</I>&gt;<i> Sincerely,
+</I>&gt;<i> 
+</I>&gt;<i> Jerome
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Pink-image-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>
+===
+Hugues Talbot
+9 all&#233;es des cornouillers, 77420 Champs sur Marne, France
++33 6 72 07 51 26
+
+
+
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+The lyf so short, the craft so long to lerne, The'assay so hard, so sharp the conqueryinge (Chaucer)
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110829/6704d438/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110829/6704d438/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000053.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+	<LI>Next message: <A HREF="000055.html">[Pink-image-devel] compilation issue for 0.9.r617
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#54">[ date ]</a>
+              <a href="thread.html#54">[ thread ]</a>
+              <a href="subject.html#54">[ subject ]</a>
+              <a href="author.html#54">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

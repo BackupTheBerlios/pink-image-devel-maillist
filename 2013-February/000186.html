@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Building 32-bit windows version of pink ?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-February/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Building%2032-bit%20windows%20version%20of%20pink%20%3F&In-Reply-To=%3CDB7AC171-BFA2-4316-84C2-0E92934C8965%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000185.html">
+   <LINK REL="Next"  HREF="000180.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Building 32-bit windows version of pink ?</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Building%2032-bit%20windows%20version%20of%20pink%20%3F&In-Reply-To=%3CDB7AC171-BFA2-4316-84C2-0E92934C8965%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Building 32-bit windows version of pink ?">hugues.talbot at gmail.com
+       </A><BR>
+    <I>Thu Feb  7 21:54:36 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000185.html">[Pink-image-devel] Building 32-bit windows version of pink ?
+</A></li>
+        <LI>Next message: <A HREF="000180.html">[Pink-image-devel] Also,	how do you use the win64-bit version of pink ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#186">[ date ]</a>
+              <a href="thread.html#186">[ thread ]</a>
+              <a href="subject.html#186">[ subject ]</a>
+              <a href="author.html#186">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks Laszlo,
+
+I'll try this very shortly.
+
+
+On 7 Feb 2013, at 7 Feb, 21:39, L&#225;szl&#243; Mar&#225;k wrote:
+
+&gt;<i> Hello, 
+</I>&gt;<i> 
+</I>&gt;<i> I am writing about the merging. I was looking for some tutorial, but the simplest would be to tell You my experiences. 
+</I>&gt;<i> 
+</I>&gt;<i> You can start the merging with 
+</I>&gt;<i> <A HREF="http://mercurial.selenic.com/wiki/TutorialMerge">http://mercurial.selenic.com/wiki/TutorialMerge</A>
+</I>&gt;<i> 
+</I>&gt;<i> this gives You an introduction as to how do You need to merge the branches. Before the merge You can clone a clean repository, so if anything is messed up You can just clone a new one. You always do two-way merge first default-&gt;personal then personal-&gt;default.
+</I>&gt;<i> All the commands are local so 
+</I>&gt;<i> 
+</I>&gt;<i> hg checkout personal
+</I>&gt;<i> hg merge default
+</I>&gt;<i> 
+</I>&gt;<i> will do the default-&gt;personal merge.
+</I>&gt;<i> 
+</I>&gt;<i> If there is a conflict You need a merge tool; for mercurial I use kdiff3 which You can setup as:
+</I>&gt;<i> 
+</I>&gt;<i> [ui]
+</I>&gt;<i> merge    = kdiff3
+</I>&gt;<i> 
+</I>&gt;<i> [extensions]
+</I>&gt;<i> hgext.extdiff =
+</I>&gt;<i> 
+</I>&gt;<i> [extdiff]
+</I>&gt;<i> cmd.kdiff3 =
+</I>&gt;<i> 
+</I>&gt;<i> [merge-tools]
+</I>&gt;<i> kdiff3.args = $base $local $other -o $output
+</I>&gt;<i> 
+</I>&gt;<i> in the ~/.hgrc config file. You can also use meld (git's merging tool), both are good. After You have reviewed Your changes You have to merge the changes manually and push them back to the main repository. 
+</I>&gt;<i> 
+</I>&gt;<i> Please write me questions if any arise. I also suggest to look into hg shelve for those changes, which You do not want to put into the repository (like debug information).
+</I>&gt;<i> 
+</I>&gt;<i> Laszlo
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> On Wed, Feb 6, 2013 at 11:12 AM, ujoimro &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>&gt; wrote:
+</I>&gt;<i> Yes, I'll send You today
+</I>&gt;<i> 
+</I>&gt;<i> On 2013-02-05 16:36:09 Hugues Talbot wrote:
+</I>&gt;<i> &gt; Hello Laszlo,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; With Lilian we eventually succeeded in creating a dev branch with mercurial,
+</I>&gt;<i> &gt; and we would like to merge things back again.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Any good documentation on how to do this ?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On 5 Feb 2013, at 5 Feb, 15:05, ujoimro wrote:
+</I>&gt;<i> &gt; &gt; Hello Hugues,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; when I have run for it last time, it did not compile. I will try to pull
+</I>&gt;<i> &gt; &gt; a new version soon.
+</I>&gt;<i> &gt; &gt; Also python 2.7 would be your best bet,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Laszlo
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; On 2013-02-04 22:42:16 Hugues Talbot wrote:
+</I>&gt;<i> &gt; &gt;&gt; Hello Laszlo,
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; I seem to notice that the windows version of pink are quite old. Also
+</I>&gt;<i> &gt; &gt;&gt; only 64-bit versions are available.
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; How hard would it be to build 32-bit versions ? Newer ones as well ?
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; Thanks.
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; ===
+</I>&gt;<i> &gt; &gt;&gt; Hugues Talbot
+</I>&gt;<i> &gt; &gt;&gt; 9 all&#233;es des cornouillers, 77420 Champs sur Marne, France
+</I>&gt;<i> &gt; &gt;&gt; +33 6 72 07 51 26
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ===
+</I>&gt;<i> &gt; Hugues Talbot
+</I>&gt;<i> &gt; 9 all&#233;es des cornouillers, 77420 Champs sur Marne, France
+</I>&gt;<i> &gt; +33 6 72 07 51 26
+</I>&gt;<i> 
+</I>
+===
+Hugues Talbot
+9 all&#233;es des cornouillers, 77420 Champs sur Marne, France
++33 6 72 07 51 26
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130207/0f1688b4/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130207/0f1688b4/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000185.html">[Pink-image-devel] Building 32-bit windows version of pink ?
+</A></li>
+	<LI>Next message: <A HREF="000180.html">[Pink-image-devel] Also,	how do you use the win64-bit version of pink ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#186">[ date ]</a>
+              <a href="thread.html#186">[ thread ]</a>
+              <a href="subject.html#186">[ subject ]</a>
+              <a href="author.html#186">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

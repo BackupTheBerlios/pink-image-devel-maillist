@@ -1,0 +1,379 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Numpy to pink and back
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Numpy%20to%20pink%20and%20back&In-Reply-To=%3CCANYiBk23cNHJ8WT8HNZ4CdPhNDQZGbNAG4TUQmzo4WUC_zoqjA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000027.html">
+   <LINK REL="Next"  HREF="000030.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Numpy to pink and back</H1>
+    <B>Jerome Ferrari</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Numpy%20to%20pink%20and%20back&In-Reply-To=%3CCANYiBk23cNHJ8WT8HNZ4CdPhNDQZGbNAG4TUQmzo4WUC_zoqjA%40mail.gmail.com%3E"
+       TITLE="[Pink-image-devel] Numpy to pink and back">zonderrr at gmail.com
+       </A><BR>
+    <I>Thu Jul  7 09:50:56 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000027.html">[Pink-image-devel] Numpy to pink and back
+</A></li>
+        <LI>Next message: <A HREF="000030.html">[Pink-image-devel] Numpy to pink and back
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#28">[ date ]</a>
+              <a href="thread.html#28">[ thread ]</a>
+              <a href="subject.html#28">[ subject ]</a>
+              <a href="author.html#28">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Laszlo,
+
+I believe that what you look for is the *ravel *method.
+import numpy
+#create a 2x2 image
+a = numpy.ndarray(shape=(2,2), dtype=float, order='F')
+a.fill(0) #to know what is inside
+b = a.*ravel*()
+
+print(a)
+[[ 0.  0.]
+ [ 0.  0.]]
+
+print(b)
+[ 0.  0.  0.  0.]
+
+
+2011/7/7 Laszlo Marak &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>&gt;
+
+&gt;<i> My problem is, that numpy does not hold it's values as a single array. I
+</I>&gt;<i> can
+</I>&gt;<i> make a constructor which takes a pointer and converts it into pink image,
+</I>&gt;<i> if
+</I>&gt;<i> You can convert the numpy array into a simple array. Something like:
+</I>&gt;<i>
+</I>&gt;<i> A = numpy.array(...)
+</I>&gt;<i> I = pink.char_image([size_x, size_y], make_pointer_from_numpy(A))
+</I>&gt;<i>
+</I>&gt;<i> If there is no method to do that in Python, then one needs to use the numpy
+</I>&gt;<i> api.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ----- &lt;begin original message&gt; -----
+</I>&gt;<i> Date: 2011-07-06T16:53:08Z
+</I>&gt;<i> From: Jerome Ferrari &lt;Jerome Ferrari &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">zonderrr at gmail.com</A>&gt;&gt;
+</I>&gt;<i> To: Fajardo, <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Ottopink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> Cc: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">pink-image-devel at lists.berlios.depink-image-devel</A>@lists.berlios.de
+</I>&gt;<i> Subject: Re: [Pink-image-devel] Numpy to pink and back
+</I>&gt;<i>
+</I>&gt;<i> &gt; Sorry, I just realized I didn't replied to all before, I'll try to
+</I>&gt;<i> improve.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; 2011/7/6 Fajardo, Otto &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">otto.fajardo at fmi.ch</A>&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; **
+</I>&gt;<i> &gt; &gt; Yes, your method for getting it from pink to scipy looks interesting. I
+</I>&gt;<i> &gt; &gt; think I cant benefit from it, because I am working (forced to work
+</I>&gt;<i> &gt; &gt; actually), so your trick wouldn't be avaiable ...
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; For now anyway, I am happy with scipy getting the image from the buffer
+</I>&gt;<i> &gt; &gt; as I work with binary images ...
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Now, back to numpy to pink:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; 1- I found it's possible to write an image to a file-like object , so
+</I>&gt;<i> &gt; &gt; that you don't have to write it to the disk or use a pipe. First use
+</I>&gt;<i> &gt; &gt; temp = tempfile.TemporaryFile, and then if you have your image in PIL
+</I>&gt;<i> &gt; &gt; format, just saying yourimage.save(temp,'format'), you get it to the
+</I>&gt;<i> &gt; &gt; temp. Now the thing would be to use the pink.cpp.readimage to grab the
+</I>&gt;<i> &gt; &gt; image from this temporary file, but apparently it only accepts a string
+</I>&gt;<i> &gt; &gt; with the name of the file as argument and not an object ... or maybe
+</I>&gt;<i> &gt; &gt; there is a way? any idea?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I don't see the interest of that trick, it doesn't modify the format.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; 2- there is this intriguing class, pink.np. There there is a method
+</I>&gt;<i> &gt; &gt; pink.np.frombuffer. If you use this you can get the data from the numpy
+</I>&gt;<i> &gt; &gt; array to pink ... but apparently it still is a numpy array. Maybe there
+</I>&gt;<i> &gt; &gt; is a way in pink from internally convert this numpy object to a char
+</I>&gt;<i> &gt; &gt; image?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; intriguing class indeed. It seems to deliver exactly numpy.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; 3- I manage to get the for loops working on cython. It makes the thing
+</I>&gt;<i> a
+</I>&gt;<i> &gt; &gt; bit faster, but sill is slower than writing the image to the disk and
+</I>&gt;<i> &gt; &gt; then retrieving it, so, no use for it.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Otto
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;  ------------------------------
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; *From:* Jerome Ferrari [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">zonderrr at gmail.com</A>]
+</I>&gt;<i> &gt; &gt; *Sent:* Wednesday, July 06, 2011 3:22 PM
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; *To:* Fajardo, Otto
+</I>&gt;<i> &gt; &gt; *Subject:* Re: [Pink-image-devel] Numpy to pink and back
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; 2011/7/6 Fajardo, Otto &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">otto.fajardo at fmi.ch</A>&gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;&gt; **
+</I>&gt;<i> &gt; &gt;&gt; Hi Jerome,
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; your code from pink to scipy works for my images, nice!!!
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; now the problem is how to import the images from numpy to pink ...
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; I think the problem is the pink image is not just raw data but is
+</I>&gt;<i> &gt; &gt;&gt; compressed or encoded in some way I don't understand. Therefore, you
+</I>&gt;<i> &gt; &gt;&gt; need to encode the data first before put it into the pink image (in
+</I>&gt;<i> the
+</I>&gt;<i> &gt; &gt;&gt; case of your code, the get_pixels method is decoding from the pink to
+</I>&gt;<i> &gt; &gt;&gt; raw pixel data). I guess without this decoding, the whole thing will
+</I>&gt;<i> &gt; &gt;&gt; fail. As an example, you can get the buffer data from a numpy array,
+</I>&gt;<i> &gt; &gt;&gt; just by the buit in method data: mynumpyarray.data. But then, if you
+</I>&gt;<i> &gt; &gt;&gt; try to write it to the pink image, it fails.
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; So, I think we really need some help from the pink experts for a
+</I>&gt;<i> &gt; &gt;&gt; function to import from numpy/scipy to pink.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I think so too.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;&gt; Another option I am thinking, is to first convert the image to image
+</I>&gt;<i> &gt; &gt;&gt; (scipy.misc.toimage), then, save it as a pgm image
+</I>&gt;<i> (scipy.misc.imsave),
+</I>&gt;<i> &gt; &gt;&gt; and then load this pgm image into pink (pink.cpp.readimage). This
+</I>&gt;<i> &gt; &gt;&gt; works, and is about 25 times faster than the for loops. Of course it's
+</I>&gt;<i> &gt; &gt;&gt; very silly to write an image to the disk each time you want to do this
+</I>&gt;<i> &gt; &gt;&gt; convertion,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; It is not that silly, maybe just inelegant. If you look in the source
+</I>&gt;<i> &gt; &gt; code of ndimage, they do this kind of trick.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;&gt;  and therefore would be nice to save the image in an object or pipe,
+</I>&gt;<i> and
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; then open it with pink, again from the object or pipe. I don't know
+</I>&gt;<i> how
+</I>&gt;<i> &gt; &gt;&gt; to do this, and I don't know if it would work.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; To speed up things, it might be a good idea to dump the image in the
+</I>&gt;<i> &gt; &gt; /dev/shm directory. As far as I understood, it is a directory mounted
+</I>&gt;<i> in
+</I>&gt;<i> &gt; &gt; RAM.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Another issue is when you need more than 8 bit. As far as I know, Pink
+</I>&gt;<i> &gt; &gt; only read and write PGM and PGM only accept 8 bit. Pink has developped
+</I>&gt;<i> &gt; &gt; its own PGM format to be able to handle 16 bit integer or float for
+</I>&gt;<i> &gt; &gt; instance. But this pink format is not readable by scipy. The only other
+</I>&gt;<i> &gt; &gt; software able to read that is G'mic &lt;<A HREF="http://gmic.sourceforge.net/">http://gmic.sourceforge.net/</A>&gt;,
+</I>&gt;<i> &gt; &gt; which doesn't run under python, it thus has to be used with
+</I>&gt;<i> &gt; &gt; subprocess.Popen.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; But still, there are some issues in the way scipy.misc.imsave works: it
+</I>&gt;<i> &gt; &gt; modify the data to recreate an 8 bit thing stretched from 0 to 255.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Anyway, at the end, the idea would be from  pink to scipy:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; *import subprocess
+</I>&gt;<i> &gt; &gt; import pink.cpp as pink
+</I>&gt;<i> &gt; &gt; import scipy
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; #create a 32bit int image :
+</I>&gt;<i> &gt; &gt; test_image = pink.int_image([50,50])
+</I>&gt;<i> &gt; &gt; #to be sure to be out a 8bit range :
+</I>&gt;<i> &gt; &gt; test_image[0]=256
+</I>&gt;<i> &gt; &gt; test_image.writeimage(&quot;/dev/shm/tmp.pnk&quot;)
+</I>&gt;<i> &gt; &gt; subprocess.Popen(&quot;gmic /dev/shm/tmp.pnk -o
+</I>&gt;<i> /dev/shm/tmp.png&quot;,shell=True)
+</I>&gt;<i> &gt; &gt; *
+</I>&gt;<i> &gt; &gt; .pnk is the extension name chosen by G'mic as the pink format
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;&gt; any idea?
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; Otto
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;  ------------------------------
+</I>&gt;<i> &gt; &gt;&gt;  *From:* Jerome Ferrari [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">zonderrr at gmail.com</A>]
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; *Sent:* Tuesday, July 05, 2011 2:05 PM
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; *To:* Fajardo, Otto
+</I>&gt;<i> &gt; &gt;&gt; *Subject:* Re: [Pink-image-devel] Numpy to pink and back
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;   2011/7/5 Fajardo, Otto &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">otto.fajardo at fmi.ch</A>&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt; **
+</I>&gt;<i> &gt; &gt;&gt;&gt; Hi Jerome,
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt; quite interesting. is your code working?
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; I thought so when I pasted this code in the bug tracker, but since
+</I>&gt;<i> then
+</I>&gt;<i> &gt; &gt;&gt; I think I found a case that did not work properly. It probably has to
+</I>&gt;<i> &gt; &gt;&gt; be refined at least. Maybe it works as it is for your video problems,
+</I>&gt;<i> &gt; &gt;&gt; you are invited to test :)
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;  maybe we can join efforts to write something ?
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; I would sure be interested in the solution, but I don't know much
+</I>&gt;<i> about
+</I>&gt;<i> &gt; &gt;&gt; computing, I just started python this year. I actually just copied
+</I>&gt;<i> what
+</I>&gt;<i> &gt; &gt;&gt; is done in the pil_photoimage.py file.
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; I think I understand the idea behind weave, it is supposed to
+</I>&gt;<i> accelerate
+</I>&gt;<i> &gt; &gt;&gt; the &quot;code&quot;, I can't help with that high level thing.
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; Another solution is to go on with the &quot;buffer format&quot; like in the *
+</I>&gt;<i> &gt; &gt;&gt; pink_to_ndimage* function I wrote, but I don't know how to transform a
+</I>&gt;<i> &gt; &gt;&gt; NDimage into a buffer nor how to read a buffer with pink. If someone
+</I>&gt;<i> has
+</I>&gt;<i> &gt; &gt;&gt; an idea?
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt; Jerome
+</I>&gt;<i> &gt; &gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;  Otto
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;  ------------------------------
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt; *From:* Jerome Ferrari [mailto:<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">zonderrr at gmail.com</A>]
+</I>&gt;<i> &gt; &gt;&gt;&gt; *Sent:* Monday, July 04, 2011 6:25 PM
+</I>&gt;<i> &gt; &gt;&gt;&gt; *To:* Fajardo, Otto
+</I>&gt;<i> &gt; &gt;&gt;&gt; *Subject:* Re: [Pink-image-devel] Numpy to pink and back
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;   Hi,
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt; I don't have time to test your weave, but i already filed a feature
+</I>&gt;<i> &gt; &gt;&gt;&gt; request about that:
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> <A HREF="http://developer.berlios.de/feature/?func=detailfeature&amp;feature_id=5360">http://developer.berlios.de/feature/?func=detailfeature&amp;feature_id=5360</A>
+</I>&gt;<i> &gt; &gt;&gt;&gt; &amp;group_id=12429
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt; with something done about it, but not much:
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt; def pink_to_ndimage(image):
+</I>&gt;<i> &gt; &gt;&gt;&gt;     if type(image) == pink.char_image:
+</I>&gt;<i> &gt; &gt;&gt;&gt;         return
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> scipy.frombuffer(image.get_pixels(),'int8').reshape(image.size[1],image
+</I>&gt;<i> &gt; &gt;&gt;&gt; .size[0])
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;     elif type(image) == pink.float_image:
+</I>&gt;<i> &gt; &gt;&gt;&gt;         return
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> scipy.frombuffer(image.get_pixels(),'float32').reshape(image.size[1],im
+</I>&gt;<i> &gt; &gt;&gt;&gt; age.size[0])
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;     elif type(image) == pink.int_image:
+</I>&gt;<i> &gt; &gt;&gt;&gt;         return
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> scipy.frombuffer(image.get_pixels(),'int32').reshape(image.size[1],imag
+</I>&gt;<i> &gt; &gt;&gt;&gt; e.size[0])
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;     else :
+</I>&gt;<i> &gt; &gt;&gt;&gt;         print(&quot;format non-detecte&quot;)
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt; 2011/7/4 Fajardo, Otto &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">otto.fajardo at fmi.ch</A>&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; Hello,
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; I'm new to pink. I got my images as numpy arrays (because I'm
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; extracting them from videos, and then doing some pre-processing on
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; open cv and scipy-numpy), and would like an efficient way to convert
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; this numpy arrays to pink char images. Laszlo already pointed me at
+</I>&gt;<i> a
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; solution that works, using for loops in python, but it's a bit slow.
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; Does anyone have a solution? Would it be possible to implement such
+</I>&gt;<i> a
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; feature in pink. If yes, the way back to numpy would be necessary as
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; well.
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; I was trying also to write it using scipy.weave, but for some reason
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; it fails, any suggestion?
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; My code looks like this:
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; #bwtest is the binary image I would like to convert to pink. Size_x
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; and size_y are the x and y dimensions of bwtest.
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; I=pink.cpp.char_image([size_x,size_y])
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; code = '''
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;        int i;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;        int m;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;        for (i=0; i &lt;size_x; ++i){
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;            for (m=0; m&lt;size_y;++m){
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;                 I(i,m) = bwtest(m,i);
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;             }
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;        }
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;        '''
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; err = weave.inline(code, arg_names=['size_x','size_y','bwtest','I'],
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;                   type_converters=weave.converters.blitz,
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;                   compiler = 'gcc')
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; Many thanks!
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt;
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; _______________________________________________
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; Pink-image-devel mailing list
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; &gt;&gt;&gt;&gt; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>&gt;<i> Laszlo MARAK
+</I>&gt;<i> Phd. student of ESIEE
+</I>&gt;<i> email: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>
+</I>&gt;<i>
+</I>&gt;<i> At the source of every error which is blamed on the computer you will find
+</I>&gt;<i> at
+</I>&gt;<i> least two human errors, including the error of blaming it on the computer.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110707/d93e2153/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110707/d93e2153/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000027.html">[Pink-image-devel] Numpy to pink and back
+</A></li>
+	<LI>Next message: <A HREF="000030.html">[Pink-image-devel] Numpy to pink and back
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#28">[ date ]</a>
+              <a href="thread.html#28">[ thread ]</a>
+              <a href="subject.html#28">[ subject ]</a>
+              <a href="author.html#28">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

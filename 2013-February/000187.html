@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-February/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Compile%20test%20in%20CMAKE%20have%20arguments%20in%20the%0A%09wrong%20order&In-Reply-To=%3C0178C848-4BB1-4041-9D0C-CB08FA7EA721%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000180.html">
+   <LINK REL="Next"  HREF="000188.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Compile%20test%20in%20CMAKE%20have%20arguments%20in%20the%0A%09wrong%20order&In-Reply-To=%3C0178C848-4BB1-4041-9D0C-CB08FA7EA721%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order">h.talbot at esiee.fr
+       </A><BR>
+    <I>Fri Feb  8 00:09:07 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000180.html">[Pink-image-devel] Also,	how do you use the win64-bit version of pink ?
+</A></li>
+        <LI>Next message: <A HREF="000188.html">[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#187">[ date ]</a>
+              <a href="thread.html#187">[ thread ]</a>
+              <a href="subject.html#187">[ subject ]</a>
+              <a href="author.html#187">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Laszlo,
+
+I have a problem that I hope you can help with. It seems that in newer versions of gcc/g++, the order of objects files matters. This has an influence on CMAKE configure scripts.
+
+For instance, when trying to test if boost list.hpp compiles, the tests produced by CMAKE looks like this
+
+/usr/bin/c++ /opt/local/EPD/lib/libpython2.7.so -I/usr/local/include -I/opt/local/EPD/include/python2.7 CheckIncludeFile.cxx
+/tmp/ccZyjJwf.o: In function `boost::python::api::object::object()':
+CheckIncludeFile.cxx:(.text._ZN5boost6python3api6objectC2Ev[_ZN5boost6python3api6objectC5Ev]+0xd): undefined reference to `_Py_NoneStruct'
+collect2: ld returned 1 exit status
+
+
+It fails.
+
+
+However it is a simple matter of putting the library last:
+
+/usr/bin/c++ -I/usr/local/include -I/opt/local/EPD/include/python2.7 CheckIncludeFile.cxx  /opt/local/EPD/lib/libpython2.7.so
+
+This compiles.
+
+This is preventing Pink from configuring itself on newer releases of Ubuntu, for instance.
+
+I don't know how to fix this in the CMakeList.txt file. Any hint ?
+
+Thanks.
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+ 
+In theory there is no difference between theory and practice. In practice there is.
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130208/d674caeb/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130208/d674caeb/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000180.html">[Pink-image-devel] Also,	how do you use the win64-bit version of pink ?
+</A></li>
+	<LI>Next message: <A HREF="000188.html">[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#187">[ date ]</a>
+              <a href="thread.html#187">[ thread ]</a>
+              <a href="subject.html#187">[ subject ]</a>
+              <a href="author.html#187">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

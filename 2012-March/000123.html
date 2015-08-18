@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Default arguments crash pink-python on OSX 10.7
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Default%20arguments%20crash%20pink-python%20on%20OSX%2010.7&In-Reply-To=%3C3B872D16-CA64-428C-A2CB-FC02AD9D3E1B%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000124.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Default arguments crash pink-python on OSX 10.7</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Default%20arguments%20crash%20pink-python%20on%20OSX%2010.7&In-Reply-To=%3C3B872D16-CA64-428C-A2CB-FC02AD9D3E1B%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Default arguments crash pink-python on OSX 10.7">hugues.talbot at gmail.com
+       </A><BR>
+    <I>Sat Mar  3 15:08:50 CET 2012</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000124.html">[Pink-image-devel] Crash continues on 1.49
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#123">[ date ]</a>
+              <a href="thread.html#123">[ thread ]</a>
+              <a href="subject.html#123">[ subject ]</a>
+              <a href="author.html#123">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello 
+
+I'm trying to use pink-python under OSX 10.7.2 (lion) Using the most recent 'port' of boost-python 
+
+&gt;<i> % port info boost
+</I>&gt;<i> boost @1.49.0 (devel)
+</I>&gt;<i> Variants:             debug, no_single, no_static, openmpi, python25, python26, python27, python31, python32, regex_match_extra, universal
+</I>&gt;<i> 
+</I>&gt;<i> Description:          Boost provides free portable peer-reviewed C++ libraries. The emphasis is on portable libraries which work well with the C++ Standard Library.
+</I>&gt;<i> Homepage:             <A HREF="http://www.boost.org">http://www.boost.org</A>
+</I>&gt;<i> 
+</I>&gt;<i> Library Dependencies: zlib, expat, bzip2, icu
+</I>&gt;<i> Platforms:            darwin
+</I>&gt;<i> License:              Boost-1.0
+</I>&gt;<i> Maintainers:          <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">adfernandes at macports.org</A>
+</I>
+
+compilation goes OK
+
+
+Trying to import pink crashes every time
+
+&gt;<i> [<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">talbot at silverneedle</A> python]$ ../../../obj/pink.sh 
+</I>&gt;<i> Python 2.7.2 (default, Feb  4 2012, 14:38:23) 
+</I>&gt;<i> [GCC 4.2.1 Compatible Apple Clang 3.0 (tags/Apple/clang-211.10.1)] on darwin
+</I>&gt;<i> Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+</I>&gt;<i> &gt;&gt;&gt; import pink
+</I>&gt;<i> ../../../obj/pink.sh: line 5: 90223 Segmentation fault: 11  DYLD_LIBRARY_PATH=:/Users/talbot/projects/pink/Pink_MC_SVN/obj/python:/Users/talbot/projects/pink/Pink_MC_SVN/obj/lib PYTHONPATH=:/Users/talbot/projects/pink/Pink_MC_SVN/obj/python /opt/local/bin/python
+</I>
+
+The reason for this seems to be the use of default arguments. The first crash occurs in file pypink.cpp, line 314
+
+&gt;<i> UI_WRAP_FUNCTION(
+</I>&gt;<i>   &quot;translate&quot;,
+</I>&gt;<i>   loffset,
+</I>&gt;<i>   (arg(&quot;image&quot;), arg(&quot;ox&quot;), arg(&quot;oy&quot;), arg(&quot;oz&quot;), arg(&quot;mode&quot;)), // =0),
+</I>&gt;<i>   doc__translate__c__
+</I>&gt;<i>   );
+</I>&gt;<i> #include BOOST_PP_UPDATE_COUNTER()
+</I>
+If I comment out the default argument : arg(&quot;mode&quot;) = 0 as above, the first crash appears later, this time in skeleton2.cpp line 304.
+
+&gt;<i> (gdb) bt 10
+</I>&gt;<i> #0  0x0000000103598672 in PyInt_FromLong ()
+</I>&gt;<i> #1  0x0000000101137f35 in boost::python::converter::arg_to_python&lt;int&gt;::arg_to_python (this=0x7fff5fbfa338, x=@0x7fff5fbfa664) at builtin_converters.hpp:122
+</I>&gt;<i> #2  0x000000010105cb54 in boost::python::api::object_initializer_impl&lt;false, false&gt;::get&lt;int&gt; (x=@0x7fff5fbfa664) at object_core.hpp:393
+</I>&gt;<i> #3  0x000000010105cc32 in boost::python::api::object_base_initializer&lt;int&gt; (x=@0x7fff5fbfa664) at object_core.hpp:315
+</I>&gt;<i> #4  0x000000010105cc64 in boost::python::api::object::object&lt;int&gt; (this=0x7fff5fbfa3f8, x=@0x7fff5fbfa664) at object_core.hpp:334
+</I>&gt;<i> #5  0x000000010105cd26 in boost::python::detail::keywords&lt;1ul&gt;::operator=&lt;int&gt; (this=0x7fff5fbfa668, value=@0x7fff5fbfa664) at args.hpp:74
+</I>&gt;<i> #6  0x00000001014bd919 in skeleton2_export () at pyskeleton2.cpp:304
+</I>&gt;<i> #7  0x00000001013f5347 in init_module_libcpp_pink () at pypink.cpp:365
+</I>&gt;<i> #8  0x0000000100755120 in boost::python::handle_exception_impl ()
+</I>&gt;<i> #9  0x00000001007561d7 in boost::python::handle_exception&lt;void (*)()&gt; ()
+</I>
+The crash is very definitely in boost.
+
+Is there some recommendation as to what I should do ?
+
+
+
+
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000124.html">[Pink-image-devel] Crash continues on 1.49
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#123">[ date ]</a>
+              <a href="thread.html#123">[ thread ]</a>
+              <a href="subject.html#123">[ subject ]</a>
+              <a href="author.html#123">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Memory not being free()
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Memory%20not%20being%20free%28%29&In-Reply-To=%3CCAAAj9pp%2BeA9TxkrKsbWwPDkohc2CtwW%2BG5JKn6txs4Ac29dPdw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000036.html">
+   <LINK REL="Next"  HREF="000038.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Memory not being free()</H1>
+    <B>Michael Cheng</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Memory%20not%20being%20free%28%29&In-Reply-To=%3CCAAAj9pp%2BeA9TxkrKsbWwPDkohc2CtwW%2BG5JKn6txs4Ac29dPdw%40mail.gmail.com%3E"
+       TITLE="[Pink-image-devel] Memory not being free()">michael.cheng at emphron.com
+       </A><BR>
+    <I>Wed Jul 27 07:49:50 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000036.html">[Pink-image-devel] Pink on Windows
+</A></li>
+        <LI>Next message: <A HREF="000038.html">[Pink-image-devel] Memory not being free()
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#37">[ date ]</a>
+              <a href="thread.html#37">[ thread ]</a>
+              <a href="subject.html#37">[ subject ]</a>
+              <a href="author.html#37">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I have some large jobs processing thousands of images, and I've noticed that
+image memory isn't being free'd after the python object holding the image
+falls out of scope.  So my memory usage is going through the roof! (All the
+real memory I have and hundreds of GB of virtual memory!)
+
+My Steup:
+* macosx 10.6.8
+* pink r558
+
+An example to replicate the problem is below. Start 'Activity Monitor' and
+sort processes by memory usage and watch it grow and grow!
+
+&gt;<i> python
+</I>&gt;<i> import pink
+</I>
+&gt;<i> im = pink.cpp.readimage('test.pgm')
+</I>&gt;<i> del im
+</I>&gt;<i> im = pink.cpp.readimage('test.pgm')
+</I>&gt;<i> del im
+</I>&gt;<i> im = pink.cpp.readimage('test.pgm')
+</I>&gt;<i> del im
+</I>&gt;<i> im = pink.cpp.readimage('test.pgm')
+</I>&gt;<i> del im
+</I>&gt;<i> im = pink.cpp.readimage('test.pgm')
+</I>&gt;<i> del im
+</I>etc
+
+
+Memory is allocated each time an image object is created but it it never
+freed after the object is deleted.  Explicit calls to the garbage collector
+in python does not free any more memory.  I'm guessing that somewhere in the
+pink c++ internals, memory isn't being freed.
+
+Are there any suggestions or workarounds for this?  Is there a command I'm
+missing?  Is there a way to force pink to free the allocated memory for an
+object?  Should python/pink be doing this automatically?
+
+Mike.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110727/beb7c7ad/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20110727/beb7c7ad/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000036.html">[Pink-image-devel] Pink on Windows
+</A></li>
+	<LI>Next message: <A HREF="000038.html">[Pink-image-devel] Memory not being free()
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#37">[ date ]</a>
+              <a href="thread.html#37">[ thread ]</a>
+              <a href="subject.html#37">[ subject ]</a>
+              <a href="author.html#37">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

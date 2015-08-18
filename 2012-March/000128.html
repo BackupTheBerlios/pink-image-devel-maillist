@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Tutoriels pour Pink
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Tutoriels%20pour%20Pink&In-Reply-To=%3CE9E4A22B-A756-4541-9682-57EFC0F800DF%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000127.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Tutoriels pour Pink</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Tutoriels%20pour%20Pink&In-Reply-To=%3CE9E4A22B-A756-4541-9682-57EFC0F800DF%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Tutoriels pour Pink">h.talbot at esiee.fr
+       </A><BR>
+    <I>Fri Mar 16 16:53:25 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000127.html">[Pink-image-devel] Pink on OSX 10.7 : fixed
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Salut Edward,
+
+In general please try to send email to the developers' list so that several people can see it.
+
+There are several solutions
+
+1- in fact Pink can read TIFF images.
+
+
+import pink
+a = pink.cpp.readimage('toto.tif') 
+
+
+should work fine. Since TIFF is not really specified for 3D, I'm not sure what will happen.... 
+
+2- You can read many formats with imview: 
+
+<A HREF="http://hugues.zahlt.info/Imview.html">http://hugues.zahlt.info/Imview.html</A>
+
+Under Ubuntu and other Debian-related distributions, imview can be installed by apt-get , synaptic, etc.
+
+Then imview can export in PGM format.
+
+
+3- the extended PGM images consiste of a very simple header followed by the data. The documentation of the format in the source of pink is under
+
+doc/format.txt
+
+It may be a little cryptic to read...
+
+So writing a header by hand before the data is doable.
+
+4- you can use the function 
+
+pink.cpp.read_raw_image()
+
+
+This should be the simplest option, but I don't know how to use it. The help string is not as helpful as it could be:
+
+&gt;<i> In [3]: help(pink.cpp.read_raw_image)
+</I>&gt;<i> Help on built-in function read_raw_image:
+</I>&gt;<i> 
+</I>&gt;<i> read_raw_image(...)
+</I>&gt;<i>     read_raw_image( (str)filename, (list)dimensions of the image [, (int)image mode=1]) -&gt; object :
+</I>&gt;<i>         this function reads a raw image from a file the image type is specified by the suffix and the size is given in the 'dim' argument
+</I>&gt;<i>         
+</I>&gt;<i>     
+</I>&gt;<i>         C++ signature :
+</I>&gt;<i>             boost::python::api::object read_raw_image(std::string,boost::python::list [,int=1])
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+
+Let us know how you go !
+
+
+On 16 Mar 2012, at 16 Mar, 15:43, Edward Ando' wrote:
+
+&gt;<i> Bonjour Hugues,
+</I>&gt;<i> Je m'y suis mis un peu sur le Pink image library, et je suis
+</I>&gt;<i> impression&#233; par ce que je voies.
+</I>&gt;<i> 
+</I>&gt;<i> Je ne connais pas du tout, par contre, comment marchent les images PGM
+</I>&gt;<i> que vous utilisez... Je voies qu'elles commencent par &quot;P7&quot; ce qui veux
+</I>&gt;<i> dire qu'elle sont des PAM &quot;arbitraires&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> J'ai mes images dans les formats RAW (3D) ou &#224; la limite des Tiff 3D...
+</I>&gt;<i> Je voies qu'il y a:
+</I>&gt;<i> 
+</I>&gt;<i>  <A HREF="http://www.esiee.fr/~coupriem/Pink/doc/html/raw2pgm_8c.html">http://www.esiee.fr/~coupriem/Pink/doc/html/raw2pgm_8c.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> Dans le source code, mais je ne voies pas comment l'utiliser depuis
+</I>&gt;<i> le pink en python...
+</I>&gt;<i> 
+</I>&gt;<i> Peux-tu m'expliquer comment convertir mes image en PGM, ou importer
+</I>&gt;<i> directement du raw?
+</I>&gt;<i> 
+</I>&gt;<i> Sinon tu pr&#233;f&#232;res que j'&#233;crives au mailing list?
+</I>&gt;<i> 
+</I>&gt;<i> Merci,
+</I>&gt;<i> 
+</I>&gt;<i> Eddy
+</I>&gt;<i> 
+</I>&gt;<i> P.S. Pour t'inscrire au Club3D, qui est h&#233;berg&#233; chez nous, c'est ici:
+</I>&gt;<i> <A HREF="http://www.noesis.fr/forum/viewtopic.php?t=2406">http://www.noesis.fr/forum/viewtopic.php?t=2406</A>
+</I>&gt;<i> 
+</I>&gt;<i> On Thu, 12 Jan 2012 19:40:21 +0100
+</I>&gt;<i> Hugues Talbot &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> Bonjour Edward,
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Voici les tutoriels pour Pink.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> <A HREF="http://www.esiee.fr/~talboth/logiciel/tutorial_pink_20120112.tbz">http://www.esiee.fr/~talboth/logiciel/tutorial_pink_20120112.tbz</A> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Merci de me ternir au courant s'il y a des soucis.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Hugues Talbot, Professeur associ&#233;
+</I>&gt;&gt;<i> Universit&#233; Paris-Est,
+</I>&gt;&gt;<i> Laboratoire d'informatique Gaspard-Monge
+</I>&gt;&gt;<i> Equipe A3SI 
+</I>&gt;&gt;<i> ESIEE - BP 99 
+</I>&gt;&gt;<i> 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;&gt;<i> (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> There are two popes per square kilometer in Vatican.
+</I>&gt;<i> 
+</I>
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+The plural of anecdote is not data
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000127.html">[Pink-image-devel] Pink on OSX 10.7 : fixed
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#128">[ date ]</a>
+              <a href="thread.html#128">[ thread ]</a>
+              <a href="subject.html#128">[ subject ]</a>
+              <a href="author.html#128">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

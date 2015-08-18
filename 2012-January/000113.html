@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] build error on macports 2.0.3
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-January/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20build%20error%20on%20macports%202.0.3&In-Reply-To=%3CCAAAj9ppxq5%3D4V%2BcvyT%2Bd9TVTX%3DkoQ9LnQ2ZzLr5hi3k9BcWzpQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000112.html">
+   <LINK REL="Next"  HREF="000114.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] build error on macports 2.0.3</H1>
+    <B>Michael Cheng</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20build%20error%20on%20macports%202.0.3&In-Reply-To=%3CCAAAj9ppxq5%3D4V%2BcvyT%2Bd9TVTX%3DkoQ9LnQ2ZzLr5hi3k9BcWzpQ%40mail.gmail.com%3E"
+       TITLE="[Pink-image-devel] build error on macports 2.0.3">michael.cheng at emphron.com
+       </A><BR>
+    <I>Tue Jan 10 01:10:39 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000112.html">[Pink-image-devel] build error on macports 2.0.3
+</A></li>
+        <LI>Next message: <A HREF="000114.html">[Pink-image-devel] build error on macports 2.0.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#113">[ date ]</a>
+              <a href="thread.html#113">[ thread ]</a>
+              <a href="subject.html#113">[ subject ]</a>
+              <a href="author.html#113">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Just FYI, after installing macports I run the script to get everything.
+
+===========================================
+# Pink Dependencies
+port install python26
+port -f activate python26
+port select --set python python26
+port install boost +python26
+port install ImageMagick +jpeg2
+
+port install  xorg-libxcb +python26 # needed for
+doxygen-&gt;graphviz-&gt;ghostscript, but it defaults to wanting py27
+
+port install atlas boost-build bzip2 cmake coreutils doxygen eigen fftw
+fftw-3 gsl gzip jpeg libpng ncurses readline tcl tiff tk
+port install py26-ipython py26-numpy py26-pil py26-scientific py26-tkinter
+py26-xml
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120110/6cd97914/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120110/6cd97914/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000112.html">[Pink-image-devel] build error on macports 2.0.3
+</A></li>
+	<LI>Next message: <A HREF="000114.html">[Pink-image-devel] build error on macports 2.0.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#113">[ date ]</a>
+              <a href="thread.html#113">[ thread ]</a>
+              <a href="subject.html#113">[ subject ]</a>
+              <a href="author.html#113">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

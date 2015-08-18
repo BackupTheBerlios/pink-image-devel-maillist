@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Completely lost
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Completely%20lost&In-Reply-To=%3CFBFCD551-437F-4C57-8C02-1B114B51E82E%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000217.html">
+   <LINK REL="Next"  HREF="000213.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Completely lost</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Completely%20lost&In-Reply-To=%3CFBFCD551-437F-4C57-8C02-1B114B51E82E%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Completely lost">hugues.talbot at esiee.fr
+       </A><BR>
+    <I>Wed Jul 10 10:43:36 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000217.html">[Pink-image-devel] Problems with lattrib.c
+</A></li>
+        <LI>Next message: <A HREF="000213.html">[Pink-image-devel] Completely lost
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#212">[ date ]</a>
+              <a href="thread.html#212">[ thread ]</a>
+              <a href="subject.html#212">[ subject ]</a>
+              <a href="author.html#212">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Laszlo,
+
+Fundamentally there are things I don't understand with the CMake build system. This is on Mac OSX.
+
+1- I detect boost OK
+2- CMake works fine, I can generate makefiles, etc
+
+however I can't link libpink.
+
+Linking CXX shared library libpink.dylib
+cd /Users/talbot/OldHome/projects/pink/Pink_HG_Lilian/lib &amp;&amp; /opt/local/bin/cmake -E cmake_link_script CMakeFiles/pink.dir/link.txt --verbose=1
+/usr/bin/c++  -I/opt/local/include  -g -dynamiclib -Wl,-headerpad_max_install_names  -L/opt/local/lib -o libpink.dylib -install_name /Users/talbot/OldHome/projects/pink/Pink_HG_Lilian/lib/libpink.dylib CMakeFiles/pink.dir/avscrop.c.o CMakeFiles/pink.dir/avsimage.c.o CMakeFiles/pink.dir/bimage.c.o CMakeFiles/pink.dir/bimage_utils.c.o CMakeFiles/pink.dir/fmmgeodesic.c.o CMakeFiles/pink.dir/fmmgeodist.c.o [&#8230;.]
+MakeFiles/pink.dir/liar_segmentation.cxx.o CMakeFiles/pink.dir/ltangents.cxx.o CMakeFiles/pink.dir/ssexport.cxx.o CMakeFiles/pink.dir/linux/lclick.c.o CMakeFiles/pink.dir/linux/mcxbib.c.o /usr/lib/libm.dylib /opt/local/lib/libSM.dylib /opt/local/lib/libICE.dylib /opt/local/lib/libX11.dylib /opt/local/lib/libXext.dylib /opt/local/lib/libtiff.dylib /opt/local/lib/libgsl.dylib /opt/local/lib/libgslcblas.dylib /usr/lib/liblapack.dylib
+
+
+3- this is because the linking stanza DOES NOT INCLUDE the boost libraries
+
+4- HOWEVER, they are well detected. I have added some messages in the CMakeFile.txt at relevant places and all is fine:
+
+
+ Python libraries:
+ /usr/lib/libm.dylib/opt/local/lib/libSM.dylib/opt/local/lib/libICE.dylib/opt/local/lib/libX11.dylib/opt/local/lib/libXext.dylib/opt/local/lib/libtiff.dylib/opt/local
+ /lib/libgsl.dylib/opt/local/lib/libgslcblas.dylib/usr/lib/liblapack.dylib/opt/local/lib/libboost_python-mt.dylib/opt/local/lib/libboost_thread-mt.dylib/opt/local/lib
+ /libboost_system-mt.dylib/opt/local/lib/libboost_date_time-mt.dylib/usr/lib/libpython2.7.dylib
+
+ LIBS =
+ /usr/lib/libm.dylib/opt/local/lib/libSM.dylib/opt/local/lib/libICE.dylib/opt/local/lib/libX11.dylib/opt/local/lib/libXext.dylib/opt/local/lib/libtiff.dylib/opt/local
+ /lib/libgsl.dylib/opt/local/lib/libgslcblas.dylib/usr/lib/liblapack.dylib/opt/local/lib/libboost_python-mt.dylib/opt/local/lib/libboost_thread-mt.dylib/opt/local/lib
+ /libboost_system-mt.dylib/opt/local/lib/libboost_date_time-mt.dylib/usr/lib/libpython2.7.dylib/opt/local/lib/libboost_python-mt.dylib/opt/local/lib/libboost_thread-m
+ t.dylib/opt/local/lib/libboost_system-mt.dylib/usr/lib/libpython2.7.dylib
+
+
+4- I am completely at a loss. Why are those libraries not added to the linking of libpink.dylib ? How is that even possible ?
+
+Thanks for any help. Pink has been working very well on OSX for a long time now and I really need it.
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000217.html">[Pink-image-devel] Problems with lattrib.c
+</A></li>
+	<LI>Next message: <A HREF="000213.html">[Pink-image-devel] Completely lost
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#212">[ date ]</a>
+              <a href="thread.html#212">[ thread ]</a>
+              <a href="subject.html#212">[ subject ]</a>
+              <a href="author.html#212">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

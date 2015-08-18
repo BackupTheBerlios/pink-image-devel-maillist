@@ -1,0 +1,354 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] undefined reference to CreeFifoVide, etc
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-October/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20undefined%20reference%20to%20CreeFifoVide%2C%20etc&In-Reply-To=%3C1505512.TCJBv1WXW8%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000171.html">
+   <LINK REL="Next"  HREF="000173.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] undefined reference to CreeFifoVide, etc</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20undefined%20reference%20to%20CreeFifoVide%2C%20etc&In-Reply-To=%3C1505512.TCJBv1WXW8%40anyu%3E"
+       TITLE="[Pink-image-devel] undefined reference to CreeFifoVide, etc">ujoimro at gmail.com
+       </A><BR>
+    <I>Tue Oct 23 14:52:20 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000171.html">[Pink-image-devel] undefined reference to CreeFifoVide, etc
+</A></li>
+        <LI>Next message: <A HREF="000173.html">[Pink-image-devel] Fwd: missing function in pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#172">[ date ]</a>
+              <a href="thread.html#172">[ thread ]</a>
+              <a href="subject.html#172">[ subject ]</a>
+              <a href="author.html#172">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>To compile, install Pink on ubuntu 11.10, You need the following steps:
+
+# install the necessary dependencies
+sudo apt-get install cmake-gui emacs23 libx11 xserver-xorg-dev libncurses5-dev 
+libgsl0-dev libeigen2-dev g++ libboost1.46-all-dev python-dev libgsl0ldbl 
+libncurses5 libboost-dev liblapack3gf libtiff4 python python-imaging python-
+imaging-tk python-tk python-numpy python-matplotlib ipython python-vtk 
+liblapack-dev build-essential libtiff4-dev
+
+#then compile Pink with (you need to configure three times, this is a cmake 
+limitation)
+cmake -C pink_ubuntu.txt /path/to/pink
+cmake -C pink_ubuntu.txt /path/to/pink
+cmake -C pink_ubuntu.txt /path/to/pink
+
+make
+
+# after the compilation launch 
+./pink.sh
+# to get a Pink promt.
+
+note: the configuration file I have used for ubuntu 11.10 is attached to this 
+email and looks like follows:
+
+# Pink's Ubuntu Config File
+
+set( 64BIT ON CACHE BOOL &quot;desc.&quot; )
+set( BASH_FRONT_END ON CACHE BOOL &quot;desc.&quot; )
+set( BOOST_INCLUDEDIR /usr/include CACHE PATH &quot;desc.&quot; )
+set( BUILD_DOCUMENTATION OFF CACHE BOOL &quot;desc.&quot; )
+set( Boost_INCLUDE_DIR /usr/include CACHE PATH &quot;desc.&quot; )
+set( Boost_LIBRARY_DIRS /usr/lib CACHE PATH &quot;desc.&quot; )
+set( CMAKE_BUILD_TYPE Release CACHE STRING &quot;desc.&quot; )
+set( CMAKE_COLOR_MAKEFILE ON CACHE BOOL &quot;desc.&quot; )
+set( CMAKE_CXX_FLAGS_RELEASE &quot;-Wl,--no-as-needed -lpython2.7 -O3 -DNDEBUG -
+msse -msse2&quot; CACHE STRING &quot;desc.&quot; )
+set( CMAKE_C_FLAGS_RELEASE &quot;-Wl,--no-as-needed -lpython2.7 -O3 -DNDEBUG -msse 
+-msse2&quot; CACHE STRING  &quot;desc.&quot; )
+set( CMAKE_REQUIRED_FLAGS &quot;-Wl,--no-as-needed -lpython2.7&quot; CACHE STRING 
+&quot;desc.&quot; )
+set( CMAKE_INSTALL_PREFIX install CACHE  STRING &quot;desc.&quot; )
+set( CMAKE_PROJECT_NAME pink CACHE  STRING &quot;desc.&quot; )
+set( CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL &quot;desc.&quot; )
+set( DEVELOPMENT ON CACHE BOOL &quot;desc.&quot; )
+set( EIGEN_INCLUDE /usr/include CACHE PATH &quot;desc.&quot; )
+set( NUMA OFF CACHE BOOL &quot;desc.&quot; )
+set( OPENCL OFF CACHE BOOL &quot;desc.&quot; )
+set( PYTHON_FRONT_END ON CACHE BOOL &quot;desc.&quot; )
+set( SIMD ON CACHE PATH &quot;desc.&quot; )
+
+# LuM end of file
+
+
+On 2012-10-22 11:44:46 Mark Brophy wrote:
+&gt;<i> Thank you!
+</I>&gt;<i> 
+</I>&gt;<i> On Oct 22, 2012 10:44 AM, &quot;ujoimro&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Okay, I will compile one tomorrow morning.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; On 2012-10-22 10:40:28 Mark Brophy wrote:
+</I>&gt;<i> &gt; &gt; Hi, thanks for your reply. I used CMake but it didn't work either.
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; On Oct 22, 2012 9:08 AM, &quot;ujoimro&quot; &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt; &gt; Hello,
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; Is there any particular reason that You're not using CMake for
+</I>&gt;<i> &gt; &gt; &gt; building Pink?
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; Laszlo
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; On 2012-10-19 21:56:17 Mark Brophy wrote:
+</I>&gt;<i> &gt; &gt; &gt; &gt; Hi all, I hate to resort to spamming the mailing list, but
+</I>&gt;<i> &gt; &gt; &gt; &gt; I'm
+</I>&gt;<i> &gt; &gt; &gt; &gt; running
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; out
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; of ideas here. I'm using 32-bit Ubuntu 11.10, I've installed
+</I>&gt;<i> &gt; &gt; &gt; &gt; all of
+</I>&gt;<i> &gt; &gt; &gt; &gt; the
+</I>&gt;<i> &gt; &gt; &gt; &gt; pre-requirements, but when I run ./makelin I eventually get
+</I>&gt;<i> &gt; &gt; &gt; &gt; the
+</I>&gt;<i> &gt; &gt; &gt; &gt; following when compiling from the mercurial repo. Can anyone
+</I>&gt;<i> &gt; &gt; &gt; &gt; tell
+</I>&gt;<i> &gt; &gt; &gt; &gt; me how to resolve this?
+</I>&gt;<i> &gt; &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; *
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; ./linux/obj/libpink.a(mcgraphe.o): In function `RootTree':
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1855: undefined reference to `CreeFifoVide'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1871: undefined reference to `FifoPush'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1875: undefined reference to `FifoPop'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1883: undefined reference to `FifoPush'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1893: undefined reference to `FifoPush'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1873: undefined reference to `FifoVide'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1898: undefined reference to `FifoTermine'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; ./linux/obj/libpink.a(mcgraphe.o): In function `DistRoot':
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1917: undefined reference to `CreeFifoVide'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1921: undefined reference to `FifoPush'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1925: undefined reference to `FifoPop'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1932: undefined reference to `FifoPush'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1923: undefined reference to `FifoVide'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:1937: undefined reference to `FifoTermine'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; ./linux/obj/libpink.a(mcgraphe.o): In function `Lee':
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2078: undefined reference to `CreeFifoVide'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2082: undefined reference to `FifoPush'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2086: undefined reference to `FifoPop'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2093: undefined reference to `FifoPush'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2084: undefined reference to `FifoVide'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2098: undefined reference to `FifoTermine'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; ./linux/obj/libpink.a(mcgraphe.o): In function `LeeNO':
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2117: undefined reference to `CreeFifoVide'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2121: undefined reference to `FifoPush'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2125: undefined reference to `FifoPop'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2132: undefined reference to `FifoPush'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2141: undefined reference to `FifoPush'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2123: undefined reference to `FifoVide'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:2146: undefined reference to `FifoTermine'
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; ./linux/obj/libpink.a(mcgraphe.o): In function `ldrawgraph':
+</I>&gt;<i> &gt; /home/mbrophy/Downloads/pink-4ac759aeda47/pink-4ac759aeda47/./src/lib/mc
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; &gt; grap&gt;
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; he.c:3326: undefined reference to `ldrawline'
+</I>&gt;<i> &gt; &gt; &gt; &gt; collect2: ld returned 1 exit status
+</I>&gt;<i> &gt; &gt; &gt; &gt; make: *** [linux/bin/graph2pgm] Error 1
+</I>&gt;<i> &gt; &gt; &gt; &gt; *
+</I>&gt;<i> &gt; &gt; &gt; &gt; Alternatively, if anyone could point me to a 32-bit deb then
+</I>&gt;<i> &gt; &gt; &gt; &gt; I'd be
+</I>&gt;<i> &gt; &gt; &gt; &gt; infinitely grateful.
+</I>&gt;<i> &gt; &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; &gt; Best,
+</I>&gt;<i> &gt; &gt; &gt; &gt; Mark
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; _______________________________________________
+</I>&gt;<i> &gt; &gt; &gt; Pink-image-devel mailing list
+</I>&gt;<i> &gt; &gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> &gt; &gt; &gt; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>-------------- next part --------------
+# Pink's Debian Config File
+
+set( 64BIT ON CACHE BOOL &quot;desc.&quot; )
+set( BASH_FRONT_END ON CACHE BOOL &quot;desc.&quot; )
+set( BOOST_INCLUDEDIR /usr/include CACHE PATH &quot;desc.&quot; )
+set( BUILD_DOCUMENTATION OFF CACHE BOOL &quot;desc.&quot; )
+set( Boost_INCLUDE_DIR /usr/include CACHE PATH &quot;desc.&quot; )
+set( Boost_LIBRARY_DIRS /usr/lib CACHE PATH &quot;desc.&quot; )
+set( CMAKE_BUILD_TYPE Release CACHE STRING &quot;desc.&quot; )
+set( CMAKE_COLOR_MAKEFILE ON CACHE BOOL &quot;desc.&quot; )
+set( CMAKE_CXX_FLAGS_RELEASE &quot;-Wl,--no-as-needed -lpython2.7 -O3 -DNDEBUG -msse -msse2&quot; CACHE STRING &quot;desc.&quot; )
+set( CMAKE_C_FLAGS_RELEASE &quot;-Wl,--no-as-needed -lpython2.7 -O3 -DNDEBUG -msse -msse2&quot; CACHE STRING  &quot;desc.&quot; )
+set( CMAKE_REQUIRED_FLAGS &quot;-Wl,--no-as-needed -lpython2.7&quot; CACHE STRING &quot;desc.&quot; ) 
+set( CMAKE_INSTALL_PREFIX install CACHE  STRING &quot;desc.&quot; )
+set( CMAKE_PROJECT_NAME pink CACHE  STRING &quot;desc.&quot; )
+set( CMAKE_VERBOSE_MAKEFILE ON CACHE BOOL &quot;desc.&quot; )
+set( DEVELOPMENT ON CACHE BOOL &quot;desc.&quot; )
+set( EIGEN_INCLUDE /usr/include CACHE PATH &quot;desc.&quot; )
+set( NUMA OFF CACHE BOOL &quot;desc.&quot; )
+set( OPENCL OFF CACHE BOOL &quot;desc.&quot; )
+set( PYTHON_FRONT_END ON CACHE BOOL &quot;desc.&quot; )
+set( SIMD ON CACHE PATH &quot;desc.&quot; )
+
+# LuM end of file
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000171.html">[Pink-image-devel] undefined reference to CreeFifoVide, etc
+</A></li>
+	<LI>Next message: <A HREF="000173.html">[Pink-image-devel] Fwd: missing function in pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#172">[ date ]</a>
+              <a href="thread.html#172">[ thread ]</a>
+              <a href="subject.html#172">[ subject ]</a>
+              <a href="author.html#172">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

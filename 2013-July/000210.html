@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Patches &amp; new things
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Patches%20%26%20new%20things&In-Reply-To=%3C1588142.yWyKKgXKrH%40anyu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000209.html">
+   <LINK REL="Next"  HREF="000216.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Patches &amp; new things</H1>
+    <B>ujoimro</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Patches%20%26%20new%20things&In-Reply-To=%3C1588142.yWyKKgXKrH%40anyu%3E"
+       TITLE="[Pink-image-devel] Patches &amp; new things">ujoimro at gmail.com
+       </A><BR>
+    <I>Mon Jul  8 14:20:22 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000209.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+        <LI>Next message: <A HREF="000216.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#210">[ date ]</a>
+              <a href="thread.html#210">[ thread ]</a>
+              <a href="subject.html#210">[ subject ]</a>
+              <a href="author.html#210">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Dear Kacper, 
+
+we are very delighted to see You being interested in Pink.  About the versions 
+that You have been maintaining: mercurial (the source code manager) of Pink is 
+fully capable of managing Your separate versions of Pink. It is also capable 
+of pulling the new changes from us (the default, main branch) and keeping Your 
+changes. For this You do not need any access. You can also save Your changes 
+into the repository on Your machine and still receive the changes from pinkhq.
+
+About Your patches: I will review Your changes, but the simplest long-term 
+solution is to give You access to the Pink repository. There is a testing 
+repository, which is less developed as the library itself, and I can give You 
+access to that repository too. 
+
+To learn to use mercurial, I would just ask You to prepare Your patches in 
+&quot;mercurial&quot; form  using the following tutorial:
+
+<A HREF="http://mercurial.selenic.com/wiki/Workflows#One-off_patch_submission">http://mercurial.selenic.com/wiki/Workflows#One-off_patch_submission</A>
+
+after I have reviewed Your changes I can give You full access to the mercurial 
+repository and You can merge back Your patches if You like.
+
+I hope to hear about You soon, 
+
+Cordially, 
+
+Laszlo
+ 
+
+On 2013-07-07 23:41:17 Kacper Pluta wrote:
+&gt;<i> Dear All,
+</I>&gt;<i> 
+</I>&gt;<i> My name is Kacper Pluta and I'm the master student from Poland. Since 2011 I
+</I>&gt;<i> have been working with Ph.D Janaszewski and M.Sc. Postolski. We use Pink
+</I>&gt;<i> and libpink very widely and I just need to say that: Pink is great and
+</I>&gt;<i> thank you for your work and sharing it as open source.
+</I>&gt;<i> 
+</I>&gt;<i> Unfortunately we have been using too many versions of Pink, sometimes with
+</I>&gt;<i> our patches, and some time ago I have come to the conclusion that the only
+</I>&gt;<i> way out of this situation is to support the main source of pink and drop
+</I>&gt;<i> all of the old versions.
+</I>&gt;<i> 
+</I>&gt;<i> Today I want to say &quot;Hello&quot; and send you only few things but as I mentioned
+</I>&gt;<i> I want to support your work.
+</I>&gt;<i> 
+</I>&gt;<i> List of content( <A HREF="https://www.wuala.com/hilsim/Pink-070713/?key=r7tLZWtAhMTP">https://www.wuala.com/hilsim/Pink-070713/?key=r7tLZWtAhMTP</A>
+</I>&gt;<i> ):
+</I>&gt;<i> 
+</I>&gt;<i> Patches:
+</I>&gt;<i> 
+</I>&gt;<i> -- Patch for raw2pgm(file raw2pgm.c.patch):
+</I>&gt;<i> ---- short data type support now work properly
+</I>&gt;<i> 
+</I>&gt;<i> -- Patches for ltangent.cxx(file ltangent.cxx.patch):
+</I>&gt;<i> ---- wrong memory releases,
+</I>&gt;<i> ---- memory leaks(debugged with Valgrind),
+</I>&gt;<i> ---- nan values in output of lambdaMST2/3D (debugged with C99 function
+</I>&gt;<i> feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW))
+</I>&gt;<i> 
+</I>&gt;<i> New things:
+</I>&gt;<i> 
+</I>&gt;<i> -- Bridge between libpink and ITK(files ImageTypeConverter.h,
+</I>&gt;<i> ImageTypeConverter.hxx)
+</I>&gt;<i> 
+</I>&gt;<i> -- Adaptive medial axis described in M. Postolski Ph.D. thesis (file:
+</I>&gt;<i> adaptivemedialaxis.c) I also added files of airway tree to compare this
+</I>&gt;<i> method with lambdamedialaxis(files; medial.png(threshold: 2.5),
+</I>&gt;<i> adaptive.png(threshold: 0.65), tree.png)
+</I>&gt;<i> 
+</I>&gt;<i> -- changevalue.c - swap value in input file to another(equivalent may
+</I>&gt;<i> already exist).
+</I>&gt;<i> 
+</I>&gt;<i> Finally, I would like to ask about the test files. For example in file
+</I>&gt;<i> lambdamedialaxis.c there are references to file:
+</I>&gt;<i> 
+</I>&gt;<i> %IMAGES/2dbyte/binary/b2hebreu.pgm
+</I>&gt;<i> 
+</I>&gt;<i> but in pink dir &quot;images&quot; it not exist.
+</I>-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 198 bytes
+Desc: This is a digitally signed message part.
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130708/dbca717d/attachment.pgp">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130708/dbca717d/attachment.pgp</A>&gt;
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000209.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+	<LI>Next message: <A HREF="000216.html">[Pink-image-devel] Patches &amp; new things
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#210">[ date ]</a>
+              <a href="thread.html#210">[ thread ]</a>
+              <a href="subject.html#210">[ subject ]</a>
+              <a href="author.html#210">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

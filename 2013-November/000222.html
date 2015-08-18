@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Mac OSX trials to build Pink with cmake
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-November/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Mac%20OSX%20trials%20to%20build%20Pink%20with%20cmake&In-Reply-To=%3C9DF02DCD-445C-4537-A31D-FCF440F19BF4%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000221.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Mac OSX trials to build Pink with cmake</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Mac%20OSX%20trials%20to%20build%20Pink%20with%20cmake&In-Reply-To=%3C9DF02DCD-445C-4537-A31D-FCF440F19BF4%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Mac OSX trials to build Pink with cmake">hugues.talbot at esiee.fr
+       </A><BR>
+    <I>Sun Nov  3 23:42:52 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000221.html">[Pink-image-devel] Mac OSX trials to build Pink with cmake
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#222">[ date ]</a>
+              <a href="thread.html#222">[ thread ]</a>
+              <a href="subject.html#222">[ subject ]</a>
+              <a href="author.html#222">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Karsten,
+
+Thanks, you are quite right that an effort is necessary to make compiling Pink much easier. At the moment it is barely feasible.
+
+Normally malloc.h should *not* be used at all, it is not an ISO standard header. #include &lt;stdlib.h&gt; should be used instead.
+
+<A HREF="http://stackoverflow.com/questions/12973311/difference-between-stdlib-h-and-malloc-h">http://stackoverflow.com/questions/12973311/difference-between-stdlib-h-and-malloc-h</A>
+
+I also think some parts the library should be put into experimental rather than maintree ; also compiling the command-line version should be feasible from cmake, which is not the case at the moment.
+
+Thanks again for looking into this.
+
+All the best.
+
+
+On Nov 3, 2013, at 11:30 PM, Karsten &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">karo03de at gmail.com</A>&gt; wrote:
+
+&gt;<i> 
+</I>&gt;<i> Hi everybody,
+</I>&gt;<i> 
+</I>&gt;<i> from a colleague I heard that building Pink makes problems. In fact, using makeli64 on my Mac stopped building pgm2GA and diZenzo. Both programs claimed definitions of lderiche3d not in the makefile! Commenting both in general.make let at least finish the build.
+</I>&gt;<i> 
+</I>&gt;<i> After this partial success I continued:
+</I>&gt;<i> Occasionally I tried to build Pink with cmake on my Mac (OS X 10.8.5), up to today always without success. Still today, after a new effort it looks much better than ever before.
+</I>&gt;<i> 
+</I>&gt;<i> First:
+</I>&gt;<i> Some additions in the library and include definition part of the CMakeLists.txt (I am using MacPorts located in /opt/local and X11 in /opt/X11) had also to be reflected in the default include file search path (CPATH) of the compiler (I have Xcode 5 installed).
+</I>&gt;<i> 
+</I>&gt;<i> Second
+</I>&gt;<i> There are some files trying to include malloc.h not existent on Mac: ldilutbin3d, lprofile, mcscene. I replaced the include directive by
+</I>&gt;<i> 
+</I>&gt;<i> #if !defined (__APPLE__)
+</I>&gt;<i> #include &lt;malloc.h&gt;
+</I>&gt;<i> #endif
+</I>&gt;<i> 
+</I>&gt;<i> Third besides lots of warnings (Xcode 5 installs clang as the standard compiler) there was one error
+</I>&gt;<i> 
+</I>&gt;<i> In file included from /.../pink_v/pink/src/lib/liar_fseries.cxx:54:
+</I>&gt;<i> In file included from /.../pink_v/pink/include/pink.h:323:
+</I>&gt;<i> /.../pink_v/pink/include/uiSqhool.hpp:195:17: error: default arguments cannot be added to a function template that has already been declared
+</I>&gt;<i>                                std::string full_path=&quot;&quot;
+</I>&gt;<i> 
+</I>&gt;<i> I deleted in uiSqhool.hpp:195 the default argument =&quot;&quot; .
+</I>&gt;<i> 
+</I>&gt;<i> Forth I switched over to gcc-apple-4.2 from MacPorts. This reduced considerably the number of warnings.
+</I>&gt;<i> 
+</I>&gt;<i> Fifth I have still problems with the built of several modules most probably resulting from link problems of liar_line and liar_fseries concerning missing references in boost!
+</I>&gt;<i> 
+</I>&gt;<i> Undefined symbols for architecture x86_64:
+</I>&gt;<i>  &quot;boost::system::system_category()&quot;, referenced from:
+</I>&gt;<i>      __static_initialization_and_destruction_0(int, int)in liar_fseries.cxx.o
+</I>&gt;<i>      __static_initialization_and_destruction_0(int, int)in liar_line.cxx.o
+</I>&gt;<i>  &quot;boost::system::generic_category()&quot;, referenced from:
+</I>&gt;<i>      __static_initialization_and_destruction_0(int, int)in liar_fseries.cxx.o
+</I>&gt;<i>      __static_initialization_and_destruction_0(int, int)in liar_line.cxx.o
+</I>&gt;<i> ld: symbol(s) not found for architecture x86_64
+</I>&gt;<i> 
+</I>&gt;<i> I don't know if only I have all these problems with cmake of pink. I would appreciate to hear from other (Mac-)Users about their experiences. Up to now I have only tried the bash_front_end to build. I don't know when I am encouraged enough to start with the python_front_end.
+</I>&gt;<i> 
+</I>&gt;<i> Regards
+</I>&gt;<i> Karsten
+</I>&gt;<i> 
+</I>&gt;<i> PS my cmake configuration
+</I>&gt;<i> 
+</I>&gt;<i> 64BIT                            ON                                                                                                                                        
+</I>&gt;<i> BASH_FRONT_END                   ON                                                                                                                                        
+</I>&gt;<i> BOOST_INCLUDEDIR                 /opt/local/include                                                                                                                        
+</I>&gt;<i> BUILD_DOCUMENTATION              OFF                                                                                                                                       
+</I>&gt;<i> CFITSIO_DIR                      CFITSIO_DIR-NOTFOUND                                                                                                                      
+</I>&gt;<i> CMAKE_BUILD_TYPE                 Release                                                                                                                                   
+</I>&gt;<i> CMAKE_INSTALL_PREFIX             /usr/local                                                                                                                                
+</I>&gt;<i> CMAKE_OSX_ARCHITECTURES                                                                                                                                                    
+</I>&gt;<i> CMAKE_OSX_DEPLOYMENT_TARGET                                                                                                                                                
+</I>&gt;<i> CMAKE_OSX_SYSROOT                                                                                                                                                          
+</I>&gt;<i> DEVELOPMENT                      OFF                                                                                                                                       
+</I>&gt;<i> GSLCBLAS_LIB                     /opt/local/lib/libgslcblas.dylib                                                                                                          
+</I>&gt;<i> GSL_INCLUDE                      /opt/local/include                                                                                                                        
+</I>&gt;<i> GSL_LIB                          /opt/local/lib/libgsl.dylib                                                                                                               
+</I>&gt;<i> LAPACK_LIB                       /usr/lib/liblapack.dylib                                                                                                                  
+</I>&gt;<i> MATH_LIB                         /usr/lib/libm.dylib                                                                                                                       
+</I>&gt;<i> NUMA                             OFF                                                                                                                                       
+</I>&gt;<i> OPENCL                           OFF                                                                                                                                       
+</I>&gt;<i> PINKTEST_DIRECTORY               /Users/karo/sw/pink_v/pink/&quot;../Pinktest&quot;                                                                                                  
+</I>&gt;<i> PINK_PACKAGE_TYPE                TBZ2                                                                                                                                      
+</I>&gt;<i> PYTHON_FRONT_END                 OFF                                                                                                                                       
+</I>&gt;<i> SIMD                             ON                                                                                                                                        
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Pink-image-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20131103/5e481446/attachment-0001.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20131103/5e481446/attachment-0001.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000221.html">[Pink-image-devel] Mac OSX trials to build Pink with cmake
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#222">[ date ]</a>
+              <a href="thread.html#222">[ thread ]</a>
+              <a href="subject.html#222">[ subject ]</a>
+              <a href="author.html#222">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Python glue function with output image with	different size as input
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-May/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Python%20glue%20function%20with%20output%20image%20with%0A%09different%20size%20as%20input&In-Reply-To=%3C4F7543B6-C253-4E95-9811-ABAD68957851%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Python glue function with output image with	different size as input</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Python%20glue%20function%20with%20output%20image%20with%0A%09different%20size%20as%20input&In-Reply-To=%3C4F7543B6-C253-4E95-9811-ABAD68957851%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Python glue function with output image with	different size as input">h.talbot at esiee.fr
+       </A><BR>
+    <I>Thu May  2 14:02:09 CEST 2013</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#197">[ date ]</a>
+              <a href="thread.html#197">[ thread ]</a>
+              <a href="subject.html#197">[ subject ]</a>
+              <a href="author.html#197">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Laszlo,
+
+In most examples of wrapped pink function for the python front end, the output image is the same as one of the input image, ie one of the input image is overwritten.
+
+In some cases, this is not a workable proposition. I am trying to wrap a function that rotates an image in 3D, and the output is larger than the input in all 3 dimensions and so we cannot simply reuse one of the input image.
+
+Do you have an example where the output image is of unknown  dimensions ? I was thinking of using the 'readimage' type example, but these function treat the pixel type explicitly. I think I can make it work but I'm wondering if you have encountered the issue before.
+
+Thanks in advance 
+
+Cheers.
+
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+Experience is not what happens to a man; it is what a man does with what happens to him. -Aldous Huxley, novelist (1894-1963) 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130502/e4b814ee/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130502/e4b814ee/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#197">[ date ]</a>
+              <a href="thread.html#197">[ thread ]</a>
+              <a href="subject.html#197">[ subject ]</a>
+              <a href="author.html#197">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

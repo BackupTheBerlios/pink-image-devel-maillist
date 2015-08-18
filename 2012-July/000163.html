@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Pink Windows(tm) Port
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20Windows%28tm%29%20Port&In-Reply-To=%3C49886EB9-3B62-4A84-9BA1-54FAD13C1BFC%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000162.html">
+   <LINK REL="Next"  HREF="000164.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Pink Windows(tm) Port</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Pink%20Windows%28tm%29%20Port&In-Reply-To=%3C49886EB9-3B62-4A84-9BA1-54FAD13C1BFC%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Pink Windows(tm) Port">hugues.talbot at gmail.com
+       </A><BR>
+    <I>Tue Jul 24 11:19:11 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000162.html">[Pink-image-devel] Pink Windows(tm) Port
+</A></li>
+        <LI>Next message: <A HREF="000164.html">[Pink-image-devel] Pink Windows(tm) Port
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Named pipes do indeed exist under windows
+
+<A HREF="http://en.wikipedia.org/wiki/Named_pipe">http://en.wikipedia.org/wiki/Named_pipe</A>
+<A HREF="http://www.drdobbs.com/windows/using-named-pipes-to-connect-a-gui-to-a/231903148">http://www.drdobbs.com/windows/using-named-pipes-to-connect-a-gui-to-a/231903148</A>
+<A HREF="http://www.cplusplus.com/forum/articles/11168">http://www.cplusplus.com/forum/articles/11168</A>
+
+However we will have to write a dedicated code path for Windows. 
+
+The named pipe is used to communicate the socket port number between the client (pink) and the server (imview), which varies from instance to instance.
+
+I don't think I'll have time to look into this until end of August.
+
+
+On 24 Jul 2012, at 24 Jul, 10:42, ujoimro wrote:
+
+&gt;<i> Dear Pink Users, 
+</I>&gt;<i> 
+</I>&gt;<i> After much work I have managed to change Pink's CMake file to also compile on 
+</I>&gt;<i> Windows(tm).
+</I>&gt;<i> 
+</I>&gt;<i> I have created packages with an installer for Python 2.6 64bit and Python 2.7 
+</I>&gt;<i> 64bit. These packages a continuously built after each commit in the repository 
+</I>&gt;<i> together with the Linux packages. The packages are full and contain all the 
+</I>&gt;<i> standart and development operators. 
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="https://www.pinkhq.com/download/packages/pink/windows/">https://www.pinkhq.com/download/packages/pink/windows/</A>
+</I>&gt;<i> 
+</I>&gt;<i> What is missing: The Python 3.2 package does not compile yet, and I will only 
+</I>&gt;<i> investigate it later. The imview function is not yet ready as it is using 
+</I>&gt;<i> named pipes which are not present on Windows(tm). The unit tests are not 
+</I>&gt;<i> applied. 
+</I>&gt;<i> 
+</I>&gt;<i> Now the compilation is much more difficult than on Linux. It includes the need 
+</I>&gt;<i> to compile all the dependencies by hand. For those who would like to try it 
+</I>&gt;<i> all the config files and scripts used to build the packages are in the 
+</I>&gt;<i> repository at pink/data/configs/*.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Cordially, 
+</I>&gt;<i> 
+</I>&gt;<i> Laszlo Marak
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Pink-image-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000162.html">[Pink-image-devel] Pink Windows(tm) Port
+</A></li>
+	<LI>Next message: <A HREF="000164.html">[Pink-image-devel] Pink Windows(tm) Port
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

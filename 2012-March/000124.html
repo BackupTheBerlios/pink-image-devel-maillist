@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Crash continues on 1.49
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-March/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Crash%20continues%20on%201.49&In-Reply-To=%3CB306449C-500B-489C-8CB8-21CAD61559EF%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000123.html">
+   <LINK REL="Next"  HREF="000125.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Crash continues on 1.49</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Crash%20continues%20on%201.49&In-Reply-To=%3CB306449C-500B-489C-8CB8-21CAD61559EF%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Crash continues on 1.49">hugues.talbot at gmail.com
+       </A><BR>
+    <I>Sat Mar  3 20:55:27 CET 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000123.html">[Pink-image-devel] Default arguments crash pink-python on OSX 10.7
+</A></li>
+        <LI>Next message: <A HREF="000125.html">[Pink-image-devel] Lots of grief on OSX
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#124">[ date ]</a>
+              <a href="thread.html#124">[ thread ]</a>
+              <a href="subject.html#124">[ subject ]</a>
+              <a href="author.html#124">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello All,
+
+Still on OSX 10.7, unable to import pink into python.
+
+I've compiled my own version of the latest boost, with the latest gcc available: version 4.6.1
+This was a little painful, and this makes no difference
+
+I'm sure I'm using the hand-compiled boost because I've uninstalled the port version.
+
+&gt;<i> Continuing.
+</I>&gt;<i> Python 2.7.2 (default, Feb  4 2012, 14:38:23) 
+</I>&gt;<i> [GCC 4.2.1 Compatible Apple Clang 3.0 (tags/Apple/clang-211.10.1)] on darwin
+</I>&gt;<i> Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+</I>&gt;<i> &gt;&gt;&gt; import pink
+</I>
+many many lines
+...
+&gt;<i> Program received signal EXC_BAD_ACCESS, Could not access memory.
+</I>&gt;<i> Reason: KERN_INVALID_ADDRESS at address: 0x0000000000000000
+</I>&gt;<i> 0x000000010308d672 in PyInt_FromLong ()
+</I>&gt;<i> (gdb) bt 10
+</I>&gt;<i> #0  0x000000010308d672 in PyInt_FromLong ()
+</I>&gt;<i> #1  0x00000001010365b0 in arg_to_python (this=0x7fff5fbfab20, x=@0x7fff5fbfad2c) at builtin_converters.hpp:122
+</I>&gt;<i> #2  0x0000000101036a7a in boost::python::api::object_initializer_impl&lt;false, false&gt;::get&lt;int&gt; (x=@0x7fff5fbfad2c) at object_core.hpp:393
+</I>&gt;<i> #3  0x000000010108e7a3 in boost::python::api::object_base_initializer&lt;int&gt; (x=@0x7fff5fbfad2c) at object_core.hpp:315
+</I>&gt;<i> #4  0x0000000101036802 in object&lt;int&gt; (this=0x7fff5fbfabc0, x=@0x7fff5fbfad2c) at object_core.hpp:334
+</I>&gt;<i> #5  0x0000000101036676 in boost::python::detail::keywords&lt;1ul&gt;::operator=&lt;int&gt; (this=0x7fff5fbfad30, value=@0x7fff5fbfad2c) at args.hpp:74
+</I>&gt;<i> #6  0x0000000101290d11 in skeleton2_export () at /Users/talbot/projects/pink/Pink_MC_SVN/trunk/src/python/pyskeleton2.cpp:302
+</I>&gt;<i> #7  0x000000010122698a in init_module_libcpp_pink () at /Users/talbot/projects/pink/Pink_MC_SVN/trunk/src/python/pypink.cpp:365
+</I>&gt;<i> #8  0x0000000100759783 in boost::python::handle_exception_impl (f=&lt;value temporarily unavailable, due to optimizations&gt;) at function_template.hpp:760
+</I>&gt;<i> Previous frame inner to this frame (gdb could not unwind past this frame)
+</I>
+
+
+So this is not a &quot;feature&quot; of the Apple compiler. I'm beginning to think this is actually documented boost behaviour, see
+
+<A HREF="http://www.boost.org/doc/libs/1_49_0/libs/python/doc/v2/callbacks.html">http://www.boost.org/doc/libs/1_49_0/libs/python/doc/v2/callbacks.html</A>
+
+in particular this quote:
+
+boost::reference_wrapper&lt;T&gt;	The Python argument contains a pointer to, rather than a copy of, x.get(). Note: failure to ensure that no Python code holds a reference to the resulting object beyond the lifetime of *x.get()may result in a crash!
+
+This is exactly where our crash occurs.
+
+&gt;<i> (gdb) up
+</I>&gt;<i> #1  0x00000001010365b0 in arg_to_python (this=0x7fff5fbfab20, x=@0x7fff5fbfad2c) at builtin_converters.hpp:122
+</I>&gt;<i> 122     BOOST_PYTHON_TO_INT(int)
+</I>&gt;<i> Current language:  auto; currently c++
+</I>&gt;<i> (gdb) up
+</I>&gt;<i> #2  0x0000000101036a7a in boost::python::api::object_initializer_impl&lt;false, false&gt;::get&lt;int&gt; (x=@0x7fff5fbfad2c) at object_core.hpp:393
+</I>&gt;<i> 393               return python::incref(converter::arg_to_python&lt;T&gt;(x).get());
+</I>
+
+
+If so, this will never go away. We must conclude that our current way to handle default arguments is incorrect.
+
+
+Hugues Talbot
+<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">h.talbot at esiee.fr</A>
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120303/21ad346a/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120303/21ad346a/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000123.html">[Pink-image-devel] Default arguments crash pink-python on OSX 10.7
+</A></li>
+	<LI>Next message: <A HREF="000125.html">[Pink-image-devel] Lots of grief on OSX
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#124">[ date ]</a>
+              <a href="thread.html#124">[ thread ]</a>
+              <a href="subject.html#124">[ subject ]</a>
+              <a href="author.html#124">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

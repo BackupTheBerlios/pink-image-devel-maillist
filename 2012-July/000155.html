@@ -1,0 +1,260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] My very recent experience compiling pink on	CentOS 6.3
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2012-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20My%20very%20recent%20experience%20compiling%20pink%20on%0A%09CentOS%206.3&In-Reply-To=%3C86F4616B-0043-4ADD-81D0-A40E3ECD7E08%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000156.html">
+   <LINK REL="Next"  HREF="000157.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] My very recent experience compiling pink on	CentOS 6.3</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20My%20very%20recent%20experience%20compiling%20pink%20on%0A%09CentOS%206.3&In-Reply-To=%3C86F4616B-0043-4ADD-81D0-A40E3ECD7E08%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] My very recent experience compiling pink on	CentOS 6.3">h.talbot at esiee.fr
+       </A><BR>
+    <I>Tue Jul 17 21:14:15 CEST 2012</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000156.html">[Pink-image-devel] Minimum version for Boost ?
+</A></li>
+        <LI>Next message: <A HREF="000157.html">[Pink-image-devel] My very recent experience compiling pink on	CentOS 6.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#155">[ date ]</a>
+              <a href="thread.html#155">[ thread ]</a>
+              <a href="subject.html#155">[ subject ]</a>
+              <a href="author.html#155">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+This message is not to apportion blame or really complain, this is more like a log of what one might experience while trying to compile pink on a Linux machine, and perhaps some suggestions at the end.
+Pink is mainly developed under Linux, so I was hoping for a bit of a pleasant experience, but not really.
+
+First this was on a machine were I did not have access to, so the sysadmin on this machine tried first on his own, but failed. Then he tried to have me help him over the phone. We tried for a couple of days but could get nowhere. Eventually I was granted access and I was able to succeed, but not without a lot of efforts.
+
+0- It is not obvious to find the source Pink.
+
+Find the distribution on <A HREF="http://www.pinkhq.com">http://www.pinkhq.com</A> ; under the Source tab, on the left click Repository then on the *RIGHT* there is a menu under the Mercurial logo. Click any of the bz2, zip or gz button, although for Linux bz2 is best.
+
+00- It is not obvious how to get started
+
+For some reason, the pink source distribution is called tip.tar.bz2 ; this should be changed
+
+I assume here that you have downloaded the tar.bz2 version, under ${HOME}/Download/tip.tar.bz2
+
+- Unpack the source somewhere you have write access to, for example ${HOME}/Pink 
+
+	mkdir ${HOME}/Pink
+	cd ${HOME}/Pink
+	tar jxvf ${HOME}/Download/tip.tar.bzw
+
+This should create the source directory called pink-blababla ; mine was called pink-ddcd360a3e95 ; this is unclear as well.
+
+- create ANOTHER directory, for instance ${HOME}/Pink-compile
+
+- cd ${HOME}/Pink-compile
+
+- now type 
+
+	ccmake ${HOME}/pink-blablabla/  
+
+	this is not obvious is one does not know cmake.
+
+	However, before going through this, one must attend the prerequisites.
+
+A- Prerequisite
+
+Pink has a few prerequisite, including the various computing libraries like BLAS, GSL, LAPACK and of course BOOST and last but not least a working version of Python
+only version 2.6 and 2.7 are really supported at this stage.
+
+I did not compile in the various experimental option, but the prerequisite vary for these as well.
+
+BOOST really need to be at version 1.37 or better ; I can confirm it works with 1.41, which comes with CentOS, even though it complains at configuration time.
+
+Pink DOES NOT require CFITSIO even though it complains all the time about it. Just ignore the warnings  with a succession of 'e', 'c'
+
+Most of the prerequisite had been well handled by the sysadmin, I did not have to intervene here.
+
+B- Configuration
+
+The main problem here, is when trying to configure itself, pink complains about issues that are not relevant.
+
+B1- first run
+
+type
+
+ ccmake ${HOME}/pink-blablabla
+
+then type 'c' for configuring	
+
+cmake complains about CFITSIO ; we don't need it ; it should not complain endlessly like that.
+
+type 'e' to exit &quot;help&quot;
+
+leave everything the way they are, only change in the menu PYTHON_FRONT_END from OFF to ON (type enter)
+
+
+B2- second run
+
+type 'c' again to reconfigure
+
+ ccmake complains again about CFITSIO ; jeez
+
+ Then:
+
+  CMake Error at CMakeLists.txt:375 (message):
+   error boost/shared_ptr.hpp does not compile.  Check if its correctly
+   installed.  You may need a newer version.
+
+This would indicate to the untrained eye that the version of boost we have is too old. Alas this is incorrect
+
+
+ CMake Error: The following variables are used in this project, but they are set to NOTFOUND.
+ Please set them or make sure they are set and tested correctly in the CMake files:
+ PYTHON_INCLUDE_DIR (ADVANCED)
+    used as include directory in directory /home/administrateur/Pink/pink-ddcd360a3e95
+
+This is the more serious error, the one we should attend to
+
+B3- third run
+
+We could waste a lot of time chasing the boost issue. However, checking the error logs, one finds that this is in fact a non-issue.
+Let us attend the last error instead
+
+'e' to exit help.
+
+ccmake indicates that it cannot find the python include ; which is very strange. However I wanted to use the Enthought version of Python, which was installed under /opt/local/epd-7.3-1-rh5-x86_64/
+
+There is an 'include' directory there, but this is NOT the one pink wants, it wants /opt/local/epd-7.3-1-rh5-x86_64/include/python-2.7 ; so this is what we should put under Both PYTHON_INCLUDE
+and PYTHON_INCLUDE_DIR
+
+B4- fourth run
+
+type 'c' to configure again, It complains about CFITSIO of course, and again about boost/shared_ptr not compiling but we are going to ignore those
+
+Now there is a new error, this time it wants the Python library.
+
+Note that there exists a /opt/local/epd-7.3-1-rh5-x86_64/lib ; but this NOT what pink wants. It wants /opt/local/epd-7.3-1-rh5-x86_64/lib/libpython2.7.so ; this is again not obvious.
+
+if you do not attend to this, the configuration will never succeed. I was only able to fix this by looking at the error logs and guessing.
+
+so set PYTHON_LIBRARY to /opt/local/epd-7.3-1-rh5-x86_64/lib/libpython2.7.so
+
+B5- fifth run
+
+type 'c' again, it complains about CFITSIO of course, but nothing more. No longer any complaint about boost/shared_ptr ; which was a red herring.
+
+Now however, it want you to specify the python interpreter, even though we have specified the include directory, the library and so one earlier. It guesses the wrong ones: /usr/bin/python
+
+Specify the right versions:
+
+PYTHON_DOCUMENTATION_EXE	set to /opt/local/epd-7.3-1-rh5-x86_64/bin/python  
+and
+PYTHON_EXE	set to /opt/local/epd-7.3-1-rh5-x86_64/bin/ipython (recommended !)
+
+It wants the 
+
+PYTHON_MODULE_INSTALL_PATH  ; which is wrong again, set it to ; /opt/local/epd-7.3-1-rh5-x86_64/lib/python2.7/site-packages
+
+B6- sixth run
+
+type 'c' one more time, go through the CFITSIO warning again ('e')
+
+Now at last we can generate !!! type 'g'
+
+C- Generate and compile,
+
+type 'g'
+
+at the shell prompt, make -j 4 (at least 4, I put 60 on this machine, which has 80 cores)
+
+watch the compilation, ignore the warnings (there are way too many warnings).
+
+
+D- Run and test
+
+ ./pink.sh
+Enthought Python Distribution -- www.enthought.com
+
+Python 2.7.3 |EPD 7.3-1 (64-bit)| (default, Apr 11 2012, 17:52:16) 
+Type &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+
+IPython 0.12.1 -- An enhanced Interactive Python.
+?         -&gt; Introduction and overview of IPython's features.
+%quickref -&gt; Quick reference.
+help      -&gt; Python's own help system.
+object?   -&gt; Details about 'object', use 'object??' for extra details.
+
+In [1]: import pink
+Warning: could not initialize windowing, try to install python-tk or tkinter
+
+
+This is actually OK.
+
+There is a test suite but I haven't tried that yet.
+
+
+E- CONCLUSION
+
+I did not log all the failed frustrating attempts, this is like a walkthrough, the smallest possible number of configuration runs is 6 on this machine.
+
+This is too many, and there are many non-obvious or misleading steps.
+
+We have a lot of work to do.
+
+
+
+
+
+
+
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+The plural of anecdote is not data
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120717/c8882380/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20120717/c8882380/attachment.html</A>&gt;
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000156.html">[Pink-image-devel] Minimum version for Boost ?
+</A></li>
+	<LI>Next message: <A HREF="000157.html">[Pink-image-devel] My very recent experience compiling pink on	CentOS 6.3
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#155">[ date ]</a>
+              <a href="thread.html#155">[ thread ]</a>
+              <a href="subject.html#155">[ subject ]</a>
+              <a href="author.html#155">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

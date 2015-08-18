@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Memory not being free()
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-July/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Memory%20not%20being%20free%28%29&In-Reply-To=%3C201107300020.43234.ujoimro%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000039.html">
+   <LINK REL="Next"  HREF="000041.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Memory not being free()</H1>
+    <B>Laszlo Marak</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Memory%20not%20being%20free%28%29&In-Reply-To=%3C201107300020.43234.ujoimro%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Memory not being free()">ujoimro at gmail.com
+       </A><BR>
+    <I>Sat Jul 30 00:20:38 CEST 2011</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000039.html">[Pink-image-devel] Memory not being free()
+</A></li>
+        <LI>Next message: <A HREF="000041.html">[Pink-image-devel] Memory not being free()
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello, 
+
+I have managed to reproduce the error and I've made the necessary corrections 
+in r596. In scripts, the garbage collection works as follows (in interactive 
+mode there is one exception, see below):
+readimage reads the image into the memory. There is no copy the image is 
+converted to Python object in constant time. The images are then garbage 
+collected by Python. The descructor can be invoked manually, but the 
+invocation is not necessary.
+
+Simple garbage collection:
+
+-----------------------------------------------------------------
+In [3]: I = pink.cpp.readimage(&quot;source_filtered.pgm&quot;)
+creating image '' (0x7fff9d0a21d0)
+WARNING!: copy constructors only constructs shallow copies!
+creating image '' (0x1333878)
+deleting image '' (0x7fff9d0a21d0)
+
+In [4]: I = pink.cpp.readimage(&quot;source_filtered.pgm&quot;)
+creating image '' (0x7fff9d0a21d0)
+WARNING!: copy constructors only constructs shallow copies!
+creating image '' (0x13337c0)
+deleting image '' (0x7fff9d0a21d0)
+deleting image '' (0x1333878)
+liberator_t called
+-----------------------------------------------------------------
+
+we can see in ln[3] the image is copied, but the data is only transferred. In 
+ln[4] liberator_t indicates, that the data is freed before the new image is 
+read.
+
+Manual liberation:
+
+-----------------------------------------------------------------
+In [5]: del I
+deleting image '' (0x13337c0)
+liberator_t called
+-----------------------------------------------------------------
+
+we can see, that the data is deleted (not that the liberation can also be 
+verified in ksysguard)
+
+Assignment:
+
+-----------------------------------------------------------------
+In [9]: I=J
+deleting image '' (0x1333708)
+liberator_t called
+-----------------------------------------------------------------
+
+In interactive mode, if some method is invoked implicitly, the garbage 
+collection might fail:
+
+-----------------------------------------------------------------
+In [14]: I = pink.cpp.readimage(&quot;source_filtered.pgm&quot;)
+creating image '' (0x7fff9d0a21d0)
+WARNING!: copy constructors only constructs shallow copies!
+creating image '' (0x1333aa0)
+deleting image '' (0x7fff9d0a21d0)
+
+In [15]: I
+Out[15]: uint8_t image of size '' = [ 512, 512, 512 ]
+
+In [16]: del I
+
+In [17]: 
+-----------------------------------------------------------------
+
+we can see, that neither the data nor the image is deleted. I am not sure, why 
+is this; however this case does not happen if You work with thousands of 
+images.  
+
+Note the corrections have altered the following functions:
+long2byte
+readimage with bands
+zoom
+skelcurv
+toposhrink
+skeleton
+
+If some of them don't work, this patch should be the first to check.
+
+good luck,
+
+Laszlo
+
+
+----- &lt;begin original message&gt; -----
+Date: 2011-07-28T14:37:25Z
+From: Laszlo Marak &lt;Laszlo Marak &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>&gt;&gt;
+To: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">pink-image-devel at lists.berlios.de</A>
+Cc: 
+Subject: Re: [Pink-image-devel] Memory not being free()
+
+&gt;<i> I will check this afternoon.
+</I>&gt;<i> 
+</I>&gt;<i> On 2011-07-27 Wednesday 07:59:55 Hugues Talbot wrote:
+</I>&gt;<i> &gt; Hello Laszlo,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; can you take a look at this as a matter of priority ?
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Thanks !
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; On 27 Jul 2011, at 27 Jul, 7:49, Michael Cheng wrote:
+</I>&gt;<i> &gt; &gt; Hi all,
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; I have some large jobs processing thousands of images, and I've noticed
+</I>&gt;<i> &gt; &gt; that image memory isn't being free'd after the python object holding
+</I>&gt;<i> &gt; &gt; the image falls out of scope.  So my memory usage is going through the
+</I>&gt;<i> &gt; &gt; roof! (All the real memory I have and hundreds of GB of virtual
+</I>&gt;<i> &gt; &gt; memory!)
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; My Steup:
+</I>&gt;<i> &gt; &gt; * macosx 10.6.8
+</I>&gt;<i> &gt; &gt; * pink r558
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; An example to replicate the problem is below. Start 'Activity Monitor'
+</I>&gt;<i> &gt; &gt; and sort processes by memory usage and watch it grow and grow!
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; python
+</I>&gt;<i> &gt; &gt; &gt; import pink
+</I>&gt;<i> &gt; &gt; &gt; 
+</I>&gt;<i> &gt; &gt; &gt; im = pink.cpp.readimage('test.pgm')
+</I>&gt;<i> &gt; &gt; &gt; del im
+</I>&gt;<i> &gt; &gt; &gt; im = pink.cpp.readimage('test.pgm')
+</I>&gt;<i> &gt; &gt; &gt; del im
+</I>&gt;<i> &gt; &gt; &gt; im = pink.cpp.readimage('test.pgm')
+</I>&gt;<i> &gt; &gt; &gt; del im
+</I>&gt;<i> &gt; &gt; &gt; im = pink.cpp.readimage('test.pgm')
+</I>&gt;<i> &gt; &gt; &gt; del im
+</I>&gt;<i> &gt; &gt; &gt; im = pink.cpp.readimage('test.pgm')
+</I>&gt;<i> &gt; &gt; &gt; del im
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; etc
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; Memory is allocated each time an image object is created but it it
+</I>&gt;<i> &gt; &gt; never freed after the object is deleted.  Explicit calls to the
+</I>&gt;<i> &gt; &gt; garbage collector in python does not free any more memory.  I'm
+</I>&gt;<i> &gt; &gt; guessing that somewhere in the pink c++ internals, memory isn't being
+</I>&gt;<i> &gt; &gt; freed.
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; Are there any suggestions or workarounds for this?  Is there a command
+</I>&gt;<i> &gt; &gt; I'm missing?  Is there a way to force pink to free the allocated memory
+</I>&gt;<i> &gt; &gt; for an object?  Should python/pink be doing this automatically?
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; Mike.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; ===
+</I>&gt;<i> &gt; Hugues Talbot, Professeur associ&#233;
+</I>&gt;<i> &gt; Universit&#233; Paris-Est,
+</I>&gt;<i> &gt; Laboratoire d'informatique Gaspard-Monge
+</I>&gt;<i> &gt; Equipe A3SI
+</I>&gt;<i> &gt; ESIEE - BP 99
+</I>&gt;<i> &gt; 2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+</I>&gt;<i> &gt; (Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; The lyf so short, the craft so long to lerne, The'assay so hard, so sharp
+</I>&gt;<i> &gt; the conqueryinge (Chaucer)
+</I>&gt;<i> 
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Pink-image-devel mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">Pink-image-devel at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">https://lists.berlios.de/mailman/listinfo/pink-image-devel</A>
+</I>Laszlo MARAK
+Phd. student of ESIEE
+email: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">ujoimro at gmail.com</A>
+
+Begathon, n.: A multi-day event on public television, used to raise money so 
+you won't have to watch commercials.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000039.html">[Pink-image-devel] Memory not being free()
+</A></li>
+	<LI>Next message: <A HREF="000041.html">[Pink-image-devel] Memory not being free()
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

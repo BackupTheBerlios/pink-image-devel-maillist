@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Pink cass&#233;...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-April/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20%3D%3Fiso-8859-1%3Fq%3FPink_cass%3DE9%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C2DDCF281-EE43-4D3F-9377-4530AD82B5EB%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000196.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Pink cass&#233;...</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20%3D%3Fiso-8859-1%3Fq%3FPink_cass%3DE9%3D2E%3D2E%3D2E%3F%3D&In-Reply-To=%3C2DDCF281-EE43-4D3F-9377-4530AD82B5EB%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Pink cass&#233;...">h.talbot at esiee.fr
+       </A><BR>
+    <I>Wed Apr 24 19:57:25 CEST 2013</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000196.html">[Pink-image-devel] Building Pink in Ubuntu 12.4 with CMake
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#195">[ date ]</a>
+              <a href="thread.html#195">[ thread ]</a>
+              <a href="subject.html#195">[ subject ]</a>
+              <a href="author.html#195">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Salut John,
+
+Normalement &#231;a marche la m&#233;thode avec cmake, mais c'est vrai que &#231;a fait un petit moment que je n'ai pas test&#233;.
+
+dlopen / close etc &#231;a sert au chargement d'un .so (aka DLL) ; &#231;a m'&#233;tonne qu'on en ait besoin.
+
+Je vais regarder.
+
+Si tu veux bien poste tes questions &#224; <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">pink-image-devel at lists.berlios.de</A> (en anglais de pr&#233;f&#233;rence).
+
+On 24 Apr 2013, at 24 Apr, 19:00, John Chaussard wrote:
+
+&gt;<i> Bonjour Michel, Bonjour Hugues,
+</I>&gt;<i> 
+</I>&gt;<i> un petit mail rapide pour vous signaler que la compilation de Pink semble cass&#233;e...
+</I>&gt;<i> 
+</I>&gt;<i> La m&#233;thode par le makefile (makelin64 ou makelin) ne fonctionne pas car elle repose sur la librairie statique libpink.a &#224; laquelle sont ajout&#233;s des objets au fur et &#224; mesure... Le probl&#232;me c'est que les d&#233;clarations de d&#233;pendance des objets ne sont pas bonnes, et beaucoup d'erreurs surviennent...
+</I>&gt;<i> Pour la compilation avec cmake, pour ma part, elle me produit une erreur au moment de construire les binaires (pas d'erreur sur les objets)
+</I>&gt;<i> Linking C executable pink.0000
+</I>&gt;<i> ../lib/libpink.so: undefined reference to `dlsym'
+</I>&gt;<i> ../lib/libpink.so: undefined reference to `dlerror'
+</I>&gt;<i> ../lib/libpink.so: undefined reference to `dlopen'
+</I>&gt;<i> ../lib/libpink.so: undefined reference to `dlclose'
+</I>&gt;<i> 
+</I>&gt;<i> je crois que cmake n'a pas &#233;t&#233; correctement configur&#233; pour utiliser la librairie pink qui a &#233;t&#233; produite... mais je ne saurais pas dire pourquoi...
+</I>&gt;<i> 
+</I>&gt;<i> Bonne journ&#233;e,
+</I>&gt;<i> John
+</I>&gt;<i> 
+</I>&gt;<i> -- 
+</I>&gt;<i> John CHAUSSARD
+</I>&gt;<i> Bureau D402
+</I>&gt;<i> Universit&#233; Paris 13 - Institut Galil&#233;e - LAGA - UMR 7539
+</I>&gt;<i> 99 Avenue J.B Cl&#233;ment 93430 Villetaneuse - France
+</I>&gt;<i> mailto: <A HREF="https://lists.berlios.de/mailman/listinfo/pink-image-devel">j.chaussard at esiee.fr</A>
+</I>&gt;<i> url: <A HREF="http://www.esiee.fr/~chaussaj">http://www.esiee.fr/~chaussaj</A>
+</I>&gt;<i> 
+</I>
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+Those parts of the system that you can hit with a hammer (not advised) are called hardware; those program instructions that you can only curse at are called software.
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000196.html">[Pink-image-devel] Building Pink in Ubuntu 12.4 with CMake
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#195">[ date ]</a>
+              <a href="thread.html#195">[ thread ]</a>
+              <a href="subject.html#195">[ subject ]</a>
+              <a href="author.html#195">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

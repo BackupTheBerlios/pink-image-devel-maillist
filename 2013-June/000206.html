@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] float2byte silently extends range to 0 - 255
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20float2byte%20silently%20extends%20range%20to%200%20-%20255&In-Reply-To=%3CCAL8%2B6yw0%3DuqsJ4YNkxNVQ7%3DtBifz0UhODX1iKKaVqqoDF_REGQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000204.html">
+   <LINK REL="Next"  HREF="000207.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] float2byte silently extends range to 0 - 255</H1>
+    <B>PUYBAREAU, Elodie</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20float2byte%20silently%20extends%20range%20to%200%20-%20255&In-Reply-To=%3CCAL8%2B6yw0%3DuqsJ4YNkxNVQ7%3DtBifz0UhODX1iKKaVqqoDF_REGQ%40mail.gmail.com%3E"
+       TITLE="[Pink-image-devel] float2byte silently extends range to 0 - 255">elodie.puybareau at edu.esiee.fr
+       </A><BR>
+    <I>Tue Jun 25 20:22:34 CEST 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000204.html">[Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed
+</A></li>
+        <LI>Next message: <A HREF="000207.html">[Pink-image-devel] float2byte silently extends range to 0 - 255
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#206">[ date ]</a>
+              <a href="thread.html#206">[ thread ]</a>
+              <a href="subject.html#206">[ subject ]</a>
+              <a href="author.html#206">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello all;
+
+Thanks for the great work on Pink;
+
+I have found that pink.cpp.float2byte(float_image) silently converts the
+image range to 0-255 irrespective of the content of the image
+
+example:
+
+In [20]: mybinn = pink.cpp.convert2float(mybin)
+
+In [21]: pink.cpp.minmax(mybinn)
+Out[21]: [0.0, 1.0]
+
+In [22]: mybinb = pink.cpp.float2byte(mybinn)
+
+In [23]: pink.cpp.minmax(mybinb)
+Out[23]: [0, 255]
+
+
+I believe it should be an option.
+
+Cheers
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130625/1bdcef15/attachment.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130625/1bdcef15/attachment.html</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000204.html">[Pink-image-devel] building pink on ubuntu 13.04 (32 bits) with	python support failed
+</A></li>
+	<LI>Next message: <A HREF="000207.html">[Pink-image-devel] float2byte silently extends range to 0 - 255
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#206">[ date ]</a>
+              <a href="thread.html#206">[ thread ]</a>
+              <a href="subject.html#206">[ subject ]</a>
+              <a href="author.html#206">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

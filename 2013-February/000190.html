@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2013-February/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Compile%20test%20in%20CMAKE%20have%20arguments%20in%20the%0A%09wrong%20order&In-Reply-To=%3C13DD25AB-C0B0-4EA3-BC1D-A5DD29BF5832%40esiee.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000188.html">
+   <LINK REL="Next"  HREF="000189.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order</H1>
+    <B>Hugues Talbot</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Compile%20test%20in%20CMAKE%20have%20arguments%20in%20the%0A%09wrong%20order&In-Reply-To=%3C13DD25AB-C0B0-4EA3-BC1D-A5DD29BF5832%40esiee.fr%3E"
+       TITLE="[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order">h.talbot at esiee.fr
+       </A><BR>
+    <I>Fri Feb  8 02:40:47 CET 2013</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000188.html">[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order
+</A></li>
+        <LI>Next message: <A HREF="000189.html">[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#190">[ date ]</a>
+              <a href="thread.html#190">[ thread ]</a>
+              <a href="subject.html#190">[ subject ]</a>
+              <a href="author.html#190">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Laszlo
+
+
+To finish onto something more cheerful tonight, try the following
+
+1- start pink with some options:
+
+pink.sh qtconsole --pylab=inline
+
+2- try this
+
+import pink
+import pink.cpp as pinklib
+
+a=pinklib.readimage(&quot;/some/path/to/an/image.pgm&quot;)
+
+# exhibit one
+pink.view(a)
+
+# exhibit two
+ah = pink.histogram(a)
+plot(ah)
+
+
+Cheers.
+
+
+
+
+
+===
+Hugues Talbot, Professeur associ&#233;
+Universit&#233; Paris-Est,
+Laboratoire d'informatique Gaspard-Monge
+Equipe A3SI 
+ESIEE - BP 99 
+2 bd Blaise-Pascal, F-93162 Noisy-le-Grand Cedex
+(Office) +33 1 45 92 66 15 / (Fax) +33 1 45 92 66 99
+
+Twenty years of schooling and they put you on the day shift.
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130208/0f50c709/attachment-0001.html">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130208/0f50c709/attachment-0001.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Screen shot 2013-02-08 at Friday8 Feb,2.38.png
+Type: image/png
+Size: 135460 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130208/0f50c709/attachment-0001.png">https://lists.berlios.de/pipermail/pink-image-devel/attachments/20130208/0f50c709/attachment-0001.png</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000188.html">[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order
+</A></li>
+	<LI>Next message: <A HREF="000189.html">[Pink-image-devel] Compile test in CMAKE have arguments in the	wrong order
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#190">[ date ]</a>
+              <a href="thread.html#190">[ thread ]</a>
+              <a href="subject.html#190">[ subject ]</a>
+              <a href="author.html#190">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>

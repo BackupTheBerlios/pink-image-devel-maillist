@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Pink-image-devel] Missing &quot;long2short&quot; and &quot;short2long&quot; from	pink
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/pink-image-devel/2011-June/index.html" >
+   <LINK REL="made" HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Missing%20%22long2short%22%20and%20%22short2long%22%20from%0A%09pink&In-Reply-To=%3C201106021559.27121.ujoimro%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000010.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Pink-image-devel] Missing &quot;long2short&quot; and &quot;short2long&quot; from	pink</H1>
+    <B>Laszlo Marak</B> 
+    <A HREF="mailto:pink-image-devel%40lists.berlios.de?Subject=Re%3A%20%5BPink-image-devel%5D%20Missing%20%22long2short%22%20and%20%22short2long%22%20from%0A%09pink&In-Reply-To=%3C201106021559.27121.ujoimro%40gmail.com%3E"
+       TITLE="[Pink-image-devel] Missing &quot;long2short&quot; and &quot;short2long&quot; from	pink">ujoimro at gmail.com
+       </A><BR>
+    <I>Thu Jun  2 15:59:26 CEST 2011</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000010.html">[Pink-image-devel] Missing &quot;long2short&quot; and &quot;short2long&quot; from	pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>We wrote something, but it's not finished, so I did not include it. 
+
+short2long is obvious, 
+
+but long2short? What do you think, the conversion modes should be?
+
+
+On 2011-06-02 Thursday 15:19:19 Hugues Talbot wrote:
+&gt;<i> Hello Laszlo,
+</I>&gt;<i> 
+</I>&gt;<i> Something you may have done with ... has not been comitted:
+</I>&gt;<i> 
+</I>&gt;<i> Do you know about this ?
+</I>&gt;<i> 
+</I>&gt;<i> Linking CXX shared library libcpp_pink.dylib
+</I>&gt;<i> Undefined symbols for architecture x86_64:
+</I>&gt;<i>   &quot;long2short(xvimage*, xvimage*)&quot;, referenced from:
+</I>&gt;<i>       export_function168()     in pypink.cpp.o
+</I>&gt;<i>       pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i>  pink::ujoi&lt;dcomplex&gt;, &amp;(long2short(xvimage*,
+</I>&gt;<i>  xvimage*))&gt;(pink::ujoi&lt;dcomplex&gt;)in pypink.cpp.o pink::ujoi&lt;int&gt;
+</I>&gt;<i>  pink::python::make_result&lt;pink::ujoi&lt;int&gt;, pink::ujoi&lt;fcomplex&gt;,
+</I>&gt;<i>  &amp;(long2short(xvimage*, xvimage*))&gt;(pink::ujoi&lt;fcomplex&gt;)in pypink.cpp.o
+</I>&gt;<i>  pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i>  pink::ujoi&lt;double&gt;, &amp;(long2short(xvimage*,
+</I>&gt;<i>  xvimage*))&gt;(pink::ujoi&lt;double&gt;)in pypink.cpp.o pink::ujoi&lt;int&gt;
+</I>&gt;<i>  pink::python::make_result&lt;pink::ujoi&lt;int&gt;, pink::ujoi&lt;float&gt;,
+</I>&gt;<i>  &amp;(long2short(xvimage*, xvimage*))&gt;(pink::ujoi&lt;float&gt;)in pypink.cpp.o
+</I>&gt;<i>  pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i>  pink::ujoi&lt;int&gt;, &amp;(long2short(xvimage*, xvimage*))&gt;(pink::ujoi&lt;int&gt;)in
+</I>&gt;<i>  pypink.cpp.o pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i>  pink::ujoi&lt;unsigned short&gt;, &amp;(long2short(xvimage*,
+</I>&gt;<i>  xvimage*))&gt;(pink::ujoi&lt;unsigned short&gt;)in pypink.cpp.o ...
+</I>&gt;<i>   &quot;short2long(xvimage*, xvimage*)&quot;, referenced from:
+</I>&gt;<i>       export_function167()     in pypink.cpp.o
+</I>&gt;<i>       pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i>  pink::ujoi&lt;dcomplex&gt;, &amp;(short2long(xvimage*,
+</I>&gt;<i>  xvimage*))&gt;(pink::ujoi&lt;dcomplex&gt;)in pypink.cpp.o pink::ujoi&lt;int&gt;
+</I>&gt;<i>  pink::python::make_result&lt;pink::ujoi&lt;int&gt;, pink::ujoi&lt;fcomplex&gt;,
+</I>&gt;<i>  &amp;(short2long(xvimage*, xvimage*))&gt;(pink::ujoi&lt;fcomplex&gt;)in pypink.cpp.o
+</I>&gt;<i>  pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i>  pink::ujoi&lt;double&gt;, &amp;(short2long(xvimage*,
+</I>&gt;<i>  xvimage*))&gt;(pink::ujoi&lt;double&gt;)in pypink.cpp.o pink::ujoi&lt;int&gt;
+</I>&gt;<i>  pink::python::make_result&lt;pink::ujoi&lt;int&gt;, pink::ujoi&lt;float&gt;,
+</I>&gt;<i>  &amp;(short2long(xvimage*, xvimage*))&gt;(pink::ujoi&lt;float&gt;)in pypink.cpp.o
+</I>&gt;<i>  pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i>  pink::ujoi&lt;int&gt;, &amp;(short2long(xvimage*, xvimage*))&gt;(pink::ujoi&lt;int&gt;)in
+</I>&gt;<i>  pypink.cpp.o pink::ujoi&lt;int&gt; pink::python::make_result&lt;pink::ujoi&lt;int&gt;,
+</I>&gt;<i>  pink::ujoi&lt;unsigned short&gt;, &amp;(short2long(xvimage*,
+</I>&gt;<i>  xvimage*))&gt;(pink::ujoi&lt;unsigned short&gt;)in pypink.cpp.o ...
+</I>&gt;<i> 
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000010.html">[Pink-image-devel] Missing &quot;long2short&quot; and &quot;short2long&quot; from	pink
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/pink-image-devel">More information about the Pink-image-devel
+mailing list</a><br>
+</body></html>
